@@ -14,6 +14,7 @@
         "glob": "^7.1.3",
         "grpc": "^1.18.0",
         "hyperprov-client": "file:hyperprov-client",
+        "hyperprov_client": "file:hyperprov-client",
         "inquirer": "^6.2.2"
     },
     "author": "Petter Tunstad",

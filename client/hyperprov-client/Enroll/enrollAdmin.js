@@ -18,7 +18,7 @@ var os = require('os');
 
 
 exports.enrollAdmin = function(store_path, caURL, caName, enrollmentID, enrollmentSecret, MSPid) {
-    //Store path = path.join(__dirname, 'hfc-key-store');
+    var store_path = path.join(__dirname, 'hfc-key-store');
 
     var fabric_client = new Fabric_Client();
     var fabric_ca_client = null;
