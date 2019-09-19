@@ -20,6 +20,7 @@ router.put('/', function(req, res) {
         }
         else if(status == 1) {
                 power.writeSync(1);
+                console.log("on");
         }
         res.send();
 });
