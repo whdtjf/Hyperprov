@@ -77,10 +77,8 @@
 
         <tr>
           <th>ID</th>
+          <th>Name</th>
           <th>Timestamp</th>
-          <th>Holder</th>
-          <th>Catch Location <br>(Longitude, Latitude)</th>
-          <th>Vessel</th>
         </tr>
 
         <tr ng-repeat="enterance in all_enterance">
@@ -95,7 +93,7 @@
         <label>Query a Specific Enterance</label><br>
         <h5 style="color:red;margin-bottom:2%" id="error_query">Error: Please enter a valid Barcode Id</h5>
         
-        Enter a Barcode number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="enterance_Timestamp">
+        Enter a Barcode number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="enterance_id">
         <input id="querySubmit" type="submit" value="Query" class="btn btn-primary" ng-click="queryEnterance()">
       </div>
 
@@ -104,7 +102,6 @@
         <tr>
           <th>Name</th>
           <th>Timestamp</th>
-
         </tr>
 
         <tr>
@@ -125,7 +122,7 @@
 
       <div class="form-group">
         <label>Update the Enterance Time</label><br>
-        <h5 style="color:green;margin-bottom:2%" id="success_holder">Success! Tx ID: {{update_timestamp}}</h5>
+        <h5 style="color:green;margin-bottom:2%" id="success_timestamp">Success! Tx ID: {{update_timestamp}}</h5>
         <h5 style="color:red;margin-bottom:2%" id="error_holder">Error: Please enter a valid Barcode Number</h5>
         Enter a Barcode Number: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="enterance.id">
         Enter the new timestamp: <input class="form-control" name="assetSelect" placeholder="Ex: Barry" ng-model="enterance.timestamp">
