@@ -97,7 +97,7 @@
  
 	 var enterance = Enterance{ Name: args[1], Timestamp: args[2]}
  
-	 enteranceAsBytes=, _ := json.Marshal(enterance)
+	 enteranceAsBytes, _ := json.Marshal(enterance)
 	 err := APIstub.PutState(args[0], enteranceAsBytes)
 	 if err != nil {
 		 return shim.Error(fmt.Sprintf("Failed to record Enterance: %s", args[0]))
