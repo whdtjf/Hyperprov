@@ -17,9 +17,7 @@ var path          = require('path');
 var util          = require('util');
 var os            = require('os');
 
-var GPIO = require('onoff').Gpio,
-	led = new GPIO(24, 'out');
-	button=new GPIO(18, 'in', 'both')
+
 
 module.exports = (function() {
 return{
@@ -65,7 +63,7 @@ return{
 		    const request = {
 		        chaincodeId: 'enterance-app',
 		        txId: tx_id,
-		        fcn: 'queryAllenterance',
+		        fcn: 'queryAllEnterance',
 		        args: ['']
 		    };
 
@@ -143,24 +141,14 @@ return{
 		    const request = {
 		        //targets : --- letting this default to the peers assigned to the channel
 		        chaincodeId: 'enterance-app',
-		        fcn: 'recordenterance',
+		        fcn: 'recordBarcode',
 		        args: [key, name, timestamp],
 		        chainId: 'mychannel',
 		        txId: tx_id
 		    };
 
+			return channel.sendTransactionProposal(request);
 			// send the transaction proposal to the peers
-			button.watch(function(err, state){
-				if(state==1){
-					led.writeSync(1);
-					return channel.sendTransactionProposal(request);
-				}
-				else{
-					led.writeSync(0);
-					return err;
-				}
-			})
-		    
 		}).then((results) => {
 		    var proposalResponses = results[0];
 		    var proposal = results[1];
@@ -296,7 +284,7 @@ return{
 		    const request = {
 		        chaincodeId: 'enterance-app',
 		        txId: tx_id,
-		        fcn: 'queryenterance',
+		        fcn: 'queryEnterance',
 		        args: [key]
 		    };
 
