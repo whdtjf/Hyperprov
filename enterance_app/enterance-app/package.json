@@ -4,13 +4,14 @@
     "description": "Hyperledger Fabric MOOC Sample Application",
     "main": "server.js",
     "dependencies": {
-        "fabric-ca-client": "^1.0.2",
-        "fabric-client": "^1.0.2",
-        "grpc": "^1.6.0",
-        "express": "latest",
-        "body-parser": "latest",
+        "angular": "^1.4.3",
+        "body-parser": "^1.19.0",
         "ejs": "latest",
-        "angular": "^1.4.3"
+        "express": "^4.17.1",
+        "fabric-ca-client": "^1.4.4",
+        "fabric-client": "^1.4.4",
+        "grpc": "^1.6.0",
+        "onoff": "^5.0.0"
     },
     "license": "Apache-2.0",
     "keywords": [
