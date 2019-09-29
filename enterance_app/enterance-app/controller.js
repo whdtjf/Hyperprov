@@ -61,7 +61,7 @@ return{
 
 		    // queryAllenterance - requires no arguments , ex: args: [''],
 		    const request = {
-		        chaincodeId: 'enterance-app',
+		        chaincodeId: 'enterance_code',
 		        txId: tx_id,
 		        fcn: 'queryAllEnterance',
 		        args: ['']
@@ -140,7 +140,7 @@ return{
 		    // send proposal to endorser
 		    const request = {
 		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'enterance-app',
+		        chaincodeId: 'enterance_code',
 		        fcn: 'recordBarcode',
 		        args: [key, name, timestamp],
 		        chainId: 'mychannel',
@@ -282,7 +282,7 @@ return{
 
 		    // queryenterance - requires 1 argument, ex: args: ['4'],
 		    const request = {
-		        chaincodeId: 'enterance-app',
+		        chaincodeId: 'enterance_code',
 		        txId: tx_id,
 		        fcn: 'queryEnterance',
 		        args: [key]
@@ -362,7 +362,7 @@ return{
 		    // send proposal to endorser
 		    var request = {
 		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'enterance-app',
+		        chaincodeId: 'enterance_code',
 		        fcn: 'UpdateEnterance',
 		        args: [key, timestamp],
 		        chainId: 'mychannel',
