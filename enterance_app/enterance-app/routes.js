@@ -1,11 +1,13 @@
 //SPDX-License-Identifier: Apache-2.0
 
 var enterance = require('./controller.js');
-var GPIO = require('onoff').Gpio,
-  led = new GPIO(24, 'out');
+
 
 module.exports = function (app) {
+  var GPIO = require('onoff').Gpio,
+  led = new GPIO(24, 'out');
 
+  
   app.get('/get_enterance/:id', function (req, res) { //GET 메소드 / 주소의 요청일때만 실행된다.
     enterance.get_enterance(req, res);
   });
