@@ -4,7 +4,7 @@ var express = require('express'),
     server = http.createServer(app);
 var bodyParser = require('body-parser');
 var GPIO = require('onoff').Gpio,
-    led = new GPIO(18, 'out');
+    led = new GPIO(24, 'out');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/led', function (req, res) {
