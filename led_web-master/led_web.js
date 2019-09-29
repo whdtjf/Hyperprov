@@ -12,6 +12,7 @@ app.get('/led', function (req, res) {
 });
 app.post('/data', function (req, res) {
     var state = req.body.led;
+	console.log(req);
     if (state == 'on') {
         led.writeSync(1);
     }
