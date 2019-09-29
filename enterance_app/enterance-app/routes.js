@@ -33,5 +33,26 @@ module.exports = function (app) {
   app.get('/update_enterance/:updated_timestamp', function (req, res) {
     enterance.update_enterance(req, res);
   });
+<<<<<<< HEAD
+=======
+
+}
+
+/*    app.get('/led', function (req, res) {
+    res.sendfile('./client/index.html', { root: __dirname });
+  });
+  app.post('/data', function (req, res) {
+    var state = req.body.led;
+    if (state == 'Create') {
+      led.writeSync(1);
+      console.log("on");
+    }
+    else {
+      led.writeSync(0);
+    }
+    res.sendfile('./client/index.html', { root: __dirname });
+  });
+}  */
+>>>>>>> 0bf174b38107055c9e429b553c08f3b43bd31f92
 
 }
