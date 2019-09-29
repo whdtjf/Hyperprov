@@ -1,7 +1,8 @@
 //SPDX-License-Identifier: Apache-2.0
 
 var enterance = require('./controller.js');
-
+var express = require('express');
+var app2=express();
 
 module.exports = function (app) {
   var GPIO = require('onoff').Gpio,
@@ -21,7 +22,7 @@ module.exports = function (app) {
     enterance.update_enterance(req, res);
   });
 
-  var app2=express();
+ 
   app2.use(bodyParser.json());
   app2.use(bodyParser.urlencoded({ extended: false }));
   app2.get('/led', function (req, res) {
