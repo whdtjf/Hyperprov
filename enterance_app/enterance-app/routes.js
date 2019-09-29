@@ -27,6 +27,7 @@ module.exports = function (app) {
     }
     else {
       led.writeSync(0);
+      console.log("off");
     }
     // res.sendfile('./client/index.html', { root: __dirname });
 
