@@ -50,13 +50,13 @@ return{
 		    fabric_client.setCryptoSuite(crypto_suite);
 
 		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user2', true);
+		    return fabric_client.getUserContext('user3', true);
 		}).then((user_from_store) => {
 		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user2 from persistence');
+		        console.log('Successfully loaded user3 from persistence');
 		        member_user = user_from_store;
 		    } else {
-		        throw new Error('Failed to get user2.... run registerUser.js');
+		        throw new Error('Failed to get user3.... run registerUser.js');
 		    }
 
 		    // queryAllenterance - requires no arguments , ex: args: [''],
@@ -123,13 +123,13 @@ return{
 		    fabric_client.setCryptoSuite(crypto_suite);
 
 		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user2', true);
+		    return fabric_client.getUserContext('user3', true);
 		}).then((user_from_store) => {
 		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user2 from persistence');
+		        console.log('Successfully loaded user3 from persistence');
 		        member_user = user_from_store;
 		    } else {
-		        throw new Error('Failed to get user2.... run registerUser.js');
+		        throw new Error('Failed to get user3.... run registerUser.js');
 		    }
 
 		    // get a transaction id object based on the current user assigned to fabric client
@@ -271,13 +271,13 @@ return{
 		    fabric_client.setCryptoSuite(crypto_suite);
 
 		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user2', true);
+		    return fabric_client.getUserContext('user3', true);
 		}).then((user_from_store) => {
 		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user2 from persistence');
+		        console.log('Successfully loaded user3 from persistence');
 		        member_user = user_from_store;
 		    } else {
-		        throw new Error('Failed to get user2.... run registerUser.js');
+		        throw new Error('Failed to get user3.... run registerUser.js');
 		    }
 
 		    // queryenterance - requires 1 argument, ex: args: ['4'],
@@ -345,13 +345,13 @@ return{
 		    fabric_client.setCryptoSuite(crypto_suite);
 
 		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user2', true);
+		    return fabric_client.getUserContext('user3', true);
 		}).then((user_from_store) => {
 		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user2 from persistence');
+		        console.log('Successfully loaded user3 from persistence');
 		        member_user = user_from_store;
 		    } else {
-		        throw new Error('Failed to get user2.... run registerUser.js');
+		        throw new Error('Failed to get user3.... run registerUser.js');
 		    }
 
 		    // get a transaction id object based on the current user assigned to fabric client
