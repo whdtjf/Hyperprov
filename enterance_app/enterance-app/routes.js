@@ -3,6 +3,7 @@
 var enterance = require('./controller.js');
 var express = require('express');
 var app2=express();
+var bodyParser = require('body-parser');
 
 module.exports = function (app) {
   var GPIO = require('onoff').Gpio,
