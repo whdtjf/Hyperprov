@@ -13,9 +13,15 @@ module.exports = function (app) {
   });
 
   app.get('/add_barcode/:enterance', function (req, res) {
+<<<<<<< HEAD
     console.log(req);
     var state = req.body.led;
     if (state == 'Create') {
+=======
+    var array = req.params.enterance.split("-");
+    var state=array[0];
+    if (state == "5") {
+>>>>>>> 99decdc283af6c3685a2fd41c0b2efb0681daf5c
       led.writeSync(1);
       console.log("on");
     }
