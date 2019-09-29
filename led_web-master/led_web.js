@@ -7,10 +7,11 @@ var GPIO = require('onoff').Gpio,
     led = new GPIO(24, 'out');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.get('/led', function (req, res) {
-    res.sendfile('led_web.html', { root: __dirname });
-});
+// app.get('/led', function (req, res) {
+//     res.sendfile('led_web.html', { root: __dirname });
+// });
 app.post('/data', function (req, res) {
+    console.log(req);
     var state = req.body.led;
     if (state == 'on') {
         led.writeSync(1);
@@ -18,7 +19,7 @@ app.post('/data', function (req, res) {
     else {
         led.writeSync(0);
     }
-    console.log(state);
+    // console.log(state);
     res.sendfile('led_web.html', { root: __dirname });
 });
 server.listen(8000, function () {
