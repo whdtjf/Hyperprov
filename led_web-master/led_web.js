@@ -11,7 +11,7 @@ app.get('/led', function (req, res) {
     res.sendfile('led_web.html', { root: __dirname });
 });
 app.post('/data', function (req, res) {
-    console.log(req);
+    // console.log(req);
     var state = req.body.led;
 	console.log(req);
     if (state == 'on') {
@@ -21,6 +21,7 @@ app.post('/data', function (req, res) {
         led.writeSync(0);
     }
     // console.log(state);
+    console.log(res);
     res.sendfile('led_web.html', { root: __dirname });
 });
 server.listen(8000, function () {
