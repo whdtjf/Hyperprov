@@ -1,5 +1,3 @@
-//SPDX-License-Identifier: Apache-2.0
-
 var enterance = require('./controller.js');
 
 
@@ -13,15 +11,9 @@ module.exports = function (app) {
   });
 
   app.get('/add_barcode/:enterance', function (req, res) {
-<<<<<<< HEAD
-    console.log(req);
-    var state = req.body.led;
-    if (state == 'Create') {
-=======
     var array = req.params.enterance.split("-");
     var state=array[0];
     if (state == "5") {
->>>>>>> 99decdc283af6c3685a2fd41c0b2efb0681daf5c
       led.writeSync(1);
       console.log("on");
     }
@@ -41,22 +33,5 @@ module.exports = function (app) {
   app.get('/update_enterance/:updated_timestamp', function (req, res) {
     enterance.update_enterance(req, res);
   });
+
 }
-
-
-/*   app.get('/led', function (req, res) {
-    res.sendfile('./client/index.html', { root: __dirname });
-  });
-  app.post('/data', function (req, res) {
-    var state = req.body.led;
-    if (state == 'Create') {
-      led.writeSync(1);
-      console.log("on");
-    }
-    else {
-      led.writeSync(0);
-    }
-    res.sendfile('./client/index.html', { root: __dirname });
-  });
-} */
-
