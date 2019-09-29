@@ -7,7 +7,7 @@ module.exports = function (app) {
   var GPIO = require('onoff').Gpio,
   led = new GPIO(24, 'out');
 
-  
+
   app.get('/get_enterance/:id', function (req, res) { //GET 메소드 / 주소의 요청일때만 실행된다.
     enterance.get_enterance(req, res);
   });
@@ -21,10 +21,13 @@ module.exports = function (app) {
     enterance.update_enterance(req, res);
   });
 
-  app.get('/led', function (req, res) {
+  var app2=express();
+  app2.use(bodyParser.json());
+  app2.use(bodyParser.urlencoded({ extended: false }));
+  app2.get('/led', function (req, res) {
     res.sendfile('./client/index.html', { root: __dirname });
   });
-  app.post('/data', function (req, res) {
+  app2.post('/data', function (req, res) {
     var state = req.body.led;
     if (state == 'Create') {
       led.writeSync(1);
