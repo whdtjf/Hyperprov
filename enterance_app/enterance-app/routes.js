@@ -35,10 +35,10 @@ module.exports = function (app) {
   app.get('/update_enterance/:updated_timestamp', function (req, res) {
     enterance.update_enterance(req, res);
   });
+
 }
 
-
-/*   app.get('/led', function (req, res) {
+/*    app.get('/led', function (req, res) {
     res.sendfile('./client/index.html', { root: __dirname });
   });
   app.post('/data', function (req, res) {
@@ -52,5 +52,5 @@ module.exports = function (app) {
     }
     res.sendfile('./client/index.html', { root: __dirname });
   });
-} */
+}  */
 
