@@ -13,7 +13,7 @@ module.exports = function (app) {
   });
 
   app.get('/add_barcode/:enterance', function (req, res) {
-    console.log(req.body);
+    console.log(req);
     var state = req.body.led;
     if (state == 'Create') {
       led.writeSync(1);
