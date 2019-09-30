@@ -1,4 +1,4 @@
-var enterance = require('./controll.js');
+var enterance = require('./controller.js');
 
 
 module.exports = function (app) {

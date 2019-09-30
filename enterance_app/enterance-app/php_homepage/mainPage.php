@@ -69,7 +69,7 @@
     </style>
   </head>
 
-  <body>
+  <body ng-app="application" ng-controller="appController">
 
     <br>
     <center>
@@ -100,10 +100,26 @@
     </center>
     <div align="center">
       <table width="80%">
-        <tr><td><h2>   월간 총 입장 통계  <button>query</button></h2>
+        <tr><td><h2>   월간 총 입장 통계  <p><input id="queryAllEnterance" type="submit" value="Query" class="btn btn-primary" ng-click="queryAllEnterance()"></p></h2>
         </td></tr>
         
       </table>
+
+       <table id="all_enterance" class="table" align="center">
+
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Timestamp</th>
+        </tr>
+
+        <tr ng-repeat="enterance in all_enterance">
+          <td>{{enterance.Key}}</td>
+          <td>{{enterance.name}}</td>
+          <td>{{enterance.timestamp}}</td>
+
+        </tr>
+        </table>
       <hr width="90%">
       <div id="chart_div" style="width:90%;height:300px;
         margin-top:-50px;
@@ -437,6 +453,6 @@
     }
   }
   </script>
-
+  <script type="text/javascript" src="./controll.js"></script>
   </body>
 </html>
