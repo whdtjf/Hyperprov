@@ -39,7 +39,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
     	verify: false
     };
     // be sure to change the http to https when the CA is running TLS enabled
-    fabric_ca_client = new Fabric_CA_Client('http://localhost:7054', null , '', crypto_suite);
+    fabric_ca_client = new Fabric_CA_Client('http://192.168.200.183:7054', null , '', crypto_suite);
 
     // first check to see if the admin is already enrolled
     return fabric_client.getUserContext('admin', true);
@@ -53,16 +53,16 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 
     // at this point we should have the admin user
     // first need to register the user with the CA server
-    return fabric_ca_client.register({enrollmentID: 'user1', affiliation: 'org1.department1'}, admin_user);
+    return fabric_ca_client.register({enrollmentID: 'user4', affiliation: 'org1.department1'}, admin_user);
 }).then((secret) => {
     // next we need to enroll the user with CA server
-    console.log('Successfully registered user1 - secret:'+ secret);
+    console.log('Successfully registered user4 - secret:'+ secret);
 
-    return fabric_ca_client.enroll({enrollmentID: 'user1', enrollmentSecret: secret});
+    return fabric_ca_client.enroll({enrollmentID: 'user4', enrollmentSecret: secret});
 }).then((enrollment) => {
-  console.log('Successfully enrolled member user "user1" ');
+  console.log('Successfully enrolled member user "user4" ');
   return fabric_client.createUser(
-     {username: 'user1',
+     {username: 'user4',
      mspid: 'Org1MSP',
      cryptoContent: { privateKeyPEM: enrollment.key.toBytes(), signedCertPEM: enrollment.certificate }
      });
@@ -71,7 +71,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 
      return fabric_client.setUserContext(member_user);
 }).then(()=>{
-     console.log('User1 was successfully registered and enrolled and is ready to intreact with the fabric network');
+     console.log('user4 was successfully registered and enrolled and is ready to intreact with the fabric network');
 
 }).catch((err) => {
     console.error('Failed to register: ' + err);
