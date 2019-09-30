@@ -100,8 +100,9 @@
     </center>
     <div align="center">
       <table width="80%">
-        <tr><td><h2>   월간 총 입장 통계</h2>
+        <tr><td><h2>   월간 총 입장 통계  <button>query</button></h2>
         </td></tr>
+        
       </table>
       <hr width="90%">
       <div id="chart_div" style="width:90%;height:300px;
