@@ -9,8 +9,7 @@ module.exports = function (app) {
 
   app.set('view engine','ejs');
   app.get('/mainPage', (req,res) => {
-    console.log(req.session.uID);
-    res.send(req.session.uID);
+    res.render(__dirname+'/client/mainPage.ejs');
   });
 
   app.get('/get_enterance/:id', function (req, res) {
