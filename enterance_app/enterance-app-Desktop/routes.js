@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.set('view engine','ejs');
   app.get('/mainPage', (req,res) => {
     console.log(req.session.uID);
-    res.sender(req.session.uID);
+    res.send(req.session.uID);
   });
 
   app.get('/get_enterance/:id', function (req, res) {
