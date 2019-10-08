@@ -6,9 +6,16 @@
     <script src="fakeApp.js" charset="UTF-8"></script>
   </head>
 
-  <body ng-app="fakeApplication" ng-controller="fakeAppController">
+  <body ng-app="fakeApplication" ng-controller="fakeAppController"
+    style="margin:0px 0px 0px 0px;width:100%;height:100%;
+  	background-image:url('./img/bg2.png');
+  	background-position:center center">
 
-    
+    <center>
+      <image src="./img/logining.gif" width="100%">
+        <h2><font color="white">사용자 로그인 중...</font></h2>
+    </center>
+
     <script>
       let getID ='<%= id%>';
 
@@ -29,7 +36,7 @@
         }
       }
 
-      checkLogin();
+      setTimeout(checkLogin(),300);
 
     </script>
   </body>
