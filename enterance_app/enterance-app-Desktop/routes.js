@@ -7,9 +7,10 @@ module.exports = function (app) {
     res.render(__dirname+'/client/loginProcess.ejs',{id:req.body.id});
   });
 
+  app.set('view engine','ejs');
   app.get('/mainPage', (req,res) => {
     console.log(req.session.uID);
-    res.render(`helloWorld`);
+    res.sender(req.session.uID);
   });
 
   app.get('/get_enterance/:id', function (req, res) {
