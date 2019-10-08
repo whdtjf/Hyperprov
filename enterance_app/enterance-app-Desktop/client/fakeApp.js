@@ -21,4 +21,13 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
                          ];
 
   $scope.all_enterance = allQueryData;
+
+  $scope.setIDtoSession = (uID) => {
+    try {
+      sessionStorage.setItem("uID", JSON.stringify(emp));
+    } catch (e) {
+      alert("세션 저장중 에러..!\n"+e);
+    }
+  };
+
 }])

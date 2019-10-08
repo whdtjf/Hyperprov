@@ -1,15 +1,10 @@
 var enterance = require('./controller.js');
-var sess;
 
 module.exports = function (app) {
 
   app.set('view engine','ejs');
   app.post( '/loginProcess',(req,res) => {
     res.render(__dirname+'/client/loginProcess.ejs',{id:req.body.id});
-  });
-
-  app.get('/', (req,res) => {
-    req = req.session;
   });
 
   app.get('/get_enterance/:id', function (req, res) {

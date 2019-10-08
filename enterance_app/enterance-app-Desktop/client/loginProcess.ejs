@@ -32,7 +32,7 @@
               }
             });
 
-            if (flag) {location.href="/mainPage";}
+            if (flag) {location.href="/mainPage"; setIDtoSession(getID);}
             else {alert("로그인 실패... ID"); location.href="/";}
         }
       };
