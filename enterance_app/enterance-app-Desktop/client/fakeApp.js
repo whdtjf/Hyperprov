@@ -25,7 +25,7 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
   $scope.setIDtoSession = (uID) => {
     try {
       sessionStorage.setItem("uID", JSON.stringify(uID));
-      alert("storage : "sessionStorage.getItem("uID"));
+      alert("storage : "+sessionStorage.getItem("uID"));
     } catch (e) {
       alert("세션 저장중 에러..!\n"+e);
     }
