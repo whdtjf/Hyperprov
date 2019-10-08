@@ -13,17 +13,25 @@ var path          = require('path');
 var util          = require('util');
 var os            = require('os');
 
+// instantiate the app
+var app = express();
+
+
 // Load all of our middleware
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 //interprete the main body contents
 // app.use(express.static(__dirname + '/client'));
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); //
-app.use(bodyParser.json());
 
+app.get('/client/test', (req,res) => {
+  res.sendfile('./client/test.html')
+})
 
-// instantiate the app
-var app = express();
+app.post( '/login',(req,res) => {
+  res.send("result ..."+req.body.id);
+});
 
 // this line requires and runs the code from our routes.js file and passes it app
 require('./routes.js')(app);
