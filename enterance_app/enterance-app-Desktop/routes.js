@@ -9,7 +9,7 @@ module.exports = function (app) {
 
   app.get('/mainPage', (req,res) => {
     console.log(req.session.uID);
-    res.render(__dirname+'/client/mainPage.html');
+    res.render(`helloWorld`);
   });
 
   app.get('/get_enterance/:id', function (req, res) {
