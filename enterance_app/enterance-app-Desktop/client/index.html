@@ -18,19 +18,12 @@
           <font size="7" color="white">관리자 로그인</font>
           <br><br><br>
           <div style="width:80%">
-            <form method="post">
+            <form method="post" action="/login">
               <div class="input-group" style="border: 0px;">
                 <div class="input-group-addon" style="width:40%;">
                   <span class="input-group-text">ID</span>
                 </div>
-                <input type="text" class="form-control" style="border: 0px; " placeholder="ID를 입력하세요.">
-              </div>
-              <br>
-              <div class="input-group" style="border: 0px;">
-                <div class="input-group-addon" style="width:40%;">
-                  <span class="input-group-text">PW</span>
-                </div>
-                <input type="text" class="form-control" style="border: 0px;">
+                <input type="text" class="form-control" name="id" style="border: 0px; " placeholder="ID를 입력하세요.">
               </div>
               <br>
               <button type="submit" style="width:100%" class="btn btn-primary">로그인</button>
