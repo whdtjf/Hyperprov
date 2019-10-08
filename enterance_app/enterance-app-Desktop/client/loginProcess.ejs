@@ -22,7 +22,7 @@
 
       let checkLogin = () => {
         if (allQueryData.length == 0) {
-          setTimeout(checkLogin,1000);
+          setTimeout(checkLogin,1500);
         } else {
             console.log("input id : "+getID);
             let flag = false;
@@ -35,7 +35,6 @@
             if (flag) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(getID));
-                alert(sessionStorage.getItem('uID'));
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
               }
@@ -44,9 +43,6 @@
             else {alert("로그인 실패... ID"); location.href="/";}
         }
       };
-
-      setTimeout(checkLogin(),5000);
-
     </script>
   </body>
 </html>
