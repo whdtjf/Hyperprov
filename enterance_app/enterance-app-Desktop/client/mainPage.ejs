@@ -12,9 +12,9 @@
     <table width="100%" style="height:100%; margin:0px 0px 0px 0px; border-collapse:collapse;">
       <tr>
         <td bgcolor="#2E1257" style="width:30%;min-width:180px" align="center"><font color="white">
-          <h2><span class="username"></span></h2>
+          <h2><div id="username"></div></h2>
           <script>
-            let userName = document.getElementById('username');
+            var userName = document.getElementById('username');
             userName.innerHTML = sessionStorage.getItem('uID');
           </script>
         </font></td>
