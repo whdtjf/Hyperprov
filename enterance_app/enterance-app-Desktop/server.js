@@ -25,10 +25,6 @@ var app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); //
 
-app.get('/client/test', (req,res) => {
-  res.sendfile('./client/test.html')
-})
-
 app.post( '/login',(req,res) => {
   res.send("result ..."+req.body.id);
 });
