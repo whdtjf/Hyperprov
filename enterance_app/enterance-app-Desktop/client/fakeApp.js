@@ -2,8 +2,6 @@
 
 var app = angular.module('fakeApplication', []);
 let allQueryData =[];
-let testStr = "hi!!";
-
 
 app.controller ('fakeAppController', ['$scope',($scope) => {
 
@@ -21,13 +19,4 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
                          ];
 
   $scope.all_enterance = allQueryData;
-
-  $scope.setIDtoSession = (uID) => {
-    try {
-      sessionStorage.setItem("uID", JSON.stringify(uID));
-    } catch (e) {
-      alert("세션 저장중 에러..!\n"+e);
-    }
-  };
-
 }])
