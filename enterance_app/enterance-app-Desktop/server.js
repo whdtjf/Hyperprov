@@ -14,16 +14,10 @@ var util          = require('util');
 var os            = require('os');
 var session       = require('express-session');
 
-
 // instantiate the app
 var app = express();
 
 // initialize session
-app.use(session({
- secret: 'HyperShield',
- resave: true,
- saveUninitialized: true
-}));
 
 // Load all of our middleware
 // configure app to use bodyParser()
