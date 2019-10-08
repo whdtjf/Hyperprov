@@ -35,6 +35,7 @@
             if (flag) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(getID));
+                console.log(sessionStorage.getItem('uID'));
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
               }
