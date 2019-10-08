@@ -7,10 +7,17 @@ module.exports = function (app) {
     res.render(__dirname+'/client/loginProcess.ejs',{id:req.body.id});
   });
 
+  app.get('/mainPage', (req,res) => {
+    console.log(req.session.uID);
+    res.render(__dirname+'/client/mainPage.html');
+  });
+
   app.get('/get_enterance/:id', function (req, res) {
     //GET 메소드 / 주소의 요청일때만 실행된다.
     enterance.get_enterance(req, res);
   });
+
+
 
   app.get('/add_barcode/:enterance', function (req, res) {
     enterance.add_barcode(req, res);
