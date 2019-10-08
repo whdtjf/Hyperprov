@@ -35,10 +35,10 @@
             if (flag) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(getID));
+                location.href="/mainPage";
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
               }
-              location.href="/mainPage";
             }
             else {alert("로그인 실패... ID"); location.href="/";}
         }
