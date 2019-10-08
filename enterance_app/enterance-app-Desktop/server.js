@@ -25,8 +25,9 @@ var app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); //
 
-app.post( '/login',(req,res) => {
-  res.send("result ..."+req.body.id);
+app.set('view engine','ejs');
+app.post( '/loginProcess',(req,res) => {
+  res.render(__dirname+'/client/loginProcess.ejs',{id:req.body.id});
 });
 
 // this line requires and runs the code from our routes.js file and passes it app

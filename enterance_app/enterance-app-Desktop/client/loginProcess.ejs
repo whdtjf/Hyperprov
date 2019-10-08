@@ -11,17 +11,18 @@
   	background-image:url('./img/bg2.png');
   	background-position:center center">
 
-    <center>
-      <image src="./img/logining.gif" width="100%">
-        <h2><font color="white">사용자 로그인 중...</font></h2>
-    </center>
-
+    <div style="position:absolute;width:400px;height:250px;left:50%;top:50%;margin-left:-200px;margin-top:-125px;">
+      <center>
+	<image src="./img/logining.gif" width="60%"><br>
+         <h2><font color="white">사용자 로그인 중...</font></h2>
+   	 </center>
+    </div>
     <script>
       let getID ='<%= id%>';
 
       let checkLogin = () => {
         if (allQueryData.length == 0) {
-          setTimeout(checkLogin,1);
+          setTimeout(checkLogin,1000);
         } else {
             console.log("input id : "+getID);
             let flag = false;
@@ -34,9 +35,9 @@
             if (flag) {location.href="/mainPage";}
             else {alert("로그인 실패... ID"); location.href="/";}
         }
-      }
+      };
 
-      setTimeout(checkLogin(),300);
+      setTimeout(checkLogin(),5000);
 
     </script>
   </body>
