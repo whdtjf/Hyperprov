@@ -50,12 +50,15 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
                 ];
 
   $scope.all_enterance = allHistoryData;
-  $scope.queryHistory = (id) => {
-    let arr = [];
+  $scope.queryHistory = [];
+  $scope.queryHistoryOnWake = (id) => {
+    console.log("id : "+id);
+    $scope.queryHistory = [];
     for (let i = 0 ;  i < allHistoryData.length; i ++){
       if (allHistoryData[i].key == id)
-        arr.push(allHistoryData[i]);
+        $scope.queryHistory.push(allHistoryData[i]);
     }
-    return arr;
   }
+
+  setTimeout($scope.queryHistoryOnWake($scope.uID),1);
 }])
