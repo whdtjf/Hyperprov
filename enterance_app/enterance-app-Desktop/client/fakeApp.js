@@ -50,7 +50,12 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
                 ];
 
   $scope.all_enterance = allHistoryData;
-
-
-
+  $scope.queryHistory = (id) => {
+    let arr = [];
+    for (let i = 0 ;  i < allHistoryData.length; i ++){
+      if (allHistoryData[i].key == id)
+        arr.push(allHistoryData[i]);
+    }
+    return arr;
+  }
 }])
