@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="style.css" />
     <script src="fakeApp.js" charset="UTF-8"></script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
-    <script> if(sessionStorage.getItem('uID') == null) locaton.href="/"; </script>
-		<script> let userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')} </script>
+		<script>
+      try{
+        let userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
+      } catch(e) {
+        location.href="/";
+      }
+    </script>
   </head>
 
   <body style="margin:0px 0px 0px 0px; height:100%" ng-app="fakeApplication" ng-controller="fakeAppController">
