@@ -51,7 +51,7 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
 
   $scope.all_enterance = allHistoryData;
   $scope.queryHistory = [];
-  $scope.queryHistoryTop15 = () => {
+  $scope.queryHistoryTop10 = () => {
     console.log("id : "+userData.key);
     $scope.queryHistory = [];
     let arr =[];
