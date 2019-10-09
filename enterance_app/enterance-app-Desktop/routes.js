@@ -9,7 +9,7 @@ module.exports = function (app) {
 
   app.set('view engine','ejs');
   app.get('/mainPage', (req,res) => {
-    res.render(__dirname+'/client/mainPage.ejs');
+    res.render(__dirname+'/client/mainPage.ejs',{uID:sessionStorage.getItem('uID')});
   });
 
   app.get('/get_enterance/:id', function (req, res) {
