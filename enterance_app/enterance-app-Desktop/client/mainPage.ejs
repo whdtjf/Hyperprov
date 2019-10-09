@@ -55,7 +55,7 @@
 								<font color="white">
                   <h2>최근 출입 기록</h2>
                   <table width="100%" style="color:#BAB8DB">
-                    <tr ng-repeat="temp in queryHistory">
+                    <tr ng-repeat="temp in queryHistoryOnWake(uID)">
                       <td>{{temp.timestamp}}</td>
                       <td>{{temp.location}}</td>
                       <td>{{temp.state}}</td>
