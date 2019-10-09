@@ -8,8 +8,7 @@
     <script src="fakeApp.js" charset="UTF-8"></script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
     <script> if(!sessionStorage.getItem('uID')) locaton.href="/"; </script>
-    <script>alert(sessionStorage.getItem('uID'));</script>
-		<script> let userData = {key:(parseInt(sessionStorage.getItem('uID'))), name:sessionStorage.getItem('uNAME')} </script>
+		<script> let userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')} </script>
   </head>
 
   <body style="margin:0px 0px 0px 0px; height:100%" ng-app="fakeApplication" ng-controller="fakeAppController">
