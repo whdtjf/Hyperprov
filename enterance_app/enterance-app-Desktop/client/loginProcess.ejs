@@ -26,15 +26,19 @@
         } else {
             console.log("input id : "+getID);
             let flag = false;
+            let username = "";
             allQueryData.forEach( (element) => {
               if (element.key == getID){
                 flag = true;
+                username = element.name;
+                break;
               }
             });
 
             if (flag) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(getID));
+                sessionStorage.setItem("uNAME", JSON.stringify(username));
                 location.href="/mainPage";
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);

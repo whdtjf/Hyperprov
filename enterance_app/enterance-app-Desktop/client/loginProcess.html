@@ -7,10 +7,9 @@
   </head>
 
   <body ng-app="fakeApplication" ng-controller="fakeAppController">
-
+    <%= id %>
     <script language="javascript">
       let getID = id;
-
       let checkLogin = () => {
         if (allQueryData.length == 0) {
           setTimeout(checkLogin,1);

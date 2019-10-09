@@ -4,7 +4,9 @@
     <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" >
     <script data-require="bootstrap@4.0.5" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
     <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
+    <script> if(!sessionStorage.getItem('uID')) locaton.href="/"; </script>
 		<script> let userData = {key:2013122041, name:"김영찬", timestamp:Date.now()} </script>
   </head>
 
@@ -20,16 +22,20 @@
 										<td width="30%"><img src="./img/icon/default.png" width="100%" style="min-width:100px" id="uImage"></td>
 										<td width="5%"></td>
 										<td width="75%">
-											<font size="5"><div id='username'></div></font><font size="1"><br></font>
+											<font size="4"><div id='username'></div></font><font size="1"><br></font>
 											&nbsp;&nbsp;<font color="white">등급 : 관리자 </font><font size="1"><br><br><br></font>
 											<div align = "right"><button class="btn btn-primary" id="logout">로그아웃</button></div>
 						          <script>
 						            let userName = document.getElementById('username');
-						            userName.innerHTML = "<font color='yellow' size='6'>"+userData.name
+						            userName.innerHTML = "<font color='yellow' size='5'>"+userData.name
 													+"</font><font color='white'>님, 반갑습니다!</font>";
 												let userImage = document.getElementById('uImage');
 												userImage.src = "./img/icon/" + userData.key + ".png";
-												let logoutBtn =
+												let logoutBtn = document.getElementById('logout');
+                        logoutBtn.onclick = () => {
+                          sessionStorage.removeItem('uID');
+                          location.href="/";
+                        };
 						          </script>
 										</td>
 									</tr>
@@ -60,7 +66,7 @@
 							border-collapse:collapse;
 							background-image:url('./img/bg3.png');
 							background-position:center center;
-							background-size: 100%" align="left" valign="bottom">>
+							background-size: 100%" align="left" valign="bottom">
 								<b><font color="white" size="7"><div id ="titleName">
 									메인 페이지
 								</div></font></b>
@@ -68,7 +74,29 @@
       </tr>
 			<tr height="8%" bgcolor="#272822">
 				<td>
+          <table width="100%" style="color:white;">
+            <tr>
+              <td width="20%" align="center"><div class="menu" id="menu0">메인 페이지</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu1">일별 출입량</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu2">월별 출입량</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu3">개인 페이지</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu4">사용자 관리</div></td>
+              <script>
+                let menu0 = document.getElementById('menu0');
+                let menu1 = document.getElementById('menu1');
+                let menu2 = document.getElementById('menu2');
+                let menu3 = document.getElementById('menu3');
+                let menu4 = document.getElementById('menu4');
 
+                menu0.onclick = () => {location.href="/mainPage";};
+                menu1.onclick = () => {location.href="/dailyLog";};
+                menu2.onclick = () => {location.href="/monthlyLog";};
+                menu3.onclick = () => {location.href="/personalPage";};
+                menu4.onclick = () => {location.href="/userManage";};
+
+              </script>
+            </tr>
+          </table>
 				</td>
 			</tr>
 
