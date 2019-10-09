@@ -28,6 +28,8 @@
  type Enterance struct {
 	 Name string `json:"name"`
 	 Timestamp string `json:"timestamp"`
+	 Location string `json:"location"`
+	 State string `json:"state"`
  }
 
  func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
@@ -72,8 +74,8 @@
 
  func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Response {
 	 enterance := []Enterance{
-		 Enterance{Name: "JiWon", Timestamp: "1504054225"},
-		 Enterance{Name: "YoungChan", Timestamp: "1504057825"},
+		 Enterance{Name: "JiWon", Timestamp: "1504054225", Location: "east", State: "IN"},
+		 Enterance{Name: "YoungChan", Timestamp: "1504057825", Location: "west", State: "OUT"},
 	 }
  
 	 i := 0
@@ -91,11 +93,11 @@
 
  func (s *SmartContract) recordBarcode(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
  
-	 if len(args) != 3 {
+	 if len(args) != 5 {
 		 return shim.Error("Incorrect number of arguments. Expecting 4")
 	 }
  
-	 var enterance = Enterance{ Name: args[1], Timestamp: args[2]}
+	 var enterance = Enterance{ Name: args[1], Timestamp: args[2], Location: args[3], State: args[4]}
  
 	 enteranceAsBytes, _ := json.Marshal(enterance)
 	 err := APIstub.PutState(args[0], enteranceAsBytes)
@@ -151,7 +153,7 @@
  
 func (s *SmartContract) UpdateEnterance(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
-	if len(args) != 2 {
+	if len(args) != 4 {
 		return shim.Error("Incorrect number of arguments. Expecting 2")
 	}
 
@@ -164,7 +166,8 @@ func (s *SmartContract) UpdateEnterance(APIstub shim.ChaincodeStubInterface, arg
 	json.Unmarshal(enteranceAsBytes, &enterance)
 
 	enterance.Timestamp = args[1]
-
+	enterance.Location=args[2]
+	enterance.State=args[3]
 	enteranceAsBytes, _ = json.Marshal(enterance)
 	err := APIstub.PutState(args[0], enteranceAsBytes)
 	if err != nil {
