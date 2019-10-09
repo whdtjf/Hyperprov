@@ -59,7 +59,7 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
       if (allHistoryData[i].key == userData.key){
         arr.push(allHistoryData[i]);
         $scope.queryHistory.push(allHistoryData[i]);
-        if (arr.length == 15) break;
+        if (arr.length == 10) break;
       }
     }
     return arr;
