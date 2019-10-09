@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="fakeApp.js" charset="UTF-8"></script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
-    <script> if(!sessionStorage.getItem('uID')) locaton.href="/"; </script>
+    <script> if(sessionStorage.getItem('uID') == null) locaton.href="/"; </script>
 		<script> let userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')} </script>
   </head>
 
