@@ -21,26 +21,21 @@
       let getID ='<%= id%>';
 
       let checkLogin = () => {
-        if (allQueryData.length == 0) {
+        if (allStatusData.length == 0) {
           setTimeout(checkLogin,1500);
         } else {
-            console.log("input id : "+getID);
-            let flag = false;
-            allQueryData.forEach( (element) => {
-              if (element.key == getID){
-                flag = true;
-              }
-            });
+            let result = queryEnterance(getID);
 
-            if (flag) {
+            if (result != null) {
               try {
-                sessionStorage.setItem("uID", JSON.stringify(getID));
+                sessionStorage.setItem("uID", JSON.stringify(result.key));
+                sessionStorage.setItem("uNAME", JSON.stringify(result.name));
                 location.href="/mainPage";
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
               }
             }
-            else {alert("로그인 실패... ID"); location.href="/";}
+            else {alert("로그인 실패... ID를 확인하세요"); location.href="/";}
         }
       };
 

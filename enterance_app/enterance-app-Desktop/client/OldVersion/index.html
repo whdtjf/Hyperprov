@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    
+
     <!-- adding style here -->
     <style type="text/css">
       header{
@@ -41,7 +41,7 @@
         margin-left:0;
         width:40%;
         display:inline-block;
-      } 
+      }
       #id {
         width:49%;
         display: inline-block;
@@ -72,7 +72,7 @@
         <label>Query All Enterance Catches</label>
         <p><input id="queryAllEnterance" type="submit" value="Query" class="btn btn-primary" ng-click="queryAllEnterance()"></p>
       </div>
- 
+
       <table id="all_enterance" class="table" align="center">
 
         <tr>
@@ -92,7 +92,7 @@
       <div class="form-group">
         <label>Query a Specific Enterance</label><br>
         <h5 style="color:red;margin-bottom:2%" id="error_query">Error: Please enter a valid Barcode Id</h5>
-        
+
         Enter a Barcode number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="enterance_id">
         <input id="querySubmit" type="submit" value="Query" class="btn btn-primary" ng-click="queryEnterance()">
       </div>
@@ -116,12 +116,12 @@
         <br>
         Enter Barcode Number: <input class="form-control" type="text" placeholder="Ex: 110" ng-model="enterance.id">
         Enter your name: <input class="form-control" type="text" placeholder="Ex: jiwon" ng-model="enterance.name">
-        Enter initial timestamp: <input id="createName" class="form-control" type="text" placeholder="Ex: 2019-09-19" ng-model="enterance.timestamp"> 
-        <input id="createSubmit" type="submit" value="Create" name="led" class="btn btn-primary" ng-click="recordBarcode()"> 
+        Enter initial timestamp: <input id="createName" class="form-control" type="text" placeholder="Ex: 2019-09-19" ng-model="enterance.timestamp">
+        <input id="createSubmit" type="submit" value="Create" name="led" class="btn btn-primary" ng-click="recordBarcode()">
       </div>
 
 
-      
+
 
       <div class="form-group">
         <label>Update the Enterance Time</label><br>
