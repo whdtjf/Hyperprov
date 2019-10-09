@@ -177,6 +177,65 @@ func (s *SmartContract) UpdateEnterance(APIstub shim.ChaincodeStubInterface, arg
 	return shim.Success(nil)
 }
 
+
+func (s *SmartContract) queryHistory(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+
+	if len(args) < 1 {
+		return shim.Error("Incorrect number of arguments. Expecting 1")
+	}
+
+	resultsIterator, err := stub.GetHistoryForKey(args[0])
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	defer resultsIterator.Close()
+
+	// buffer is a JSON array containing historic values for the marble
+	var buffer bytes.Buffer
+	buffer.WriteString("[")
+
+	bArrayMemberAlreadyWritten := false
+	for resultsIterator.HasNext() {
+		response, err := resultsIterator.Next()
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+		// Add a comma before array members, suppress it for the first array member
+		if bArrayMemberAlreadyWritten == true {
+			buffer.WriteString(",")
+		}
+		buffer.WriteString("{\"TxId\":")
+		buffer.WriteString("\"")
+		buffer.WriteString(response.TxId)
+		buffer.WriteString("\"")
+
+		buffer.WriteString(", \"Value\":")
+	
+		if response.IsDelete {
+			buffer.WriteString("null")
+		} else {
+			buffer.WriteString(string(response.Value))
+		}
+
+		// buffer.WriteString(", \"Timestamp\":")
+		// buffer.WriteString("\"")
+		// buffer.WriteString(time.Unix(response.Timestamp.Seconds, int64(response.Timestamp.Nanos)).String())
+		// buffer.WriteString("\"")
+
+		// buffer.WriteString(", \"IsDelete\":")
+		// buffer.WriteString("\"")
+		// buffer.WriteString(strconv.FormatBool(response.IsDelete))
+		// buffer.WriteString("\"")
+
+		buffer.WriteString("}")
+		bArrayMemberAlreadyWritten = true
+	}
+	buffer.WriteString("]")
+
+	return shim.Success(buffer.Bytes())
+}
+
+
  func main() {
  
 	 // Create a new Smart Contract
@@ -185,3 +244,4 @@ func (s *SmartContract) UpdateEnterance(APIstub shim.ChaincodeStubInterface, arg
 		 fmt.Printf("Error creating new Smart Contract: %s", err)
 	 }
  }
+
