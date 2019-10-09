@@ -50,9 +50,9 @@
 								</table>
 
 						</td></tr>
-						<tr height="50%"><td valign = "top">
+						<tr height="50%"><td valign = "top" align="center">
 								<font color="white">
-                  <div width="90%">
+                  <div style="width:90%">
                     <h2>&nbsp;최근 출입 기록</h2>
                     <hr style="border: solid 1px white;" width="90%">
                   </div>
@@ -122,12 +122,24 @@
 			</tr>
 
 			<tr>
-				<td>
+				<td style:"margin:20px 20px 20px 20px" align="left">
           <div style="width:80%">
-            <h2>출입구별 사용 통계</h2>
+            <font style="font-size: 25px;"><b>출입구별 사용 통계</b></font><br>
             <hr width="80%">
+            <div style="width:80%">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="Years" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+            </div>
           </div>
-          <table width="100%" height="80%">
+          <table width="100%" height="70%">
             <tr>
               <td rowspan="2" width="70%" heigh="100%"><img src="./img/map.png" id="map" width="100%"></td>
               <td width="30%" heigh="50%"><div onmouseover="hovermouseA()" onmouseout="outmouse()" width="100%" height="100%">A</div></td>
@@ -136,18 +148,7 @@
               <td width="30%" heigh="50%"><div onmouseover="hovermouseB()" onmouseout="outmouse()" width="100%" height="100%">B</div></td>
             </tr>
           </table>
-          <div style="width:80%">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="Years" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
-          </div>
+
           <script>
           let map = document.getElementById('map');
 
