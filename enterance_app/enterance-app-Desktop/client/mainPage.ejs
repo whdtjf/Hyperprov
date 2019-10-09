@@ -20,6 +20,7 @@
   <body style="margin:0px 0px 0px 0px; height:100%" ng-app="fakeApplication" ng-controller="fakeAppController" ng-init="uID=userData.key">
     <input type="text" id="hiddenKey" ng-model="uID">
     <script>
+      alert('<%= uID%>');
       let hiddenKeyElement = document.getElementById('hiddenKey');
       hiddenKeyElement.value = "2013122041";
     </script>
