@@ -60,5 +60,5 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
     }
   }
 
-  setTimeout($scope.queryHistoryOnWake($scope.uID),1);
+  setTimeout($scope.queryHistoryOnWake($scope.uID),100);
 }])
