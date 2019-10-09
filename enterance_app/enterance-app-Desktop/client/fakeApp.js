@@ -51,7 +51,7 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
 
   $scope.all_enterance = allHistoryData;
   $scope.queryHistory = [];
-  $scope.queryHistoryOnWake = () => {
+  $scope.queryHistoryTop15 = () => {
     console.log("id : "+userData.key);
     $scope.queryHistory = [];
     let arr =[];
@@ -59,6 +59,7 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
       if (allHistoryData[i].key == userData.key){
         arr.push(allHistoryData[i]);
         $scope.queryHistory.push(allHistoryData[i]);
+        if (arr.length == 15) break;
       }
     }
     return arr;
