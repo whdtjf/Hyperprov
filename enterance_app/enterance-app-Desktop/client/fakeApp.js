@@ -54,11 +54,13 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
   $scope.queryHistoryOnWake = (id) => {
     console.log("id : "+id);
     $scope.queryHistory = [];
+    let arr =[];
     for (let i = 0 ;  i < allHistoryData.length; i ++){
-      if (allHistoryData[i].key == id)
+      if (allHistoryData[i].key == id){
+        arr.push(allHistoryData[i]);
         $scope.queryHistory.push(allHistoryData[i]);
+      }
     }
+    return arr;
   }
-
-  setTimeout($scope.queryHistoryOnWake($scope.uID),100);
 }])
