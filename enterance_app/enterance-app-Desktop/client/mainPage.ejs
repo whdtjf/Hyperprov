@@ -20,7 +20,6 @@
   <body style="margin:0px 0px 0px 0px; height:100%" ng-app="fakeApplication" ng-controller="fakeAppController" ng-init="uID=userData.key">
     <input type="text" id="hiddenKey" ng-model="uID">
     <script>
-      alert('<%= uID%>');
       let hiddenKeyElement = document.getElementById('hiddenKey');
       hiddenKeyElement.value = "2013122041";
     </script>
@@ -60,7 +59,7 @@
 								<font color="white">
                   <h2>최근 출입 기록</h2>
                   <table width="100%" style="color:#BAB8DB">
-                    <tr ng-repeat="temp in queryHistoryOnWake(uID)">
+                    <tr ng-repeat="temp in queryHistoryOnWake()">
                       <td>{{temp.timestamp}}</td>
                       <td>{{temp.location}}</td>
                       <td>{{temp.state}}</td>
