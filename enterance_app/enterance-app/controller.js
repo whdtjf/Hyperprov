@@ -317,7 +317,7 @@ return{
 		console.log("changing timestamp of enterance catch: ");
 
 		var array = req.params.timestamp.split("-");
-		var key = array[0]
+		var key = array[0];
 		var timestamp = array[1];
 
 		var fabric_client = new Fabric_Client();
