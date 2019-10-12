@@ -102,7 +102,7 @@
       <table width="80%">
         <tr><td><h2>   월간 총 입장 통계  <p><input id="queryAllEnterance" type="submit" value="Query" class="btn btn-primary" ng-click="queryAllEnterance()"></p></h2>
         </td></tr>
-        
+
       </table>
 
        <table id="all_enterance" class="table" align="center">

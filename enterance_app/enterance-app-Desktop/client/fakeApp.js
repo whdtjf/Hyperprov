@@ -4,30 +4,6 @@ var app = angular.module('fakeApplication', []);
 let allHistoryData =[];
 let allStatusData =[];
 
-let queryAllEnterance = () => {
-  return  allStatusData;
-};
-
-let queryHistory = (id) => {
-  let resultArr = [];
-  for (let i = 0; i < allQueryData.length; i++) {
-    if (id == allQueryData[i].key ){
-      resultArr.push(allQueryData[i]);
-    }
-  }
-
-  return resultArr;
-}
-
-let queryEnterance = (id) => {
-  let resultArr = {};
-  for (let i = 0; i < allStatusData.length; i++) {
-    if (id == allStatusData[i].key ){
-      return allStatusData[i];
-    }
-  }
-  return null;
-}
 
 app.controller ('fakeAppController', ['$scope',($scope) => {
 
@@ -50,18 +26,29 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
                 ];
 
   $scope.all_enterance = allHistoryData;
-  $scope.queryHistory = [];
-  $scope.queryHistoryTop10 = () => {
-    console.log("id : "+userData.key);
-    $scope.queryHistory = [];
-    let arr =[];
-    for (let i = 0 ;  i < allHistoryData.length; i ++){
-      if (allHistoryData[i].key == userData.key){
-        arr.push(allHistoryData[i]);
-        $scope.queryHistory.push(allHistoryData[i]);
-        if (arr.length == 10) break;
+
+  $scope.queryHistory = (name) (id) => {
+    let resultArr = [];
+    for (let i = 0; i < allQueryData.length; i++) {
+      if (id == allQueryData[i].key ){
+        resultArr.push(allQueryData[i]);
       }
     }
-    return arr;
+    return resultArr;
   }
+
+  $scope.queryAllEntrance () => {
+    return  allStatusData;
+  };
+
+  $scope.queryEnterance = (id) => {
+    let resultArr = {};
+    for (let i = 0; i < allStatusData.length; i++) {
+      if (id == allStatusData[i].key ){
+        return allStatusData[i];
+      }
+    }
+    return null;
+  };
+
 }])
