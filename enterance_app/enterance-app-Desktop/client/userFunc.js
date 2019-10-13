@@ -123,11 +123,11 @@ setTimeout ( () => {
       }
     }
 
-    if (noneEnterRecord) rawDataEnter.push(['기록 없음'],1);
-    else rawDataEnter.push(['기록 없음'],0);
+    if (noneEnterRecord) rawDataEnter.push(['기록 없음',1]);
+    else rawDataEnter.push(['기록 없음',0]);
 
-    if (noneExitRecord) rawDataExit.push(['기록 없음'],1);
-    else rawDataExit.push(['기록 없음'],0);
+    if (noneExitRecord) rawDataExit.push(['기록 없음',1]);
+    else rawDataExit.push(['기록 없음',0]);
 
     console.log(rawDataEnter);
     console.log(rawDataExit);
