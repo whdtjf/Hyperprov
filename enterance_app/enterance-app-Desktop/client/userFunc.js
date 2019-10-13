@@ -114,6 +114,9 @@ setTimeout ( () => {
         }
       }
     }
+
+    console.log(rawDataEnter);
+    console.log(rawDataExit);
     drawEnterChart();
     drawExitChart();
   },1000);
