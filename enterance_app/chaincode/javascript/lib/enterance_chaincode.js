@@ -43,6 +43,8 @@ class Enterance_Chaincode extends Contract {
         return enteranceAsBytes.toString();
     }
 
+
+
     async recordBarcode(ctx, Barcode, name, timestamp, location, state) {
         console.info('============= START : Add Barcode ===========');
 
@@ -57,6 +59,36 @@ class Enterance_Chaincode extends Contract {
         await ctx.stub.putState(Barcode, Buffer.from(JSON.stringify(enterance)));
         console.info('============= END : Add Barcode ===========');
     }
+
+    
+    async queryHistory(ctx, Barcode) {
+    
+        const iterator = await ctx.stub.getHistoryForKey(Barcode);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                let jsonRes = {};
+                console.log(res.value.value.toString('utf8'));
+                jsonRes.TxId = res.value.tx_id;
+                jsonRes.Timestamp = res.value.timestamp;
+                try {
+                    jsonRes.Value = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    jsonRes.Value = res.value.value.toString('utf8');
+                }
+                allResults.push(jsonRes);
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }
+      }
 
     async queryAllEnterance(ctx) {
         const startKey = '0';
@@ -90,6 +122,8 @@ class Enterance_Chaincode extends Contract {
         }
     }
 
+
+
     async UpdateEnterance(ctx, Barcode, newTimestamp, newLocation, newState) {
         console.info('============= START : UpdateEnterance ===========');
 
@@ -104,6 +138,8 @@ class Enterance_Chaincode extends Contract {
         await ctx.stub.putState(Barcode, Buffer.from(JSON.stringify(enterance)));
         console.info('============= END : UpdateEnterance ===========');
     }
+
+
 
 }
 
