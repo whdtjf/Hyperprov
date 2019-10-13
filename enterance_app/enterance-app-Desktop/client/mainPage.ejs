@@ -167,8 +167,8 @@
           let hovermouseB = () => { map.src = "./img/map_B.png"; }
           let outmouse = () => { map.src = "./img/map.png"; }
 
-          let rawDataEnter = [['gate','count']['gate_A',0],['gate_B',0]];
-          let rawDataExit = [['gate','count']['gate_A',0],['gate_B',0]];
+          let rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0]];
+          let rawDataExit = [['gate','count'],['gate_A',0],['gate_B',0]];
 
           google.charts.load('current', { packages: ['corechart'] });
           google.charts.setOnLoadCallback(drawEnterChart);
