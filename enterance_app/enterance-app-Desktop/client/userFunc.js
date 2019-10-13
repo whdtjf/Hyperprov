@@ -4,8 +4,8 @@ let currentTime = new Date();
 let timeStr = '2019-10-10';
 console.log('currentTime : '+timeStr);
 
-let rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0]];
-let rawDataExit = [['gate','count'],['gate_A',0],['gate_B',1]];
+rawDataEnter = [['gate','count'],['입장',0],['퇴장',0],['기록 없음',1]];
+rawDataExit = [['gate','count'],['입장',0],['퇴장',0],['기록 없음',1]];
 
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(drawEnterChart);
@@ -67,8 +67,8 @@ function drawExitChart() {
 }
 
 setTimeout ( () => {
-  rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0]];
-  rawDataExit = [['gate','count'],['gate_A',0],['gate_B',1]];
+  rawDataEnter = [['gate','count'],['입장',0],['퇴장',0]];
+  rawDataExit = [['gate','count'],['입장',0],['퇴장',1]];
   let allEntranceLog = queryAllEntrance();
   console.log(allEntranceLog);
   console.log(allEntranceLog.length);
@@ -78,9 +78,9 @@ setTimeout ( () => {
       if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr){
         let flag = false;  let index = 0;
         //------------------------------------------------------------------------
-        // 입장한 경우
+        // gate_A의 로그
         //------------------------------------------------------------------------
-        if (allEntranceLog[i].state == 'in'){
+        if (allEntranceLog[i].location == 'gate_A'){
           noneEnterRecord = false;
 
           for(let j = 0; j < rawDataEnter.length; j++) {

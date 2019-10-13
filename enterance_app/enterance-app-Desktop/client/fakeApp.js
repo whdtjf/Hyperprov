@@ -1,12 +1,27 @@
 'use strict';
 
 var app = angular.module('fakeApplication', []);
-let allHistoryData =[];
-let allStatusData =[];
 
+//=================================================================
+//  ADD REAL app.js
+//=================================================================
 let queryHistory;
 let queryAllEntrance;
 let queryEnterance;
+let queryAllHistory = () => {
+  let history = [];
+  for( let i = 0 ; i < queryAllEntrance.length ; i++ ){
+    let temp = queryHistory(queryAllEntrance[i].name);
+    for (let j = 0 ; j < temp.length ; j ++ ){
+      history.add(temp[j]);
+    }
+  }
+  history.sort( (str1,str2) => {  return ( ( str1 == str2 ) ? 0 : ( ( str1 > str2 ) ? 1 : -1 ) ); });
+
+  return history;
+}
+
+
 
 app.controller ('fakeAppController', ['$scope',($scope) => {
 
@@ -70,5 +85,4 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
     }
     return arr;
   }
-
 }])
