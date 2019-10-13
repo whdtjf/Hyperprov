@@ -3,8 +3,7 @@ let currentTime = new Date();
 let timeStr = currentTime.getFullYear() + "-" + (currentTime.getMonth()+1) + "-" + currentTime.getDay();
 console.log('currentTime : '+timeStr);
 
-google.charts.setOnLoadCallback(drawEnterChart);
-google.charts.setOnLoadCallback(drawExitChart);
+
 let allEntranceLog = queryAllEntrance();
 function drawEnterChart() {
   let rawData = [];
@@ -109,3 +108,6 @@ function drawExitChart() {
   let exitChart = new google.visualization.PieChart(document.getElementById('chart-exit'));
   exitChart.draw(data,options);
 }
+
+google.charts.setOnLoadCallback(drawEnterChart);
+google.charts.setOnLoadCallback(drawExitChart);
