@@ -37,7 +37,7 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
     return resultArr;
   }
 
-  $scope.queryAllEntrance () => {
+  $scope.queryAllEntrance = () => {
     return  allStatusData;
   };
 
