@@ -186,6 +186,53 @@ module.exports = (function () {
 			}
 
 		},
+		get_history: function (req, res) {
+			try {
+				// Create a new file system based wallet for managing identities.
+				addWallet().then((barcode) => {
+					// Check to see if we've already enrolled the user.
+					const userExists = await wallet.exists(`${barcode}`);
+					if (!userExists) {
+						console.log('An identity for the user who has "Barcode" does not exist in the wallet');
+						console.log('Run the registerUser.js application before retrying');
+						return;
+					}
+
+					// Create a new gateway for connecting to our peer node.
+					const gateway = new Gateway();
+					await gateway.connect(ccpPath, { wallet, identity: `${barcode}`, discovery: { enabled: true, asLocalhost: true } });
+
+					// Get the network (channel) our contract is deployed to.
+					const network = await gateway.getNetwork('mychannel');
+
+					// Get the contract from the network.
+					const contract = network.getContract('enterance_chaincode');
+
+					// Evaluate the specified transaction.
+					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
+					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
+					const query_responses = await contract.evaluateTransaction('queryHistory',`${barcode}`);
+					console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+
+					if (query_responses && query_responses.length == 1) {
+						if (query_responses[0] instanceof Error) {
+							console.error("error from query = ", query_responses[0]);
+						} else {
+							console.log("Response is ", query_responses[0].toString());
+							res.send(query_responses[0].toString())
+						}
+					} else {
+						console.log("No payloads were returned from query");
+					}
+				})
+			} catch (error) {
+				console.log(error);
+				console.log(error.stack);
+				console.error(`Failed to submit transaction: ${error}`);
+				process.exit(1);
+			}
+
+		},
 		update_enterance: function (req, res) {
 			console.log("changing timestamp of enterance catch: ");
 
