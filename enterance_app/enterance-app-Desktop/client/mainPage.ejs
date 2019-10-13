@@ -167,9 +167,6 @@
           let hovermouseB = () => { map.src = "./img/map_B.png"; }
           let outmouse = () => { map.src = "./img/map.png"; }
 
-          google.charts.setOnLoadCallback(drawEnterChart);
-          google.charts.setOnLoadCallback(drawExitChart);
-
           let rawDataEnter = [['gate_A',0],['gate_B',0]];
           let rawDataExit = [['gate_A',0],['gate_B',0]];
 
@@ -228,6 +225,9 @@
             exitChart.draw(data,options);
           }
 
+
+                    google.charts.setOnLoadCallback(drawEnterChart);
+                    google.charts.setOnLoadCallback(drawExitChart);
           </script>
 				</td>
 			</tr>
