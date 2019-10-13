@@ -4,6 +4,9 @@ var app = angular.module('fakeApplication', []);
 let allHistoryData =[];
 let allStatusData =[];
 
+let queryHistory;
+let queryAllEntrance;
+let queryEnteranc;
 
 app.controller ('fakeAppController', ['$scope',($scope) => {
 
@@ -36,10 +39,12 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
     }
     return resultArr;
   }
+  queryHistory = $scope.queryHistory;
 
   $scope.queryAllEntrance = () => {
     return  allStatusData;
   };
+  queryAllEntrance = $scope.queryAllEntrance;
 
   $scope.queryEnterance = (id) => {
     let resultArr = {};
@@ -50,5 +55,6 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
     }
     return null;
   };
+  queryEnterance = $scope.queryEnterance;
 
 }])
