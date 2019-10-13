@@ -25,7 +25,7 @@
         try{
             let result = document.getElementById('queryEnterance').value;
 
-            if (result != null) {
+            if (result != undefined) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(result.key));
                 sessionStorage.setItem("uNAME", JSON.stringify(result.name));
