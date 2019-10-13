@@ -27,7 +27,7 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
 
   $scope.all_enterance = allHistoryData;
 
-  $scope.queryHistory = (name) (id) => {
+  $scope.queryHistory = (id) => {
     let resultArr = [];
     for (let i = 0; i < allQueryData.length; i++) {
       if (id == allQueryData[i].key ){
