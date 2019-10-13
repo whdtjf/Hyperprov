@@ -70,4 +70,6 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
     }
     return arr;
   }
+
+  $scope.currentTime = "2019-10-10";
 }])
