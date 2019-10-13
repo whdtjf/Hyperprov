@@ -69,10 +69,14 @@ function drawExitChart() {
 setTimeout ( () => {
   let allEntranceLog = queryAllEntrance();
   console.log(allEntranceLog);
+  console.log(allEntranceLog.length);
   for (let i = 0 ; i < allEntranceLog.length ; i ++) {
-      if (allEntranceLog[i].timestamp.startsWith(currentTime)){
-        let flag = false;  let index = 0;
 
+      console.log (allEntranceLog[i].timestamp.split(' ')[0]+' == ' + currentTime +'?');
+
+      if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr){
+        let flag = false;  let index = 0;
+	console.log('wow! : '+i);
         //------------------------------------------------------------------------
         // 입장한 경우
         //------------------------------------------------------------------------
