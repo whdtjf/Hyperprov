@@ -21,6 +21,7 @@
       let getID ='<%= id%>';
 
       let checkLogin = () => {
+        try{
             let result = queryEnterance(getID);
 
             if (result != null) {
@@ -33,7 +34,10 @@
               }
             }
             else {alert("로그인 실패... ID를 확인하세요"); location.href="/";}
-
+        } catch (e) {
+          console.log('error');
+          setTimeout(checkLogin(),1500);
+        }
       };
 
       setTimeout(checkLogin(),1500);
