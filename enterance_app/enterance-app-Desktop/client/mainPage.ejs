@@ -170,7 +170,7 @@
           google.charts.setOnLoadCallback(drawEnterChart);
           google.charts.setOnLoadCallback(drawExitChart);
           let allEntranceLog = queryAllEntrance();
-          let drawEnterChart = () => {
+          function drawEnterChart() {
             let rawData = [];
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
               if (allEntranceLog[i].timestamp.startWith(currentTime) &&
@@ -222,7 +222,7 @@
             enterChart.draw(data,options);
           }
 
-          let drawExitChart = () => {
+          function drawExitChart() {
             let rawData = [];
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
               if (allEntranceLog[i].timestamp.startWith(currentTime) &&
