@@ -57,4 +57,17 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
   };
   queryEnterance = $scope.queryEnterance;
 
+  //=================================================================
+  //  ADD REAL app.js
+  //=================================================================
+  $scope.queryHistoryTop10 = () => {
+    console.log("id : "+userData.key);
+    let arr =[];
+    let getArr = $scope.queryHistory(userData.key)
+    for (let i = 0 ;  i < getArr.length; i ++){
+      arr.push(getArr[i]);
+      if (arr.length == 10) break;
+    }
+    return arr;
+  }
 }])
