@@ -70,7 +70,7 @@ setTimeout ( () => {
   let allEntranceLog = queryAllEntrance();
 
   for (let i = 0 ; i < allEntranceLog.length ; i ++) {
-      if (allEntranceLog[i].timestamp.startWith(currentTime)){
+      if (allEntranceLog[i].timestamp.startsWith(currentTime)){
         let flag = false;  let index = 0;
 
         //------------------------------------------------------------------------
