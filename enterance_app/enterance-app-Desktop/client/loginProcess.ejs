@@ -15,6 +15,7 @@
       <center>
 	<image src="./img/logining.gif" width="60%"><br>
          <h2><font color="white">사용자 로그인 중...</font></h2>
+         <input type="hidden" ng-model="queryEnterance(getID)" id="queryEnterance">
    	 </center>
     </div>
     <script>
@@ -22,7 +23,7 @@
 
       let checkLogin = () => {
         try{
-            let result = {{queryEnterance(getID)}};
+            let result = document.getElementById('queryEnterance').value;
 
             if (result != null) {
               try {
