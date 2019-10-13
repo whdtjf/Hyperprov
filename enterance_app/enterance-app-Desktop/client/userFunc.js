@@ -118,4 +118,4 @@ setTimeout ( () => {
     }
     drawEnterChart();
     drawExitChart();
-  },10);
+  },1000);
