@@ -4,8 +4,8 @@ let currentTime = new Date();
 let timeStr = '2019-10-10';
 console.log('currentTime : '+timeStr);
 
-let rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0],['기록 없음',1]];
-let rawDataExit = [['gate','count'],['gate_A',0],['gate_B',1],['기록 없음',0]];
+let rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0]];
+let rawDataExit = [['gate','count'],['gate_A',0],['gate_B',1]];
 
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(drawEnterChart);
@@ -67,20 +67,23 @@ function drawExitChart() {
 }
 
 setTimeout ( () => {
+  rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0]];
+  rawDataExit = [['gate','count'],['gate_A',0],['gate_B',1]];
   let allEntranceLog = queryAllEntrance();
   console.log(allEntranceLog);
   console.log(allEntranceLog.length);
   for (let i = 0 ; i < allEntranceLog.length ; i ++) {
-
-      console.log (allEntranceLog[i].timestamp.split(' ')[0]+' == ' + currentTime +'?');
+      let noneEnterRecord = true;
+      let noneExitRecord = true;
 
       if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr){
         let flag = false;  let index = 0;
-	console.log('wow! : '+i);
         //------------------------------------------------------------------------
         // 입장한 경우
         //------------------------------------------------------------------------
         if (allEntranceLog[i].state == 'in'){
+          noneEnterRecord = false;
+
           for(let j = 0; j < rawDataEnter.length; j++) {
             if (allEntranceLog[i].location == rawDataEnter[j][0]){
               flag = true;
@@ -93,15 +96,15 @@ setTimeout ( () => {
             let count = rawDataEnter[index][1] + 1;
             rawDataEnter.splice(index, 1);
             rawDataEnter.splice(index,0,[allEntranceLog[i].location,count]);
-            console.log(rawDataEnter);
           } else {
             rawDataEnter.push([allEntranceLog[i].location,1]);
-            console.log(rawDataEnter);
           }
         //------------------------------------------------------------------------
         // 퇴장한 경우
         //------------------------------------------------------------------------
         } else {
+          noneExitRecord = false;
+
           for(let j = 0; j < rawDataExit.length; j++) {
             if (allEntranceLog[i].location == rawDataExit[j][0]){
               flag = true;
@@ -114,17 +117,21 @@ setTimeout ( () => {
             let count = rawDataExit[index][1] + 1;
             rawDataExit.splice(index, 1);
             rawDataExit.splice(index,0,[allEntranceLog[i].location,count]);
-            console.log(rawDataExit);
           } else {
             rawDataExit.push([allEntranceLog[i].location,1]);
-            console.log(rawDataExit);
           }
         }
       }
     }
 
+    if (noneEnterRecord) rawDataEnter.push(['기록 없음'],1);
+    else rawDataEnter.push(['기록 없음'],0);
+
+    if (noneExitRecord) rawDataExit.push(['기록 없음'],1);
+    else rawDataExit.push(['기록 없음'],0);
+
     console.log(rawDataEnter);
     console.log(rawDataExit);
     drawEnterChart();
     drawExitChart();
-  },1000);
+  },3000);
