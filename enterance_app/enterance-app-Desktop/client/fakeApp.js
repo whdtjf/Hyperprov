@@ -6,7 +6,7 @@ let allStatusData =[];
 
 let queryHistory;
 let queryAllEntrance;
-let queryEnteranc;
+let queryEnterance;
 
 app.controller ('fakeAppController', ['$scope',($scope) => {
 
