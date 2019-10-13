@@ -19,8 +19,8 @@
     </div>
     <script>
       let getID ='<%= id%>';
-
-      let checkLogin2 = () => {
+      setTimeout( () => {alert('이상발생!');},3000);
+      setTimeout( () => {
         try{
             let result = queryEnterance(getID);
 
@@ -37,10 +37,7 @@
         } catch (e) {
           console.log('error' +e);
         }
-      };
-
-      setTimeout( () => {alert('이상발생!');},3000);
-      setTimeout(checkLogin2(),1500);
+      } ,1500);
     </script>
   </body>
 </html>
