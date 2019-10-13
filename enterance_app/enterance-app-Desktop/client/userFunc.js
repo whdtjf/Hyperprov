@@ -72,10 +72,9 @@ setTimeout ( () => {
   let allEntranceLog = queryAllEntrance();
   console.log(allEntranceLog);
   console.log(allEntranceLog.length);
+  let noneEnterRecord = true;
+  let noneExitRecord = true;
   for (let i = 0 ; i < allEntranceLog.length ; i ++) {
-      let noneEnterRecord = true;
-      let noneExitRecord = true;
-
       if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr){
         let flag = false;  let index = 0;
         //------------------------------------------------------------------------
