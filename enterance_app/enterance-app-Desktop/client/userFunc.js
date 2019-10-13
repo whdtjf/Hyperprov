@@ -4,8 +4,8 @@ let currentTime = new Date();
 let timeStr = '2019-10-10';
 console.log('currentTime : '+timeStr);
 
-let rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0]];
-let rawDataExit = [['gate','count'],['gate_A',0],['gate_B',1]];
+let rawDataEnter = [['gate','count'],['gate_A',0],['gate_B',0],['기록 없음',1]];
+let rawDataExit = [['gate','count'],['gate_A',0],['gate_B',1],['기록 없음',0]];
 
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(drawEnterChart);
@@ -68,7 +68,7 @@ function drawExitChart() {
 
 setTimeout ( () => {
   let allEntranceLog = queryAllEntrance();
-
+  console.log(allEntranceLog);
   for (let i = 0 ; i < allEntranceLog.length ; i ++) {
       if (allEntranceLog[i].timestamp.startsWith(currentTime)){
         let flag = false;  let index = 0;
@@ -89,8 +89,10 @@ setTimeout ( () => {
             let count = rawDataEnter[index][1] + 1;
             rawDataEnter.splice(index, 1);
             rawDataEnter.splice(index,0,[allEntranceLog[i].location,count]);
+            console.log(rawDataEnter);
           } else {
             rawDataEnter.push([allEntranceLog[i].location,1]);
+            console.log(rawDataEnter);
           }
         //------------------------------------------------------------------------
         // 퇴장한 경우
@@ -108,8 +110,10 @@ setTimeout ( () => {
             let count = rawDataExit[index][1] + 1;
             rawDataExit.splice(index, 1);
             rawDataExit.splice(index,0,[allEntranceLog[i].location,count]);
+            console.log(rawDataExit);
           } else {
             rawDataExit.push([allEntranceLog[i].location,1]);
+            console.log(rawDataExit);
           }
         }
       }
