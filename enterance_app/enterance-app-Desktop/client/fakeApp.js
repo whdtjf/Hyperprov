@@ -32,9 +32,9 @@ app.controller ('fakeAppController', ['$scope',($scope) => {
 
   $scope.queryHistory = (id) => {
     let resultArr = [];
-    for (let i = 0; i < allQueryData.length; i++) {
-      if (id == allQueryData[i].key ){
-        resultArr.push(allQueryData[i]);
+    for (let i = 0; i < allHistoryData.length; i++) {
+      if (id == allHistoryData[i].key ){
+        resultArr.push(allHistoryData[i]);
       }
     }
     return resultArr;
