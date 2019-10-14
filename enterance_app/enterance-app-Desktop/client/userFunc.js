@@ -16,6 +16,7 @@ function drawGateAChart() {
 
   let options = {
     is3D : true, legend : 'none',
+    backgroundColor:'transparent',
     slices : {
       is3D: true,legend : 'none',
       slices: {
@@ -43,6 +44,7 @@ function drawGateBChart() {
   let data = google.visualization.arrayToDataTable(rawDataGateB);
   let options = {
     is3D : true, legend : 'none',
+    backgroundColor:'transparent',
     slices : {
       is3D: true,legend : 'none',
       slices: {
@@ -52,8 +54,8 @@ function drawGateBChart() {
         3: { color: '#FF3D6F' }
       },
       chartArea:{
-        left:10,
-        right:10, // !!! works !!!
+        left:0,
+        right:0, // !!! works !!!
         bottom:0,  // !!! works !!!
         top:0,
         width:"100%",
