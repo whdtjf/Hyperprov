@@ -127,37 +127,47 @@
 				<td align="center" height="72%">
           <div style="width:100%;height:100%;padding:10px 10px;">
 
-            <table height="100%" width="100%">
+            <table height="100%" width="90%">
               <tr>
-                <td width="60%" height="20%" align="left">
-                  <font style="font-size: 35px;"><b>출입구별 사용 통계</b></font>
+                <td width="59%" height="20%" align="left" valign="top" style="border-bottom:5px solid #CCDAE6; padding-top:10px;">
+                  <font style="font-size: 30px;">
+                    <b>출입구별 사용 통계
+                  </font>
+		  <div style="font-size:20px;font-weight:bold;background-color:#000000;color:white; padding: 2px 10px;">
+	            SELECT TIME 
+	            <input type="date">
+	          </div>
                 </td>
+		<td width="1%" rowspan="2"></td>
                 <td rowspan="2" width="40%">
                   <table width="100%" height="100%">
                     <tr>
-                      <td height="5%">test1</td>
+                      <td height="5%">
+                        <div style="border-left:10px solid #4A78E8;padding:10px; width:100%;font-size:25px;background-image:linear-gradient(90deg,#BDBCE8,#FFFFFF)">
+                           test1
+                        </div>
+                      </td>
                     </tr><tr>
-                      <td height="45%" bgcolor="yellow">
+                      <td height="40%">
                         <div onmouseover="hovermouseA()"
                              onmouseout="outmouse()"
                              id="chart-gateA"
-                             style="width:100%;height:100%;background-color:blue;padding:0px;margin:0px;">
+                             style="width:100%;height:100%;padding:0px;margin:0px;border-left:10px solid #81A6FF;background-image:linear-gradient(90deg,#D1D1EB,#FFFFFF)">
                         </div>
                       </td>
                     </tr>
                     <tr width="100%">
                       <td height="5%">
-                  			<div style="z-index:1;background-color:black;border-radius:25px;padding:10px;color:white;
-                                    height:40px; width:100%;">
+                  			<div style="border-left:10px solid #4A78E8;padding:10px; width:100%;font-size:25px;background-image:linear-gradient(90deg,#BDBCE8,#FFFFFF)">
                   				test2
                   			</div>
 		                  </td>
                     </tr><tr>
-                      <td height="45%">
+                      <td height="40%">
                         <div onmouseover="hovermouseB()"
                              onmouseout="outmouse()"
                              id="chart-gateB"
-                             style="width:100%;height:100%;background-color:red;padding:0px;margin:0px;">
+                             style="width:100%;height:100%;padding:0px;margin:0px;border-left:10px solid #81A6FF;background-image:linear-gradient(90deg,#D1D1EB,#FFFFFF)">
                         </div>
                       </td>
                     </tr>
@@ -167,8 +177,8 @@
               </tr>
 
               <tr>
-                <td width="60%" height="80%" align="center" bgcolor="green">
-		              <div style="width:100%;height:100%;overflow:hidden;">
+                <td width="59%" height="80%" align="center" valign="middle">
+		              <div style="width:100%;height:100%;overflow:hidden; vertical-align:middle;">
                     <img src="./img/map.png" id="map" width="90%">
 		              </div>
                 </td>
