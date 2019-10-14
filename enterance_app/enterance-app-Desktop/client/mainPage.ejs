@@ -134,20 +134,30 @@
                     <b>게이트별 사용 통계</b>
                   </font>
                   <div class="searchTotalBox" align="center">
-                    <img src="./img/searchBtn.png" width="25px" height="25px" style="margin:0px;padding:0px;">
-                    <input type="text" value="날짜 검색" class="descriptionField"  disabled>
+                    <img src="./img/searchBtn.png" width="25px" height="25px" style="margin:0px;padding:0px;" onclick="searchBtnClick()">
                     <input type="date" class="dateField scroll" id="userSelectDate">
                     <script>
                       let userSelectDate = document.getElementById('userSelectDate')
+
                       userSelectDate.onfocus = () => {
+                        userSelectDate.classList.remove('scroll')
+                      }
+
+                      userSelectDate.onclick = () => {
                         userSelectDate.classList.remove('scroll')
                       }
 
                       userSelectDate.onblur = () => {
                         if(!Date.parse(userSelectDate.value)){
                           userSelectDate.classList.add('scroll')
-                        } else {
-                          console.log(Date.parse(userSelectDate.value));
+                        }
+                      }
+
+                      let searchBtnClick = () => {
+                        if(!Date.parse(userSelectDate.value)){
+                          timeStr = userSelectDate.value
+                          drawGateAChart();
+                          drawGateBChart();
                         }
                       }
                     </script>
