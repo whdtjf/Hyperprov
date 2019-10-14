@@ -73,7 +73,7 @@ setTimeout ( () => {
   let noneGateARecord = true;
   let noneGateBRecord = true;
   for (let i = 0 ; i < allEntranceLog.length ; i ++) {
-      if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr){
+      if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr) {
         //------------------------------------------------------------------------
         // gate_A의 로그
         //------------------------------------------------------------------------
@@ -105,6 +105,7 @@ setTimeout ( () => {
             let count = rawDataGateB[2][1] + 1;
             rawDataGateB.splice(2, 1);
             rawDataGateB.splice(2,0,['퇴장',count]);
+          }
         }
       }
     }
