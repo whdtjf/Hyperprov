@@ -26,8 +26,8 @@ function drawGateAChart() {
         3: { color: '#81FF75' }
       },
       chartArea:{
-        left:10,
-        right:10, // !!! works !!!
+        left:0,
+        right:0, // !!! works !!!
         bottom:0,  // !!! works !!!
         top:0,
         width:"100%",
