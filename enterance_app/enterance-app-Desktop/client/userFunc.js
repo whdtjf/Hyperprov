@@ -4,8 +4,8 @@ let currentTime = new Date();
 let timeStr = '2019-10-10';
 console.log('currentTime : '+timeStr);
 
-rawDataGateA = [['gate','count'],['입장',0],['퇴장',0],['기록 없음',1]];
-rawDataGateB = [['gate','count'],['입장',0],['퇴장',0],['기록 없음',1]];
+let rawDataGateA = [['gate','count'],['입장',0],['퇴장',0],['기록 없음',1]];
+let rawDataGateB = [['gate','count'],['입장',0],['퇴장',0],['기록 없음',1]];
 
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(drawGateAChart);

@@ -5,6 +5,8 @@ var app = angular.module('fakeApplication', []);
 //=================================================================
 //  ADD REAL app.js
 //=================================================================
+let allHistoryData = [];
+let allStatusData = [];
 let queryHistory;
 let queryAllEntrance;
 let queryEnterance;
