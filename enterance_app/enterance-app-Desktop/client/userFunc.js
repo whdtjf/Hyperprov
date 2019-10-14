@@ -120,4 +120,4 @@ setTimeout ( () => {
 
     drawGateAChart();
     drawGateBChart();
-  },10);
+  },200);
