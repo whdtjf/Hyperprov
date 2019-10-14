@@ -1,0 +1,59 @@
+.menu:hover{
+  color:gray;
+  cursor: context-menu;
+}
+
+.searchTotalBox{
+  background-color: #2E1257;
+  color:white;
+  padding:10px;
+  border-radius: 20px;
+  display: inline;
+}
+
+.searchTotalBox img {
+  padding 0px;
+  margin 0px;
+  display:inline;
+}
+
+.descriptionField {
+  border:none;
+  outline:none;
+  font-size:16px;
+  border-radius: 50px;
+  height:0px;
+  padding: 0px 0px;
+  margin:0px 0px;
+  display: inline;
+  width:0px;
+  transition:0.2s;
+  color:white;
+  text-align: center;
+  background:none;
+}
+
+.searchTotalBox:hover > .descriptionField{
+  height:20px;
+  padding: 10px 10px;
+  width:110px;
+}
+
+.dateField{
+  border:none;
+  outline:none;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.scroll {
+  transition:0.2s;
+  height:0px !important;
+  width:0px !important;
+}
+
+.searchTotalBox:hover > .scroll{
+  height:25px !important;
+  padding-right:5px;
+  width:200px !important;
+}
