@@ -209,8 +209,8 @@ module.exports = (function () {
 					const contract = network.getContract('enterance_chaincode');
 
 					// Evaluate the specified transaction.
-					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
-					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
+					// queryEnterance transaction - requires 1 argument, ex: ('queryHistory', '0101092')
+				
 					const query_responses = await contract.evaluateTransaction('queryHistory',`${barcode}`);
 					console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
