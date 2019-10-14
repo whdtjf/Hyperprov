@@ -25,10 +25,9 @@ MAX_RETRY=5
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/ptunstad.no/orderers/orderer.ptunstad.no/msp/tlscacerts/tlsca.ptunstad.no-cert.pem
 PEER0_ORG1_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.ptunstad.no/peers/peer0.org1.ptunstad.no/tls/ca.crt
 
-CC_SRC_PATH="github.com/hyperledger/fabric/examples/chaincode/enterance/javascript"
-#if [ "$LANGUAGE" = "node" ]; then
-#	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/chaincode_example02/node/"
-#fi
+if [ "$LANGUAGE" = "node" ]; then
+	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/enterance-chaincode/node/"
+fi
 
 #if [ "$LANGUAGE" = "java" ]; then
 #	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/chaincode_example02/java/"
@@ -155,7 +154,7 @@ installChaincode () {
   setGlobals $PEER $ORG
   VERSION=${3:-1.2}
         set -x
-  peer chaincode install -n enterance_code2 -v ${VERSION} -l ${LANGUAGE} -p github.com/hyperledger/fabric/examples/chaincode/enterance/javascript/lib >&log.txt
+  peer chaincode install -n enterance_code2 -v ${VERSION} -l ${LANGUAGE} -p /opt/gopath/src/github.com/chaincode/enterance-chaincode/node/enterance-chaincode/node >&log.txt
   res=$?
         set +x
   cat log.txt
