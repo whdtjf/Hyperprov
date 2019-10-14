@@ -154,7 +154,7 @@
                       }
 
                       let searchBtnClick = () => {
-                        if(!Date.parse(userSelectDate.value)){
+                        if(Date.parse(userSelectDate.value)){
                           timeStr = userSelectDate.value
                           drawGateAChart();
                           drawGateBChart();
