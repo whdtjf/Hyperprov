@@ -18,7 +18,7 @@ let queryAllHistory = () => {
       history.push(temp[j]);
     }
   }
-  history.sort( (str1,str2) => {  return ( ( str1 == str2 ) ? 0 : ( ( str1 > str2 ) ? 1 : -1 ) ); });
+  history.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
   return history;
 }
 
@@ -87,9 +87,10 @@ app.controller ('fakeAppController', ['$scope','$filter',($scope,$filter) => {
   $scope.queryHistoryTop10 = () => {
     let arr =[];
     let getArr = $scope.queryHistory(userData.key)
+    getArr.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
     for (let i = 0 ;  i < getArr.length; i ++){
       arr.push(getArr[i]);
-      if (arr.length == 10) break;
+      if (arr.length == 8) break;
     }
     return arr;
   }
