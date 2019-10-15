@@ -162,20 +162,20 @@
                       }
                     </script>
                   </div><br />
-                  <table width="90%" style="border:1px solid white;margin-bottom:10px;">
+                  <table style="border:1px solid white;margin:10px;" class="inOutTable">
                     <tr height="30px">
                       <td align="center" bgcolor="#2D4059" colspan="4"><font color="white"><b>GATE A</b></font></td>
                       <td align="center" bgcolor="#2D4059" colspan="4"><font color="white"><b>GATE B</b></font></td>
                     </tr>
                     <tr heigth="20px">
-                      <td bgcolor="#6A98D4"><font color="white">입장</font></td>
-                      <td bgcolor="#FFFFFF"><font color="white"><div class="A_in" align="center"></div></font></td>
-                      <td bgcolor="#6A98D4"><font color="white">퇴장</font></td>
-                      <td bgcolor="#FFFFFF"><font color="white"><div class="A_out" align="center"></div></font></td>
-                      <td bgcolor="#6A98D4"><font color="white">입장</font></td>
-                      <td bgcolor="#FFFFFF"><font color="white"><div class="B_in" align="center"></div></font></td>
-                      <td bgcolor="#6A98D4"><font color="white">퇴장</font></td>
-                      <td bgcolor="#FFFFFF"><font color="white"><div class="B_out" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center"><font color="white">입장</font></td>
+                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="A_in" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center"><font color="white">퇴장</font></td>
+                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="A_out" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center"><font color="white">입장</font></td>
+                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="B_in" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center"><font color="white">퇴장</font></td>
+                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="B_out" align="center"></div></font></td>
                     </tr>
                   </table>
                 </td>
@@ -321,6 +321,10 @@
             console.log(allEntranceLog)
             let noneGateARecord = true;
             let noneGateBRecord = true;
+            let countA_in = 0;
+            let countA_out = 0;
+            let countB_in = 0;
+            let countB_out = 0;
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
                 if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr) {
                   //------------------------------------------------------------------------
@@ -331,11 +335,11 @@
                     noneGateARecord = false;
 
                     if(isEnter) {
-                      let count = rawDataGateA[1][1] + 1;
+                      countA_in = rawDataGateA[1][1] + 1;
                       rawDataGateA.splice(1, 1);
                       rawDataGateA.splice(1,0,['입장',count]);
                     } else {
-                      let count = rawDataGateA[2][1] + 1;
+                      countA_out = rawDataGateA[2][1] + 1;
                       rawDataGateA.splice(2, 1);
                       rawDataGateA.splice(2,0,['퇴장',count]);
                     }
@@ -347,11 +351,11 @@
                     noneGateBRecord = false;
 
                     if(isEnter) {
-                      let count = rawDataGateB[1][1] + 1;
+                      countB_in = rawDataGateB[1][1] + 1;
                       rawDataGateB.splice(1, 1);
                       rawDataGateB.splice(1,0,['입장',count]);
                     } else {
-                      let count = rawDataGateB[2][1] + 1;
+                      countB_out = rawDataGateB[2][1] + 1;
                       rawDataGateB.splice(2, 1);
                       rawDataGateB.splice(2,0,['퇴장',count]);
                     }
@@ -369,10 +373,10 @@
               drawGateBChart();
               document.getElementById('targetDate1').innerHTML = timeStr;
               document.getElementById('targetDate2').innerHTML = timeStr;
-              document.getElementById('A_in').innerHTML = rawDataGateA[1][1];
-              document.getElementById('A_out').innerHTML = rawDataGateA[2][1];
-              document.getElementById('B_in').innerHTML = rawDataGateB[1][1];
-              document.getElementById('B_out').innerHTML = rawDataGateB[2][1];
+              document.getElementById('A_in').innerHTML = "" + countA_in;
+              document.getElementById('A_out').innerHTML = "" + countA_out;
+              document.getElementById('B_in').innerHTML = "" + countB_in;
+              document.getElementById('B_out').innerHTML = "" + countB_out;
               document.getElementById('locationDiv').innerHTML = '전자관 5층' + timeStr;
             },200);};
 
