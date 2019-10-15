@@ -297,7 +297,7 @@
             }
           }
 
-          reDraw = { setTimeout ( () => {
+          reDraw = () => { setTimeout ( () => {
             rawDataGateA = [['gate','count'],['입장',0],['퇴장',0]];
             rawDataGateB = [['gate','count'],['입장',0],['퇴장',0]];
             let allEntranceLog = queryAllEntrance();
