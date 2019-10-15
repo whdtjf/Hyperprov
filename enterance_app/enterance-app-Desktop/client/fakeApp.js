@@ -51,13 +51,12 @@ app.controller ('fakeAppController', ['$scope','$filter',($scope,$filter) => {
                    {key:2013122260, name:"정지원", timestamp:"2019-10-16 10:59:38",location:"gate_A",state:"in"},
                    {key:2013122260, name:"김영찬", timestamp:"2019-10-16 11:10:10",location:"gate_A",state:"in"},
                    {key:2013122260, name:"김영찬", timestamp:"2019-10-16 11:12:13",location:"gate_A",state:"out"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"},
-
+                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"}
                 ];
 
   allStatusData = [ {key:2013122260, name:"이승준", timestamp:"2019-10-16 10:32:44",location:"gate_A",state:"in"},
                     {key:2013122260, name:"김영찬", timestamp:"2019-10-16 11:12:13",location:"gate_A",state:"out"},
-                    {key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"},
+                    {key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"}
                 ];
 
   $scope.all_enterance = allHistoryData;
