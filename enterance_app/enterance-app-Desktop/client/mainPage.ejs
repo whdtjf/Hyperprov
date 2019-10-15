@@ -162,20 +162,20 @@
                       }
                     </script>
                   </div><br />
-                  <table style="border:1px solid white;margin:10px;" class="inOutTable">
+                  <table style="border:1px solid white;margin:10px;" class="inOutTable" width="100%">
                     <tr height="30px">
-                      <td align="center" bgcolor="#2D4059" colspan="4"><font color="white"><b>GATE A</b></font></td>
-                      <td align="center" bgcolor="#2D4059" colspan="4"><font color="white"><b>GATE B</b></font></td>
+                      <td align="center" bgcolor="#2D4059" colspan="4" width="50%"><font color="white"><b>GATE A</b></font></td>
+                      <td align="center" bgcolor="#2D4059" colspan="4" width="50%"><font color="white"><b>GATE B</b></font></td>
                     </tr>
                     <tr heigth="20px">
-                      <td bgcolor="#6A98D4" align="center"><font color="white">입장</font></td>
-                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="A_in" align="center"></div></font></td>
-                      <td bgcolor="#6A98D4" align="center"><font color="white">퇴장</font></td>
-                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="A_out" align="center"></div></font></td>
-                      <td bgcolor="#6A98D4" align="center"><font color="white">입장</font></td>
-                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="B_in" align="center"></div></font></td>
-                      <td bgcolor="#6A98D4" align="center"><font color="white">퇴장</font></td>
-                      <td bgcolor="#FFFFFF" align="center"><font color="white"><div class="B_out" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center" width="12.5%"><font color="white">입장</font></td>
+                      <td bgcolor="#FFFFFF" align="center" width="12.5%"><font color="white"><div class="A_in" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center" width="12.5%"><font color="white">퇴장</font></td>
+                      <td bgcolor="#FFFFFF" align="center" width="12.5%"><font color="white"><div class="A_out" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center" width="12.5%"><font color="white">입장</font></td>
+                      <td bgcolor="#FFFFFF" align="center" width="12.5%"><font color="white"><div class="B_in" align="center"></div></font></td>
+                      <td bgcolor="#6A98D4" align="center" width="12.5%"><font color="white">퇴장</font></td>
+                      <td bgcolor="#FFFFFF" align="center" width="12.5%"><font color="white"><div class="B_out" align="center"></div></font></td>
                     </tr>
                   </table>
                 </td>
@@ -185,7 +185,7 @@
                     <tr>
                       <td height="5%">
                         <div style="border-left:10px solid #4A78E8;padding:10px; width:100%;font-size:16px;background-image:linear-gradient(90deg,#BDBCE8,#FFFFFF)">
-                           <b>GATE B 출입 현황</b> <div id="targetDate1" style={font-size:10px;}></div></div>
+                           <b>GATE B 출입 현황</b> <div id="targetDate1" style={font-size:10px;display:inline;}></div></div>
                         </div>
                       </td>
                     </tr><tr>
@@ -200,7 +200,7 @@
                     <tr width="100%">
                       <td height="5%">
                   			<div style="border-left:10px solid #4A78E8;padding:10px; width:100%;font-size:16px;background-image:linear-gradient(90deg,#BDBCE8,#FFFFFF)">
-                  				<b>GATE B 출입 현황</b> <div id="targetDate2" style={font-size:10px;}></div></div>
+                  				<b>GATE B 출입 현황</b> <div id="targetDate2" style={font-size:10px;display:inline;}></div></div>
 		                  </td>
                     </tr><tr>
                       <td height="40%">
@@ -337,11 +337,11 @@
                     if(isEnter) {
                       countA_in = rawDataGateA[1][1] + 1;
                       rawDataGateA.splice(1, 1);
-                      rawDataGateA.splice(1,0,['입장',count]);
+                      rawDataGateA.splice(1,0,['입장',countA_in]);
                     } else {
                       countA_out = rawDataGateA[2][1] + 1;
                       rawDataGateA.splice(2, 1);
-                      rawDataGateA.splice(2,0,['퇴장',count]);
+                      rawDataGateA.splice(2,0,['퇴장',countA_out]);
                     }
                   //------------------------------------------------------------------------
                   // gate_B의 로그
@@ -353,11 +353,11 @@
                     if(isEnter) {
                       countB_in = rawDataGateB[1][1] + 1;
                       rawDataGateB.splice(1, 1);
-                      rawDataGateB.splice(1,0,['입장',count]);
+                      rawDataGateB.splice(1,0,['입장',countB_in]);
                     } else {
                       countB_out = rawDataGateB[2][1] + 1;
                       rawDataGateB.splice(2, 1);
-                      rawDataGateB.splice(2,0,['퇴장',count]);
+                      rawDataGateB.splice(2,0,['퇴장',countB_out]);
                     }
                   }
                 }
