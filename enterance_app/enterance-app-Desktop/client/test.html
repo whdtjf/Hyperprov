@@ -58,7 +58,7 @@
                     <tr ng-repeat="temp in queryHistoryTop10()" align="center">
                       <td height="35px">{{temp.timestamp}}</td>
                       <td height="35px">{{temp.location}}</td>
-                      <td height="35px">{{temp.state}}</td>
+                      <td height="35px"><span ng-show="temp.state == 'in'">&nbsp;입장</span><span ng-show="temp.state == 'out'">&nbsp;퇴장</span></td>
                     </tr>
                   </table>
                 </font>
