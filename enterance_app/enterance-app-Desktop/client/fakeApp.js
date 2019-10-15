@@ -14,7 +14,7 @@ let queryAllHistory = () => {
   let history = [];
   let allEntrance = queryAllEntrance();
   for( let i = 0 ; i < allEntrance.length ; i++ ){
-    let temp = queryHistory(allEntrance[i].name);
+    let temp = queryHistory(allEntrance[i].key);
     for (let j = 0 ; j < temp.length ; j ++ ){
       history.add(temp[j]);
     }
