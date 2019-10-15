@@ -16,7 +16,7 @@ let queryAllHistory = () => {
   for( let i = 0 ; i < allEntrance.length ; i++ ){
     let temp = queryHistory(allEntrance[i].key);
     for (let j = 0 ; j < temp.length ; j ++ ){
-      history.add(temp[j]);
+      history.push(temp[j]);
     }
   }
   history.sort( (str1,str2) => {  return ( ( str1 == str2 ) ? 0 : ( ( str1 > str2 ) ? 1 : -1 ) ); });
