@@ -1,6 +1,6 @@
 .menu:hover{
   color:gray;
-  cursor: context-menu;
+  cursor: pointer;
 }
 
 .searchTotalBox{
