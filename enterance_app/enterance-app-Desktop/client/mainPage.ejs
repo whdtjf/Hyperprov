@@ -156,8 +156,7 @@
                       let searchBtnClick = () => {
                         if(Date.parse(userSelectDate.value)){
                           timeStr = userSelectDate.value
-                          drawGateAChart();
-                          drawGateBChart();
+                          reDraw();
                         }
                       }
                     </script>
@@ -297,7 +296,7 @@
             }
           }
 
-          setTimeout ( () => {
+          let reDraw = setTimeout ( () => {
             rawDataGateA = [['gate','count'],['입장',0],['퇴장',0]];
             rawDataGateB = [['gate','count'],['입장',0],['퇴장',0]];
             let allEntranceLog = queryAllEntrance();
@@ -350,6 +349,8 @@
               drawGateAChart();
               drawGateBChart();
             },200);
+
+            reDraw();
           </script>
 				</td>
 			</tr>
