@@ -4,16 +4,10 @@
     <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" >
     <script data-require="bootstrap@4.0.5" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
     <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="fakeApp.js" charset="UTF-8"></script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
-		<script>
-      let userData = {};
-      try{
-        userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
-      } catch(e) {
-        location.href="/";
-      }
-    </script>
+    <script src="fakeApp.js" charset="UTF-8"></script>
+    <script> //if(!sessionStorage.getItem('uID')) location.href="/"; </script>
+		<script> let userData = {key:2013122041, name:"김영찬", timestamp:Date.now()} </script>
   </head>
 
   <body style="margin:0px 0px 0px 0px; height:100%" ng-app="fakeApplication" ng-controller="fakeAppController">
@@ -88,7 +82,7 @@
               background-position:center center;
               background-size: 100%" align="left" valign="bottom">
                 <b><font color="white" size="7"><div id ="titleName">
-                  일별 출입량
+                  월별 출입량
                 </div></font></b>
         </td>
       </tr>
@@ -126,14 +120,14 @@
           <div style="margin:10px 10px 10px 10px;background-color:#DADEFF;width:95%;height:95%;">
           <table style="margin:0px;padding:0px;width:100%;height:100%;" >
           <tr>
-            <td colspan="2" style="height:23%" align="center" valign="middle">
+            <td style="height:24%" align="center" valign="middle">
               <div id="titleText" style="font-size:35px;font-weight:bold;margin:15px;border-bottom:3px solid #99A7BF;border-top:3px solid #99A7BF;padding:5px;width:600;">
-                {{selectDate.value | date:'yyyy'}}년 {{selectDate.value | date:'MM'}}월 {{selectDate.value | date:'dd'}}일 출입량 조사
+                {{selectDate.value | date:'yyyy'}}년 {{selectDate.value | date:'MM'}}월 월간 출입량 조사
               </div>
               <script>
                 let titleText = document.getElementById('titleText')
                 let currentTime = new Date()
-                titleText.innerHTML = currentTime.getFullYear() + '년' + (currentTime.getMonth()+1) + '월' + currentTime.getDate() + '일 출입량 조사'
+                titleText.innerHTML = currentTime.getFullYear() + '년' + (currentTime.getMonth()+1) + '월 월간 출입량 조사'
               </script>
 
               <div style="width:350px;background-color:#2E1257; height:45px;border-radius:50px;margin:5px;">
@@ -142,81 +136,25 @@
                   <script>
                     document.getElementById('serach').onclick = () => {
                       let str = document.getElementById('userSelectDate').value.split('-')
-                      titleText.innerHTML = str[0] + '년' + str[1] + '일' + str[2] + '일 출입량 조사'
+                      titleText.innerHTML = str[0] + '년' + str[1] + '월 월간 출입량 조사'
                     }
                   </script>
                   <font style="color:white;font-size:16px;" >날짜 검색</font>
-                  <input type="date" id="userSelectDate" ng-model="selectDate.value"
+                  <input type="date" id="userSelectDate" ng-model="selectDate.value" placeholder="yyyy-MM"
                          style="margin:10px;border:none;outline:none;text-align:center;
                          text-align:center;width:170px;border-radius:25px;" >
                 </div>
               </div>
             </td>
           </tr>
-          <tr>
-            <td style="width:50%;height:77%;" align="center" valign="top">
-              <div style="margin-top:20px;margin-bottom:20px;padding-bottom:5px;border-bottom:2px solid #272822;width:50%">
-                <font style="font-size:30px;font-weight:bold;">GATE A LOG</font>
-              </div>
-              <table width="80%" style="border:2px solid #272822">
-                <tr height="40px">
-                  <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">이름</font></td>
-                  <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">시간</font></td>
-                  <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">출입</font></td>
-                </tr>
-                <tr ng-repeat="temp in DailyLogA" height="40px">
-                  <td align ="center" style="border:1px solid #B5BA9E"> {{temp.name}}</td>
-                  <td align ="center" style="border:1px solid #B5BA9E"> {{temp.timestamp}}</td>
-                  <td align ="center" style="border:1px solid #B5BA9E"> <img src="./img/{{temp.state}}.png" width="35px">
-                    <span ng-show="temp.state == 'in'">&nbsp;입장</span><span ng-show="temp.state == 'out'">&nbsp;퇴장</span></td>
-                </tr>
-                <tr ng-show="dailyHistory_GateAisEmpty" height="60px">
-                  <td  colspan="3"align ="center" style="border:1px solid #B5BA9E">
-                    <b>해당 날짜의 출입 기록이 없습니다.</b>
-                  </td>
-                </tr>
-              </table>
-              <div class="pageBoxA" ng-hide="DailyLogA.length == 0" style="margin-top:20px;">
-                <div ng-repeat="temp in dailyLogGroupA"
-                  style="cursor:pointer;background-color: #272822; display: inline-block;border-radius: 7px;
-                  width:35px;height:35px;color:white;margin:0px 2px;padding:5px 5px;"
-                  ng-click="pagingDailyLog(dailyLogGroupA.indexOf(temp),true)">
-                  <span ng-show="pageA == dailyLogGroupA.indexOf(temp)+1"><font color="#9EB8E8"><u>{{dailyLogGroupA.indexOf(temp)+1}}</u></font></span>
-                  <span ng-hide="pageA == dailyLogGroupA.indexOf(temp)+1">{{dailyLogGroupA.indexOf(temp)+1}}</span>
-                </div>
-              </div>
+          <tr height="38%" bgcolor="red">
+            <td>
+
             </td>
-            <td style="width:50%;height:77%;" align="center" valign="top">
-              <div style="margin-top:20px;margin-bottom:20px;padding-bottom:5px;border-bottom:2px solid #272822;width:50%">
-                <font style="font-size:30px;font-weight:bold;">GATE B LOG</font>
-              </div>
-              <table width="80%" style="border:2px solid #272822">
-                <tr height="40px">
-                  <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">이름</font></td>
-                  <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">시간</font></td>
-                  <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">출입</font></td>
-                </tr>
-                <tr ng-repeat="temp in DailyLogB" height="40px">
-                  <td align ="center" style="border:1px solid #B5BA9E"> {{temp.name}}</td>
-                  <td align ="center" style="border:1px solid #B5BA9E"> {{temp.timestamp}}</td>
-                  <td align ="center" style="border:1px solid #B5BA9E"> <img src="./img/{{temp.state}}.png" width="35px">
-                    <span ng-show="temp.state == 'in'">&nbsp;입장</span><span ng-show="temp.state == 'out'">&nbsp;퇴장</span></td>
-                </tr>
-                <tr ng-show="dailyHistory_GateBisEmpty" height="60px">
-                  <td  colspan="3"align ="center" style="border:1px solid #B5BA9E">
-                    <b>해당 날짜의 출입 기록이 없습니다.</b>
-                  </td>
-                </tr>
-              </table>
-              <div class="pageBoxB" ng-hide="DailyLogB.length == 0" style="margin-top:20px;">
-                <div ng-repeat="temp in dailyLogGroupB"
-                  style="cursor:pointer;background-color: #272822; display: inline-block;border-radius: 7px;
-                  width:35px;height:35px;color:white;margin:0px 2px;padding:5px 5px;"
-                  ng-click="pagingDailyLog(dailyLogGroupB.indexOf(temp),false)">
-                  <span ng-show="pageA == dailyLogGroupB.indexOf(temp)+1"><font color="#9EB8E8"><u>{{dailyLogGroupB.indexOf(temp)+1}}</u></font></span>
-                  <span ng-hide="pageA == dailyLogGroupB.indexOf(temp)+1">{{dailyLogGroupB.indexOf(temp)+1}}</span>
-                </div>
-              </div>
+          </tr>
+          <tr height="38%" bgcolor="blue">
+            <td>
+
             </td>
           </tr>
           </table>

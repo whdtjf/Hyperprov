@@ -37,19 +37,27 @@ app.controller ('fakeAppController', ['$scope','$filter',($scope,$filter) => {
                    {key:2013122260, name:"정지원", timestamp:"2019-10-10 11:10:36",location:"gate_A",state:"in"},
                    {key:2013122260, name:"정지원", timestamp:"2019-10-10 11:35:35",location:"gate_B",state:"out"},
                    {key:2013122260, name:"정지원", timestamp:"2019-10-10 12:01:20",location:"gate_B",state:"in"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 11:10:36",location:"gate_A",state:"in"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 11:10:36",location:"gate_A",state:"in"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 11:10:36",location:"gate_A",state:"in"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 11:10:36",location:"gate_A",state:"in"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 11:10:36",location:"gate_A",state:"in"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 11:10:37",location:"gate_A",state:"in"},
-                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 11:10:38",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"김영찬", timestamp:"2019-10-16 00:10:32",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"김영찬", timestamp:"2019-10-16 00:15:00",location:"gate_A",state:"out"},
+                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 07:37:34",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 07:44:01",location:"gate_B",state:"out"},
+                   {key:2013122260, name:"이승준", timestamp:"2019-10-16 08:12:18",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"이승준", timestamp:"2019-10-16 08:30:22",location:"gate_B",state:"out"},
+                   {key:2013122260, name:"이승준", timestamp:"2019-10-16 08:31:27",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"김영찬", timestamp:"2019-10-16 09:52:55",location:"gate_B",state:"in"},
+                   {key:2013122260, name:"김영찬", timestamp:"2019-10-16 10:25:07",location:"gate_B",state:"out"},
+                   {key:2013122260, name:"이승준", timestamp:"2019-10-16 10:27:10",location:"gate_B",state:"out"},
+                   {key:2013122260, name:"이승준", timestamp:"2019-10-16 10:32:44",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 10:59:38",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"김영찬", timestamp:"2019-10-16 11:10:10",location:"gate_A",state:"in"},
+                   {key:2013122260, name:"김영찬", timestamp:"2019-10-16 11:12:13",location:"gate_A",state:"out"},
+                   {key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"},
 
                 ];
 
-  allStatusData = [ {key:2013122201, name:"이승준", timestamp:"2019-10-10 00:12:22",location:"gate_A",state:"out"},
-                    {key:2013122041, name:"김영찬", timestamp:"2019-10-10 10:59:20",location:"gate_A",state:"out"},
-                    {key:2013122260, name:"정지원", timestamp:"2019-10-10 12:01:20",location:"gate_B",state:"in"},
+  allStatusData = [ {key:2013122260, name:"이승준", timestamp:"2019-10-16 10:32:44",location:"gate_A",state:"in"},
+                    {key:2013122260, name:"김영찬", timestamp:"2019-10-16 11:12:13",location:"gate_A",state:"out"},
+                    {key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"},
                 ];
 
   $scope.all_enterance = allHistoryData;
