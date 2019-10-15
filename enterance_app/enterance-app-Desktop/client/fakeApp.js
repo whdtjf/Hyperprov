@@ -87,7 +87,7 @@ app.controller ('fakeAppController', ['$scope','$filter',($scope,$filter) => {
   $scope.queryHistoryTop10 = () => {
     let arr =[];
     let getArr = $scope.queryHistory(userData.key)
-    getArr.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+    getArr.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
     for (let i = 0 ;  i < getArr.length; i ++){
       arr.push(getArr[i]);
       if (arr.length == 8) break;
