@@ -16,7 +16,9 @@
             "mspid": "Org1MSP",
             "peers": [
                 "peer0.org1.ptunstad.no",
-                "peer1.org1.ptunstad.no"
+                "peer1.org1.ptunstad.no",
+                "peer2.org1.ptunstad.no",
+                "peer3.org1.ptunstad.no"
             ],
             "certificateAuthorities": [
                 "ca.ptunstad.no"
