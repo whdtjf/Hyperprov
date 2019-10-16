@@ -184,7 +184,7 @@ func (s *SmartContract) queryHistory(APIstub shim.ChaincodeStubInterface, args [
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
-	resultsIterator, err := stub.GetHistoryForKey(args[0])
+	resultsIterator, err := APIstub.GetHistoryForKey(args[0])
 	if err != nil {
 		return shim.Error(err.Error())
 	}
