@@ -68,6 +68,7 @@ services:
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
       - CORE_PEER_ID=peer0.org1.ptunstad.no
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
       - CORE_PEER_ADDRESS=peer0.org1.ptunstad.no:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.ptunstad.no:7051
       - CORE_PEER_LOCALMSPID=Org1MSP
@@ -114,6 +115,7 @@ services:
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
       - CORE_PEER_ID=peer1.org1.ptunstad.no
       - CORE_PEER_ADDRESS=peer1.org1.ptunstad.no:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.ptunstad.no:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.ptunstad.no:7051
       - CORE_PEER_LOCALMSPID=Org1MSP
@@ -160,6 +162,7 @@ services:
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
       - CORE_PEER_ID=peer2.org1.ptunstad.no
       - CORE_PEER_ADDRESS=peer2.org1.ptunstad.no:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.org1.ptunstad.no:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.org1.ptunstad.no:7051
       - CORE_PEER_LOCALMSPID=Org1MSP
@@ -205,6 +208,7 @@ services:
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
       - CORE_PEER_ID=peer3.org1.ptunstad.no
       - CORE_PEER_ADDRESS=peer3.org1.ptunstad.no:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.org1.ptunstad.no:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.org1.ptunstad.no:7051
       - CORE_PEER_LOCALMSPID=Org1MSP
