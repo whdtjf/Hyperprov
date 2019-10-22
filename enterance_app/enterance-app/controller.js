@@ -80,7 +80,7 @@ module.exports = (function () {
 					const network = await gateway.getNetwork('mychannel');
 
 					// Get the contract from the network.
-					const contract = network.getContract('enterance_chaincode');
+					const contract = network.getContract('Enterance_Code');
 
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
@@ -126,7 +126,7 @@ module.exports = (function () {
 					const network = await gateway.getNetwork('mychannel');
 
 					// Get the contract from the network.
-					const contract = network.getContract('enterance_chaincode');
+					const contract = network.getContract('Enterance_Code');
 
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
@@ -165,7 +165,7 @@ module.exports = (function () {
 					const network = await gateway.getNetwork('mychannel');
 
 					// Get the contract from the network.
-					const contract = network.getContract('enterance_chaincode');
+					const contract = network.getContract('Enterance_Code');
 
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
@@ -212,7 +212,7 @@ module.exports = (function () {
 					const network = await gateway.getNetwork('mychannel');
 
 					// Get the contract from the network.
-					const contract = network.getContract('enterance_chaincode');
+					const contract = network.getContract('Enterance_Code');
 
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
@@ -260,7 +260,7 @@ module.exports = (function () {
 					const network = await gateway.getNetwork('mychannel');
 
 					// Get the contract from the network.
-					const contract = network.getContract('enterance_chaincode');
+					const contract = network.getContract('Enterance_Code');
 
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
