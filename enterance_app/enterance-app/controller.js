@@ -21,6 +21,7 @@ var os = require('os');
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
 const barcode = fs.readFileSync('Barcode.txt', 'utf8');
+console.log(barcode);
 
 // const fixtures = path.resolve(__dirname, '../../crypto-config');
 
