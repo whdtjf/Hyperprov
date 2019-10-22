@@ -1,5 +1,5 @@
 {
-    "name": "first-network-org1",
+    "name": "scripts-org1",
     "version": "1.0.0",
     "client": {
         "organization": "Org1",
@@ -36,7 +36,7 @@
             }
         },
         "peer1.org1.ptunstad.no": {
-            "url": "grpcs://localhost:8051",
+            "url": "grpcs://192.168.9.118:8051",
             "tlsCACerts": {
                 "path": "crypto-config/peerOrganizations/org1.ptunstad.no/tlsca/tlsca.org1.ptunstad.no-cert.pem"
             },
@@ -45,7 +45,7 @@
             }
         },
         "peer2.org1.ptunstad.no": {
-            "url": "grpcs://localhost:9051",
+            "url": "grpcs://192.168.9.70:9051",
             "tlsCACerts": {
                 "path": "crypto-config/peerOrganizations/org1.ptunstad.no/tlsca/tlsca.org1.ptunstad.no-cert.pem"
             },
@@ -54,7 +54,7 @@
             }
         },
         "peer3.org1.ptunstad.no": {
-            "url": "grpcs://localhost:10051",
+            "url": "grpcs://192.168.9.122:10051",
             "tlsCACerts": {
                 "path": "crypto-config/peerOrganizations/org1.ptunstad.no/tlsca/tlsca.org1.ptunstad.no-cert.pem"
             },
