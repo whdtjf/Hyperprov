@@ -27,7 +27,7 @@
     },
     "peers": {
         "peer0.org1.ptunstad.no": {
-            "url": "grpcs://192.168.9.91:7051",
+            "url": "grpc://localhost:7051",
             "tlsCACerts": {
                 "path": "/data/Hyperprov/crypto-config/peerOrganizations/org1.ptunstad.no/tlsca/tlsca.org1.ptunstad.no-cert.pem"
             },
@@ -36,7 +36,7 @@
             }
         },
         "peer1.org1.ptunstad.no": {
-            "url": "grpcs://192.168.9.118:8051",
+            "url": "grpc://localhost:8051",
             "tlsCACerts": {
                 "path": "/data/Hyperprov/crypto-config/peerOrganizations/org1.ptunstad.no/tlsca/tlsca.org1.ptunstad.no-cert.pem"
             },
@@ -45,7 +45,7 @@
             }
         },
         "peer2.org1.ptunstad.no": {
-            "url": "grpcs://192.168.9.70:9051",
+            "url": "grpc://localhost:9051",
             "tlsCACerts": {
                 "path": "/data/Hyperprov/crypto-config/peerOrganizations/org1.ptunstad.no/tlsca/tlsca.org1.ptunstad.no-cert.pem"
             },
@@ -54,7 +54,7 @@
             }
         },
         "peer3.org1.ptunstad.no": {
-            "url": "grpcs://192.168.9.122:10051",
+            "url": "grpcs://localhost:10051",
             "tlsCACerts": {
                 "path": "/data/Hyperprov/crypto-config/peerOrganizations/org1.ptunstad.no/tlsca/tlsca.org1.ptunstad.no-cert.pem"
             },
