@@ -57,9 +57,9 @@ console.log(barcode);
 
 
 
-module.exports = (function () {
+module.exports = (async function () {
 	return {
-		get_all_enterance: function (req, res) {
+		get_all_enterance: async function (req, res) {
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -105,7 +105,7 @@ module.exports = (function () {
 			}
 			
 		},
-		add_barcode: function (req, res) {
+		add_barcode: async function (req, res) {
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -143,7 +143,7 @@ module.exports = (function () {
 			}
 		},
 		
-		get_enterance: function (req, res) {
+		get_enterance: async function (req, res) {
 			
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
@@ -190,7 +190,7 @@ module.exports = (function () {
 			}
 
 		},
-		get_history: function (req, res) {
+		get_history: async function (req, res) {
 			
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
@@ -237,7 +237,7 @@ module.exports = (function () {
 			}
 
 		},
-		update_enterance: function (req, res) {
+		update_enterance: async function (req, res) {
 			console.log("changing timestamp of enterance catch: ");
 			
 			try {
