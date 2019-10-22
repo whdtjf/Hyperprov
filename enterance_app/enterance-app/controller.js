@@ -89,7 +89,12 @@ module.exports = (function () {
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 					const query_responses = await contract.evaluateTransaction('queryAllEnterance');
 					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
-					console.log(query_responses.toString()[0]);
+					console.log(query_responses.length);
+					console.log(query_responses[0].toString());
+					var array=query_responses.toString();
+					console.log("test");
+					console.log(array[0]);
+
 					if (query_responses && query_responses.length == 1) {
 						if (query_responses[0] instanceof Error) {
 							console.error("error from query = ", query_responses[0]);
