@@ -57,7 +57,7 @@ console.log(barcode);
 
 
 
-module.exports = (async function () {
+module.exports = (function () {
 	return {
 		get_all_enterance: async function (req, res) {
 			try {
