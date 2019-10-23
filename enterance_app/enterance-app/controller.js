@@ -134,7 +134,7 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					await contract.submitTransaction('recordBarcode', `${barcode}`, 'JongWha', '2019.09.23', 'North', 'IN');
+					await contract.submitTransaction('recordBarcode', `${barcode}`, 'JongWha', '2019.09.23');
 					console.log('Transaction has been submitted');
 			
 					// Disconnect from the gateway.
