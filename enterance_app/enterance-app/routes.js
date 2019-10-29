@@ -18,7 +18,7 @@ module.exports = function (app) {
     enterance.get_all_enterance(req, res);
   });
 
-  app.get('/update_enterance/:updated_timestamp', function (req, res) {
+  app.get('/update_enterance/:updated_enterance', function (req, res) {
     enterance.update_enterance(req, res);
   });
 }

@@ -102,11 +102,15 @@
         <tr>
           <th>Name</th>
           <th>Timestamp</th>
+          <th>Location</th>
+          <th>State</th>
         </tr>
 
         <tr>
           <td>{{query_enterance.name}}</td>
           <td>{{query_enterance.timestamp}}</td>
+          <td>{{query_enterance.location}}</td>
+          <td>{{query_enterance.state}}</td>
         </tr>
       </table>
 
@@ -116,8 +120,10 @@
         <br>
         Enter Barcode Number: <input class="form-control" type="text" placeholder="Ex: 110" ng-model="enterance.id">
         Enter your name: <input class="form-control" type="text" placeholder="Ex: jiwon" ng-model="enterance.name">
-        Enter initial timestamp: <input id="createName" class="form-control" type="text" placeholder="Ex: 2019-09-19" ng-model="enterance.timestamp"> 
-        <input id="createSubmit" type="submit" value="Create" name="led" class="btn btn-primary" ng-click="recordBarcode()"> 
+        Enter initial timestamp: <input id="createName" class="form-control" type="text" placeholder="Ex: 2019-09-19" ng-model="enterance.timestamp">
+        Enter Your Location: <input class="form-control" type="text" placeholder="Ex: East" ng-model="enterance.location">
+        Enter your State: <input class="form-control" type="text" placeholder="Ex: OUT" ng-model="enterance.state">
+        <input id="createSubmit" type="submit" value="Create" class="btn btn-primary" ng-click="recordBarcode()"> 
       </div>
 
 
@@ -127,8 +133,10 @@
         <label>Update the Enterance Time</label><br>
         <h5 style="color:green;margin-bottom:2%" id="success_timestamp">Success! Tx ID: {{update_timestamp}}</h5>
         <h5 style="color:red;margin-bottom:2%" id="error_holder">Error: Please enter a valid Barcode Number</h5>
-        Enter a Barcode Number: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="enterance.id">
-        Enter the new timestamp: <input class="form-control" name="assetSelect" placeholder="Ex: Barry" ng-model="enterance.timestamp">
+        Enter a Barcode Number: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="newEnterance.id">
+        Enter the new timestamp: <input class="form-control" name="assetSelect" placeholder="Ex: 2019-10-29" ng-model="newEnterance.timestamp">
+        Enter the new Location: <input class="form-control" name="assetSelect" placeholder="Ex: West" ng-model="newEnterance.location">
+        Enter the new State: <input class="form-control" name="assetSelect" placeholder="Ex: IN" ng-model="newEnterance.state">
         <input id="transferSubmit" type="submit" value="Change" class="btn btn-primary" ng-click="UpdateEnterance()">
       </div>
 

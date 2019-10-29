@@ -61,7 +61,7 @@ app.controller('appController', function($scope, appFactory){
 
 	$scope.UpdateEnterance = function(){
 
-		appFactory.UpdateEnterance($scope.timestamp, function(data){
+		appFactory.UpdateEnterance($scope.newEnterance, function(data){
 			$scope.update_timestamp = data;
 			if ($scope.update_timestamp == "Error: no enterance catch found"){
 				$("#error_holder").show();
@@ -100,7 +100,7 @@ app.factory('appFactory', function($http){
 
 	factory.recordBarcode = function(data, callback){
 
-		var enterance = data.id + "-" + data.name + "-" + data.timestamp;
+		var enterance = data.id + "-" + data.name + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
 
     	$http.get('/add_barcode/'+enterance).success(function(output){
 			callback(output)
@@ -109,9 +109,9 @@ app.factory('appFactory', function($http){
 
 	factory.UpdateEnterance = function(data, callback){
 
-		var updated_timestamp = data.id + "-" + data.timestamp;
+		var updated_enterance = data.id + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
 
-    	$http.get('/update_enterance/'+updated_timestamp).success(function(output){
+    	$http.get('/update_enterance/'+updated_enterance).success(function(output){
 			callback(output)
 		});
 	}
