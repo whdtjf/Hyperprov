@@ -220,15 +220,15 @@ func (s *SmartContract) queryHistory(APIstub shim.ChaincodeStubInterface, args [
 			buffer.WriteString(string(response.Value))
 		}
 
-		buffer.WriteString(", \"Timestamp\":")
-		buffer.WriteString("\"")
-		buffer.WriteString(time.Unix(response.Timestamp.Seconds, int64(response.Timestamp.Nanos)).String())
-		buffer.WriteString("\"")
+		// buffer.WriteString(", \"Timestamp\":")
+		// buffer.WriteString("\"")
+		// buffer.WriteString(time.Unix(response.Timestamp.Seconds, int64(response.Timestamp.Nanos)).String())
+		// buffer.WriteString("\"")
 
-		buffer.WriteString(", \"IsDelete\":")
-		buffer.WriteString("\"")
-		buffer.WriteString(strconv.FormatBool(response.IsDelete))
-		buffer.WriteString("\"")
+		// buffer.WriteString(", \"IsDelete\":")
+		// buffer.WriteString("\"")
+		// buffer.WriteString(strconv.FormatBool(response.IsDelete))
+		// buffer.WriteString("\"")
 
 		buffer.WriteString("}")
 		bArrayMemberAlreadyWritten = true
