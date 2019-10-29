@@ -79,12 +79,16 @@
           <th>ID</th>
           <th>Name</th>
           <th>Timestamp</th>
+          <th>Location</th>
+          <th>State</th>
         </tr>
 
         <tr ng-repeat="enterance in all_enterance">
           <td>{{enterance.Key}}</td>
           <td>{{enterance.name}}</td>
           <td>{{enterance.timestamp}}</td>
+          <td>{{enterance.location}}</td>
+          <td>{{enterance.state}}</td>
 
         </tr>
       </table>
