@@ -6,6 +6,10 @@ module.exports = function (app) {
     enterance.get_enterance(req, res);
   });
 
+  app.get('/get_history', function (req, res) {
+    enterance.get_history(req, res);
+  });
+
   app.get('/add_barcode/:enterance', function (req, res) {
     enterance.add_barcode(req, res);
   });

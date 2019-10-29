@@ -108,7 +108,7 @@ module.exports = (function () {
 			}
 			
 		},
-		add_id: async function (req, res) {
+		add_barcode: async function (req, res) {
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
