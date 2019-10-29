@@ -163,8 +163,7 @@ module.exports = (function () {
 		},
 		
 		get_enterance: async function (req, res) {
-			var key = req.params.id;
-			console.log(key);
+			 var key = req.params.id;   //특정한 key값에 대해서만 uri로 query가능하게 한다 ex) localhost:8000/get_enterance/4
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -188,15 +187,12 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					if(key==id){
-						const query_responses = await contract.evaluateTransaction('queryEnterance',`${id}`);
+		
+						const query_responses = await contract.evaluateTransaction('queryEnterance',`${key}`);
 
 						console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
 						res.send(query_responses.toString());
-					}
-					else{
-						console.log("key와 id값이 다릅니다");
-					}
+
 
 					// if (query_responses && query_responses.length == 1) {
 					// 	if (query_responses[0] instanceof Error) {
