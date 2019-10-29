@@ -52,6 +52,8 @@
 		 return s.queryAllEnterance(APIstub)
 	 } else if function == "UpdateEnterance" {
 		return s.UpdateEnterance(APIstub, args)
+	} else if function == "queryHistory" {
+		return s.queryHistory(APIstub, args)
 	}
  
 	 return shim.Error("Invalid Smart Contract function name.")
