@@ -227,7 +227,7 @@ module.exports = (function () {
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 					const query_responses = await contract.evaluateTransaction('queryHistory',`${id}`);
-					console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
 					console.log(query_responses);
 					console.log("3rd");
 
