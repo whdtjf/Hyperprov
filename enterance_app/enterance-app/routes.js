@@ -6,7 +6,7 @@ module.exports = function (app) {
     enterance.get_enterance(req, res);
   });
 
-  app.get('/get_history', function (req, res) {
+  app.get('/get_history/:id', function (req, res) {
     enterance.get_history(req, res);
   });
 
