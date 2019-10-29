@@ -109,6 +109,14 @@ module.exports = (function () {
 			
 		},
 		add_barcode: async function (req, res) {
+			console.log("request확인");
+			console.log(req.params.enterance);
+			var array=req.params.enterance.split("-");
+			var key = array[0]
+			var name = array[2]
+			var timestamp = array[1]
+			var location = array[4]
+			var state = array[3]
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -134,11 +142,19 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					await contract.submitTransaction('recordid', `${id}`, 'JongWha', '2019.09.23');
-					console.log('Transaction has been submitted');
-			
+					if(key==id){
+						const invoke_response=await contract.submitTransaction('recordBarcode', `${id}`, `${name}`, `${timestamp}`, `${location}`, `${state}`);
+						console.log('Transaction has been submitted');
+						console.log(`Transaction has been evaluated, result is: ${invoke_response.toString()}`);
+						res.send(invoke_response.toString());
+						await gateway.disconnect();
+					}
+					else{
+						console.log("key와 id값이 다릅니다");
+					}
+
 					// Disconnect from the gateway.
-					await gateway.disconnect();
+					
 			
 			} catch (error) {
 				console.error(`Failed to submit transaction: ${error}`);
