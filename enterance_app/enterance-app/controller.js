@@ -164,6 +164,7 @@ module.exports = (function () {
 		
 		get_enterance: async function (req, res) {
 			var key = req.params.enterance;
+			console.log(key);
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
