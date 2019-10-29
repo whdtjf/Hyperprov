@@ -184,16 +184,11 @@ module.exports = (function () {
 					const network = await gateway.getNetwork('mychannel');
 					// Get the contract from the network.
 					const contract = network.getContract('enterance_code_please');
-					console.log(`${id}`);
-					console.log("1st ");
-					console.log(contract);
-					console.log("2nd");
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 					const query_responses = await contract.evaluateTransaction('queryEnterance',`${id}`);
 					console.log(query_responses);
-					console.log("3rd");
 
 					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
 					res.send(query_responses.toString());
