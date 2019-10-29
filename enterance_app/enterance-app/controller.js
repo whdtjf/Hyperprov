@@ -163,8 +163,7 @@ module.exports = (function () {
 		},
 		
 		get_enterance: async function (req, res) {
-			var array=req.params.enterance.split("-");
-			var key = array[0]
+			var key = req.params.enterance;
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
