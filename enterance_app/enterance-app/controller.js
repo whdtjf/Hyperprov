@@ -174,18 +174,19 @@ module.exports = (function () {
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 					const query_responses = await contract.evaluateTransaction('queryEnterance',`${barcode}`);
-					console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
+					res.send(query_responses.toString());
 
-					if (query_responses && query_responses.length == 1) {
-						if (query_responses[0] instanceof Error) {
-							console.error("error from query = ", query_responses[0]);
-						} else {
-							console.log("Response is ", query_responses[0].toString());
-							res.send(query_responses[0].toString())
-						}
-					} else {
-						console.log("No payloads were returned from query");
-					}
+					// if (query_responses && query_responses.length == 1) {
+					// 	if (query_responses[0] instanceof Error) {
+					// 		console.error("error from query = ", query_responses[0]);
+					// 	} else {
+					// 		console.log("Response is ", query_responses[0].toString());
+					// 		res.send(query_responses[0].toString())
+					// 	}
+					// } else {
+					// 	console.log("No payloads were returned from query");
+					// }
 			
 			} catch (error) {
 				console.error(`Failed to submit transaction: ${error}`);
