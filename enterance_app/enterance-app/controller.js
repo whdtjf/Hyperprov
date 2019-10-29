@@ -163,7 +163,8 @@ module.exports = (function () {
 		},
 		
 		get_enterance: async function (req, res) {
-			
+			var array=req.params.enterance.split("-");
+			var key = array[0]
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -187,10 +188,15 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					const query_responses = await contract.evaluateTransaction('queryEnterance',`${id}`);
+					if(key==id){
+						const query_responses = await contract.evaluateTransaction('queryEnterance',`${id}`);
 
-					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
-					res.send(query_responses.toString());
+						console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
+						res.send(query_responses.toString());
+					}
+					else{
+						console.log("key와 id값이 다릅니다");
+					}
 
 					// if (query_responses && query_responses.length == 1) {
 					// 	if (query_responses[0] instanceof Error) {
