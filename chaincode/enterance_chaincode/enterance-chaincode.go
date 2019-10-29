@@ -184,7 +184,8 @@ func (s *SmartContract) queryHistory(APIstub shim.ChaincodeStubInterface, args [
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
-	resultsIterator, err := APIstub.GetHistoryForKey(args[0])
+	barcodeName := args[0]
+	resultsIterator, err := APIstub.GetHistoryForKey(barcodeName)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
@@ -217,15 +218,15 @@ func (s *SmartContract) queryHistory(APIstub shim.ChaincodeStubInterface, args [
 			buffer.WriteString(string(response.Value))
 		}
 
-		// buffer.WriteString(", \"Timestamp\":")
-		// buffer.WriteString("\"")
-		// buffer.WriteString(time.Unix(response.Timestamp.Seconds, int64(response.Timestamp.Nanos)).String())
-		// buffer.WriteString("\"")
+		buffer.WriteString(", \"Timestamp\":")
+		buffer.WriteString("\"")
+		buffer.WriteString(time.Unix(response.Timestamp.Seconds, int64(response.Timestamp.Nanos)).String())
+		buffer.WriteString("\"")
 
-		// buffer.WriteString(", \"IsDelete\":")
-		// buffer.WriteString("\"")
-		// buffer.WriteString(strconv.FormatBool(response.IsDelete))
-		// buffer.WriteString("\"")
+		buffer.WriteString(", \"IsDelete\":")
+		buffer.WriteString("\"")
+		buffer.WriteString(strconv.FormatBool(response.IsDelete))
+		buffer.WriteString("\"")
 
 		buffer.WriteString("}")
 		bArrayMemberAlreadyWritten = true
