@@ -224,16 +224,8 @@ module.exports = (function () {
 
 				for (var i = 0; i < users.length; i++) {
 					const userExists = await wallet.exists(users[i]);
-					if (!userExists) {
-						console.log("user가 월렛에 없음");
-						continue;
-					}
-					else if(userExists && users[i]!=key){
-						console.log("월렛에는 있으나 요청된 바코드가 아님");
-						continue;
-					}
-					
-					else if(userExists && users[i]==key){
+
+					if(userExists && users[i]==key){
 						const gateway = new Gateway();
 						await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 						// Create a new gateway for connecting to our peer node.
@@ -256,6 +248,7 @@ module.exports = (function () {
 						break;
 					}
 					else{
+						console.log("월렛에 없거나 바코드가 매핑되지 않았습니다")
 						continue;
 					}
 				}
