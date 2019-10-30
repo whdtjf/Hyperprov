@@ -76,8 +76,8 @@ module.exports = (function () {
 			var key = array[0]
 			var name = array[2]
 			var timestamp = array[1]
-			var location = array[4]
-			var state = array[3]
+			var location = array[3]
+			var state = array[4]
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -214,8 +214,8 @@ module.exports = (function () {
 			console.log(req.params.updated_enterance);
 			var key = array[0]
 			var timestamp = array[1]
-			var location = array[3]
-			var state = array[2]
+			var location = array[2]
+			var state = array[3]
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -248,7 +248,7 @@ module.exports = (function () {
 						break;
 					}
 					else{
-						console.log("월렛에 없거나 바코드가 매핑되지 않았습니다")
+						console.log("월렛에 없거나 바코드가 매핑되지 않았습니다");
 						continue;
 					}
 				}
