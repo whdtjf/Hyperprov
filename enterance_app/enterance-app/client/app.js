@@ -16,6 +16,7 @@ app.controller('appController', function($scope, appFactory){
 	$scope.queryAllEnterance = function(){
 
 		appFactory.queryAllEnterance(function(data){ //appFactory.queryAllEnterance하면 get방식으로 enterance모든 데이터가 callback으로 넘겨짐
+			console.log(data);
 			var array = [];
 			for (var i = 0; i < data.length; i++){
 				parseInt(data[i].Key);
