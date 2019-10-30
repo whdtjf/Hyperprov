@@ -7,483 +7,292 @@
  */
 
 // call the packages we need
-var express       = require('express');        // call express
-var app           = express();                 // define our app using express
-var bodyParser    = require('body-parser');
-var http          = require('http')
-var fs            = require('fs');
+var express = require('express');        // call express
+var app = express();                 // define our app using express
+var bodyParser = require('body-parser');
+var http = require('http')
+var fs = require('fs');
 var Fabric_Client = require('fabric-client');
-var path          = require('path');
-var util          = require('util');
-var os            = require('os');
+var path = require('path');
+var util = require('util');
+var os = require('os');
+
+
+const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
+const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
+const id = fs.readFileSync('Barcode.txt', 'utf8');
+console.log(id);
+
+// const fixtures = path.resolve(__dirname, '../../crypto-config');
+
+// A wallet stores a collection of identities
+
+// async function addWallet() {
+
+// 	// Main try/catch block
+// 	try {
+// 		var id = fs.readFileSync('id.txt', 'utf8');
+
+// 		/*
+// 		바코드 문자열 단위로 출력되게 하기 -> txt or JSON 포맷형식
+// 		*/
+
+// 		// Identity to credentials to be stored in the wallet
+// 		const credPath = path.join(fixtures, 'peerOrganizations/org1.ptunstad.no/users/User1@org1.ptunstad.no');
+// 		const cert = fs.readFileSync(path.join(credPath, '/msp/signcerts/User1@org1.ptunstad.no-cert.pem')).toString();
+// 		const key = fs.readFileSync(path.join(credPath, '/msp/keystore/424cc061e990df87fc49c9ecab0d244be0250fc0f85a5826c01f9a3352278c5a_sk')).toString();
+
+// 		// Load credentials into wallet
+// 		const identityLabel = `${id}`; //User1@org1.ptunstad.no 대신 id 대입
+// 		const identity = X509WalletMixin.createIdentity('Org1MSP', cert, key);
+
+// 		await wallet.import(identityLabel, identity); //wallet.import 구문이 끝나기 전에는 밑의 return id가 실행되지 않는다
+
+// 		return id
+// 	} catch (error) {
+// 		console.log(`Error adding to wallet. ${error}`);
+// 		console.log(error.stack);
+// 	}
+// }
 
 
 
-module.exports = (function() {
-return{
-	get_all_enterance: function(req, res){
-		console.log("getting all enterance from database: ");
+module.exports = (function () {
+	return {
+		get_all_enterance: async function (req, res) {
+			try {
+				const walletPath = path.join(process.cwd(), 'wallet');
+				const wallet = new FileSystemWallet(walletPath);
+				console.log(`Wallet path: ${walletPath}`);
+					// Check to see if we've already enrolled the user.
+					const userExists = await wallet.exists(`${id}`);
+					if (!userExists) {
+						console.log('An identity for the user who has "id" does not exist in the wallet');
+						console.log('Run the registerUser.js application before retrying');
+						return;
+					}
 
-		var fabric_client = new Fabric_Client();
+					// Create a new gateway for connecting to our peer node.
+					const gateway = new Gateway();
+					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
 
-		// setup the fabric network
-		var channel = fabric_client.newChannel('mychannel');
-		var peer = fabric_client.newPeer('grpc://localhost:7051');
-		channel.addPeer(peer);
+					// Get the network (channel) our contract is deployed to.
+					const network = await gateway.getNetwork('mychannel');
+					console.log(network);
+					console.log("1st");
+					// Get the contract from the network.
+					const contract = network.getContract('enterance_code_please');
+					console.log(contract);
+					console.log("2nd");
+					// Evaluate the specified transaction.
+					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
+					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
+					const query_responses = await contract.evaluateTransaction('queryAllEnterance');
+					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
+					res.send(query_responses.toString());
 
-		//
-		var member_user = null;
-		var store_path = path.join(os.homedir(), '.hfc-key-store');
-		console.log('Store path:'+store_path);
-		var tx_id = null;
+					// if (query_responses && query_responses.length == 1) {
+					// 	if (query_responses[0] instanceof Error) {
+					// 		console.error("error from query = ", query_responses[0]);
+					// 	} else {
+					// 		console.log("Response is ", query_responses[0].toString());
+					// 		res.send(query_responses[0].toString())
+					// 	}
+					// } else {
+					// 	console.log("No payloads were returned from query");
+					// }
 
-		// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
-		Fabric_Client.newDefaultKeyValueStore({ path: store_path
-		}).then((state_store) => {
-		    // assign the store to the fabric client
-		    fabric_client.setStateStore(state_store);
-		    var crypto_suite = Fabric_Client.newCryptoSuite();
-		    // use the same location for the state store (where the users' certificate are kept)
-		    // and the crypto store (where the users' keys are kept)
-		    var crypto_store = Fabric_Client.newCryptoKeyStore({path: store_path});
-		    crypto_suite.setCryptoKeyStore(crypto_store);
-		    fabric_client.setCryptoSuite(crypto_suite);
+			} catch (error) {
+				console.error(`Failed to submit transaction: ${error}`);
+				process.exit(1);
+			}
 
-		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user4', true);
-		}).then((user_from_store) => {
-		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user4 from persistence');
-		        member_user = user_from_store;
-		    } else {
-		        throw new Error('Failed to get user4.... run registerUser.js');
-		    }
+		},
+		add_barcode: async function (req, res) {
+			console.log("request확인");
+			console.log(req.params.enterance);
+			var array=req.params.enterance.split("-");
+			var key = array[0]
+			var name = array[2]
+			var timestamp = array[1]
+			var location = array[4]
+			var state = array[3]
+			try {
+				const walletPath = path.join(process.cwd(), 'wallet');
+				const wallet = new FileSystemWallet(walletPath);
+				console.log(`Wallet path: ${walletPath}`);
+					// Check to see if we've already enrolled the user.
+					const userExists = await wallet.exists(`${id}`);
+					if (!userExists) {
+						console.log('An identity for the user who has "id" does not exist in the wallet');
+						console.log('Run the registerUser.js application before retrying');
+						return;
+					}
 
-		    // queryAllenterance - requires no arguments , ex: args: [''],
-		    const request = {
-		        chaincodeId: 'enterance_code',
-		        txId: tx_id,
-		        fcn: 'queryAllEnterance',
-		        args: ['']
-		    };
+					// Create a new gateway for connecting to our peer node.
+					const gateway = new Gateway();
+					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
 
-		    // send the query proposal to the peer
-		    return channel.queryByChaincode(request); //체인코드는 체널에 의해 명령내려진다. 체널 왈 : Peer야 chaincode install하렴.
-		}).then((query_responses) => {
-		    console.log("Query has completed, checking results");
-		    // query_responses could have more than one  results if there multiple peers were used as targets
-		    if (query_responses && query_responses.length == 1) {
-		        if (query_responses[0] instanceof Error) {
-		            console.error("error from query = ", query_responses[0]);
-		        } else {
-		            console.log("Response is ", query_responses[0].toString());
-		            res.json(JSON.parse(query_responses[0].toString()));
-		        }
-		    } else {
-		        console.log("No payloads were returned from query");
-		    }
-		}).catch((err) => {
-		    console.error('Failed to query successfully :: ' + err);
-		});
-	},
-	add_barcode: function(req, res){
-		console.log("submit recording of a enterance catch: ");
+					// Get the network (channel) our contract is deployed to.
+					const network = await gateway.getNetwork('mychannel');
 
-		var array = req.params.enterance.split("-");
-		console.log(array);
+					// Get the contract from the network.
+					const contract = network.getContract('enterance_code_please');
 
-		var key = array[0]
-		var name = array[1]
-		var timestamp = array[2]
+					// Evaluate the specified transaction.
+					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
+					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
+					if(key==id){
+						const invoke_response=await contract.submitTransaction('recordBarcode', `${id}`, `${name}`, `${timestamp}`, `${location}`, `${state}`);
+						console.log('Transaction has been submitted');
+						console.log(`Transaction has been evaluated, result is: ${invoke_response.toString()}`);
+						res.send(invoke_response.toString());
+						await gateway.disconnect();
+					}
+					else{
+						console.log("key와 id값이 다릅니다");
+					}
 
-		var fabric_client = new Fabric_Client();
+					// Disconnect from the gateway.
 
-		// setup the fabric network
-		var channel = fabric_client.newChannel('mychannel');
-		var peer = fabric_client.newPeer('grpc://localhost:7051');
-		channel.addPeer(peer);
-		var order = fabric_client.newOrderer('grpc://localhost:7050')
-		channel.addOrderer(order);
 
-		var member_user = null;
-		var store_path = path.join(os.homedir(), '.hfc-key-store');
-		console.log('Store path:'+store_path);
-		var tx_id = null;
+			} catch (error) {
+				console.error(`Failed to submit transaction: ${error}`);
+				process.exit(1);
+			}
+		},
 
-		// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
-		Fabric_Client.newDefaultKeyValueStore({ path: store_path
-		}).then((state_store) => {
-		    // assign the store to the fabric client
-		    fabric_client.setStateStore(state_store);
-		    var crypto_suite = Fabric_Client.newCryptoSuite();
-		    // use the same location for the state store (where the users' certificate are kept)
-		    // and the crypto store (where the users' keys are kept)
-		    var crypto_store = Fabric_Client.newCryptoKeyStore({path: store_path});
-		    crypto_suite.setCryptoKeyStore(crypto_store);
-		    fabric_client.setCryptoSuite(crypto_suite);
+		get_enterance: async function (req, res) {
+			 var key = req.params.id;   //특정한 key값에 대해서만 uri로 query가능하게 한다 ex) localhost:8000/get_enterance/4
+			try {
+				const walletPath = path.join(process.cwd(), 'wallet');
+				const wallet = new FileSystemWallet(walletPath);
+				console.log(`Wallet path: ${walletPath}`);
+					// Check to see if we've already enrolled the user.
+					const userExists = await wallet.exists(`${id}`);
+					if (!userExists) {
+						console.log('An identity for the user who has "id" does not exist in the wallet');
+						console.log('Run the registerUser.js application before retrying');
+						return;
+					}
 
-		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user4', true);
-		}).then((user_from_store) => {
-		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user4 from persistence');
-		        member_user = user_from_store;
-		    } else {
-		        throw new Error('Failed to get user4.... run registerUser.js');
-		    }
+					// Create a new gateway for connecting to our peer node.
+					const gateway = new Gateway();
+					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
 
-		    // get a transaction id object based on the current user assigned to fabric client
-		    tx_id = fabric_client.newTransactionID();
-		    console.log("Assigning transaction_id: ", tx_id._transaction_id);
+					// Get the network (channel) our contract is deployed to.
+					const network = await gateway.getNetwork('mychannel');
+					// Get the contract from the network.
+					const contract = network.getContract('enterance_code_please');
+					// Evaluate the specified transaction.
+					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
+					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 
-		    // recordenterance - requires 5 args, ID, vessel, location, timestamp,holder - ex: args: ['10', 'Hound', '-12.021, 28.012', '1504054225', 'Hansel'], 
-		    // send proposal to endorser
-		    const request = {
-		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'enterance_code',
-		        fcn: 'recordBarcode',
-		        args: [key, name, timestamp],
-		        chainId: 'mychannel',
-		        txId: tx_id
-		    };
+						const query_responses = await contract.evaluateTransaction('queryEnterance',`${key}`);
 
-			return channel.sendTransactionProposal(request);
-			// send the transaction proposal to the peers
-		}).then((results) => {
-		    var proposalResponses = results[0];
-		    var proposal = results[1];
-		    let isProposalGood = false;
-		    if (proposalResponses && proposalResponses[0].response &&
-		        proposalResponses[0].response.status === 200) {
-		            isProposalGood = true;
-		            console.log('Transaction proposal was good');
-		        } else {
-		            console.error('Transaction proposal was bad');
-		        }
-		    if (isProposalGood) {
-		        console.log(util.format(
-		            'Successfully sent Proposal and received ProposalResponse: Status - %s, message - "%s"',
-		            proposalResponses[0].response.status, proposalResponses[0].response.message));
+						console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
+						res.send(query_responses.toString());
 
-		        // build up the request for the orderer to have the transaction committed
-		        var request = {
-		            proposalResponses: proposalResponses,
-		            proposal: proposal
-		        };
 
-		        // set the transaction listener and set a timeout of 30 sec
-		        // if the transaction did not get committed within the timeout period,
-		        // report a TIMEOUT status
-		        var transaction_id_string = tx_id.getTransactionID(); //Get the transaction ID string to be used by the event processing
-		        var promises = [];
+					// if (query_responses && query_responses.length == 1) {
+					// 	if (query_responses[0] instanceof Error) {
+					// 		console.error("error from query = ", query_responses[0]);
+					// 	} else {
+					// 		console.log("Response is ", query_responses[0].toString());
+					// 		res.send(query_responses[0].toString())
+					// 	}
+					// } else {
+					// 	console.log("No payloads were returned from query");
+					// }
 
-		        var sendPromise = channel.sendTransaction(request);
-		        promises.push(sendPromise); //we want the send transaction first, so that we know where to check status
+			} catch (error) {
+				console.error(`Failed to submit transaction: ${error}`);
+				process.exit(1);
+			}
 
-		        // get an eventhub once the fabric client has a user assigned. The user
-		        // is required bacause the event registration must be signed
-		        // let event_hub = fabric_client.newEventHub();
-				// event_hub.setPeerAddr('grpc://localhost:7053');
-				
-				let event_hub = channel.newChannelEventHub('localhost:7051');
+		},
+		get_history: async function (req, res) {
 
-		        // using resolve the promise so that result status may be processed
-		        // under the then clause rather than having the catch clause process
-		        // the status
-		        let txPromise = new Promise((resolve, reject) => {
-		            let handle = setTimeout(() => {
-		                event_hub.disconnect();
-		                resolve({event_status : 'TIMEOUT'}); //we could use reject(new Error('Trnasaction did not complete within 30 seconds'));
-		            }, 3000);
-		            event_hub.connect();
-		            event_hub.registerTxEvent(transaction_id_string, (tx, code) => {
-		                // this is the callback for transaction event status
-		                // first some clean up of event listener
-		                clearTimeout(handle);
-		                event_hub.unregisterTxEvent(transaction_id_string);
-		                event_hub.disconnect();
+			try {
+				const walletPath = path.join(process.cwd(), 'wallet');
+				const wallet = new FileSystemWallet(walletPath);
+				console.log(`Wallet path: ${walletPath}`);
+					// Check to see if we've already enrolled the user.
+					const userExists = await wallet.exists(`${id}`);
+					if (!userExists) {
+						console.log('An identity for the user who has "id" does not exist in the wallet');
+						console.log('Run the registerUser.js application before retrying');
+						return;
+					}
 
-		                // now let the application know what happened
-		                var return_status = {event_status : code, tx_id : transaction_id_string};
-		                if (code !== 'VALID') {
-		                    console.error('The transaction was invalid, code = ' + code);
-		                    resolve(return_status); // we could use reject(new Error('Problem with the tranaction, event status ::'+code));
-		                } else {
-		                    console.log('The transaction has been committed on peer ' + event_hub._ep._endpoint.addr);
-		                    resolve(return_status);
-		                }
-		            }, (err) => {
-		                //this is the callback if something goes wrong with the event registration or processing
-		                reject(new Error('There was a problem with the eventhub ::'+err));
-		            });
-		        });
-		        promises.push(txPromise);
+					// Create a new gateway for connecting to our peer node.
+					const gateway = new Gateway();
+					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
 
-		        return Promise.all(promises);
-		    } else {
-		        console.error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
-		        throw new Error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
-		    }
-		}).then((results) => {
-		    console.log('Send transaction promise and event listener promise have completed');
-		    // check the results in the order the promises were added to the promise all list
-		    if (results && results[0] && results[0].status === 'SUCCESS') {
-		        console.log('Successfully sent transaction to the orderer.');
-		        res.send(tx_id.getTransactionID());
-		    } else {
-		        console.error('Failed to order the transaction. Error code: ' + response.status);
-		    }
+					// Get the network (channel) our contract is deployed to.
+					const network = await gateway.getNetwork('mychannel');
 
-		    if(results && results[1] && results[1].event_status === 'VALID') {
-		        console.log('Successfully committed the change to the ledger by the peer');
-		        res.send(tx_id.getTransactionID());
-		    } else {
-		        console.log('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
-		    }
-		}).catch((err) => {
-		    console.error('Failed to invoke successfully :: ' + err);
-		});
-	},
-	get_enterance: function(req, res){
+					// Get the contract from the network.
+					const contract = network.getContract('enterance_code_please');
 
-		var fabric_client = new Fabric_Client();
-		var key = req.params.id
+					// Evaluate the specified transaction.
+					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
+					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
+					const query_responses = await contract.evaluateTransaction('queryHistory',`${id}`);
+					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
+					console.log(query_responses);
+					console.log("3rd");
 
-		// setup the fabric network
-		var channel = fabric_client.newChannel('mychannel');
-		var peer = fabric_client.newPeer('grpc://localhost:7051');
-		channel.addPeer(peer);
+					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
+					res.send(query_responses.toString());
 
-		//
-		var member_user = null;
-		var store_path = path.join(os.homedir(), '.hfc-key-store');
-		console.log('Store path:'+store_path);
-		var tx_id = null;
+			} catch (error) {
+				console.error(`Failed to submit transaction: ${error}`);
+				process.exit(1);
+			}
 
-		// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
-		Fabric_Client.newDefaultKeyValueStore({ path: store_path
-		}).then((state_store) => {
-		    // assign the store to the fabric client
-		    fabric_client.setStateStore(state_store);
-		    var crypto_suite = Fabric_Client.newCryptoSuite();
-		    // use the same location for the state store (where the users' certificate are kept)
-		    // and the crypto store (where the users' keys are kept)
-		    var crypto_store = Fabric_Client.newCryptoKeyStore({path: store_path});
-		    crypto_suite.setCryptoKeyStore(crypto_store);
-		    fabric_client.setCryptoSuite(crypto_suite);
+		},
+		update_enterance: async function (req, res) {
+			console.log("changing timestamp of enterance catch: ");
 
-		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user4', true);
-		}).then((user_from_store) => {
-		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user4 from persistence');
-		        member_user = user_from_store;
-		    } else {
-		        throw new Error('Failed to get user4.... run registerUser.js');
-		    }
+			try {
+				const walletPath = path.join(process.cwd(), 'wallet');
+				const wallet = new FileSystemWallet(walletPath);
+				console.log(`Wallet path: ${walletPath}`);
+					// Check to see if we've already enrolled the user.
+					const userExists = await wallet.exists(`${id}`);
+					if (!userExists) {
+						console.log('An identity for the user who has "id" does not exist in the wallet');
+						console.log('Run the registerUser.js application before retrying');
+						return;
+					}
 
-		    // queryenterance - requires 1 argument, ex: args: ['4'],
-		    const request = {
-		        chaincodeId: 'enterance_code',
-		        txId: tx_id,
-		        fcn: 'queryEnterance',
-		        args: [key]
-		    };
+					// Create a new gateway for connecting to our peer node.
+					const gateway = new Gateway();
+					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
 
-		    // send the query proposal to the peer
-		    return channel.queryByChaincode(request);
-		}).then((query_responses) => {
-		    console.log("Query has completed, checking results");
-		    // query_responses could have more than one  results if there multiple peers were used as targets
-		    if (query_responses && query_responses.length == 1) {
-		        if (query_responses[0] instanceof Error) {
-		            console.error("error from query = ", query_responses[0]);
-		            res.send("Could not locate enterance")
-		            
-		        } else {
-		            console.log("Response is ", query_responses[0].toString());
-		            res.send(query_responses[0].toString())
-		        }
-		    } else {
-		        console.log("No payloads were returned from query");
-		        res.send("Could not locate enterance")
-		    }
-		}).catch((err) => {
-		    console.error('Failed to query successfully :: ' + err);
-		    res.send("Could not locate enterance")
-		});
-	},
-	update_enterance: function(req, res){
-		console.log("changing timestamp of enterance catch: ");
+					// Get the network (channel) our contract is deployed to.
+					const network = await gateway.getNetwork('mychannel');
 
-		var array = req.params.timestamp.split("-");
-		var key = array[0]
-		var timestamp = array[1];
+					// Get the contract from the network.
+					const contract = network.getContract('enterance_code_please');
 
-		var fabric_client = new Fabric_Client();
+					// Evaluate the specified transaction.
+					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
+					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
+					await contract.submitTransaction('UpdateEnterance', `${id}`, '2019.09.23', 'South', 'IN');
+					console.log('Transaction has been submitted');
 
-		// setup the fabric network
-		var channel = fabric_client.newChannel('mychannel');
-		var peer = fabric_client.newPeer('grpc://localhost:7051');
-		channel.addPeer(peer);
-		var order = fabric_client.newOrderer('grpc://localhost:7050')
-		channel.addOrderer(order);
+					// Disconnect from the gateway.
+					await gateway.disconnect();
 
-		var member_user = null;
-		var store_path = path.join(os.homedir(), '.hfc-key-store');
-		console.log('Store path:'+store_path);
-		var tx_id = null;
+			} catch (error) {
+				console.error(`Failed to submit transaction: ${error}`);
+				process.exit(1);
+			}
 
-		// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
-		Fabric_Client.newDefaultKeyValueStore({ path: store_path
-		}).then((state_store) => {
-		    // assign the store to the fabric client
-		    fabric_client.setStateStore(state_store);
-		    var crypto_suite = Fabric_Client.newCryptoSuite();
-		    // use the same location for the state store (where the users' certificate are kept)
-		    // and the crypto store (where the users' keys are kept)
-		    var crypto_store = Fabric_Client.newCryptoKeyStore({path: store_path});
-		    crypto_suite.setCryptoKeyStore(crypto_store);
-		    fabric_client.setCryptoSuite(crypto_suite);
-
-		    // get the enrolled user from persistence, this user will sign all requests
-		    return fabric_client.getUserContext('user4', true);
-		}).then((user_from_store) => {
-		    if (user_from_store && user_from_store.isEnrolled()) {
-		        console.log('Successfully loaded user4 from persistence');
-		        member_user = user_from_store;
-		    } else {
-		        throw new Error('Failed to get user4.... run registerUser.js');
-		    }
-
-		    // get a transaction id object based on the current user assigned to fabric client
-		    tx_id = fabric_client.newTransactionID();
-		    console.log("Assigning transaction_id: ", tx_id._transaction_id);
-
-		    // changeenteranceHolder - requires 2 args , ex: args: ['1', 'Barry'],
-		    // send proposal to endorser
-		    var request = {
-		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'enterance_code',
-		        fcn: 'UpdateEnterance',
-		        args: [key, timestamp],
-		        chainId: 'mychannel',
-		        txId: tx_id
-		    };
-
-		    // send the transaction proposal to the peers
-			button.watch(function(err, state){
-				if(state==1){
-					led.writeSync(1);
-					return channel.sendTransactionProposal(request);
-				}
-				else{
-					led.writeSync(0);
-					return err;
-				}
-			})
-		}).then((results) => {
-		    var proposalResponses = results[0];
-		    var proposal = results[1];
-		    let isProposalGood = false;
-		    if (proposalResponses && proposalResponses[0].response &&
-		        proposalResponses[0].response.status === 200) {
-		            isProposalGood = true;
-		            console.log('Transaction proposal was good');
-		        } else {
-		            console.error('Transaction proposal was bad');
-		        }
-		    if (isProposalGood) {
-		        console.log(util.format(
-		            'Successfully sent Proposal and received ProposalResponse: Status - %s, message - "%s"',
-		            proposalResponses[0].response.status, proposalResponses[0].response.message));
-
-		        // build up the request for the orderer to have the transaction committed
-		        var request = {
-		            proposalResponses: proposalResponses,
-		            proposal: proposal
-		        };
-
-		        // set the transaction listener and set a timeout of 30 sec
-		        // if the transaction did not get committed within the timeout period,
-		        // report a TIMEOUT status
-		        var transaction_id_string = tx_id.getTransactionID(); //Get the transaction ID string to be used by the event processing
-		        var promises = [];
-
-		        var sendPromise = channel.sendTransaction(request);
-		        promises.push(sendPromise); //we want the send transaction first, so that we know where to check status
-
-		        // get an eventhub once the fabric client has a user assigned. The user
-		        // is required bacause the event registration must be signed
-				
-				//------------------>>>> This code Replace with below<<<<<-----------------------------
-				// let event_hub = fabric_client.newEventHub();
-				// event_hub.setPeerAddr('grpc://localhost:7053');
-				
-				let event_hub = channel.newChannelEventHub('localhost:7051');
-				
-
-		        // using resolve the promise so that result status may be processed
-		        // under the then clause rather than having the catch clause process
-		        // the status
-		        let txPromise = new Promise((resolve, reject) => {
-		            let handle = setTimeout(() => {
-		                event_hub.disconnect();
-		                resolve({event_status : 'TIMEOUT'}); //we could use reject(new Error('Trnasaction did not complete within 30 seconds'));
-		            }, 3000);
-		            event_hub.connect();
-		            event_hub.registerTxEvent(transaction_id_string, (tx, code) => {
-		                // this is the callback for transaction event status
-		                // first some clean up of event listener
-		                clearTimeout(handle);
-		                event_hub.unregisterTxEvent(transaction_id_string);
-		                event_hub.disconnect();
-
-		                // now let the application know what happened
-		                var return_status = {event_status : code, tx_id : transaction_id_string};
-		                if (code !== 'VALID') {
-		                    console.error('The transaction was invalid, code = ' + code);
-		                    resolve(return_status); // we could use reject(new Error('Problem with the tranaction, event status ::'+code));
-		                } else {
-		                    console.log('The transaction has been committed on peer ' + event_hub._ep._endpoint.addr);
-		                    resolve(return_status);
-		                }
-		            }, (err) => {
-		                //this is the callback if something goes wrong with the event registration or processing
-		                reject(new Error('There was a problem with the eventhub ::'+err));
-		            });
-		        });
-		        promises.push(txPromise);
-
-		        return Promise.all(promises);
-		    } else {
-		        console.error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
-		        res.send("Error: no enterance catch found");
-		        // throw new Error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
-		    }
-		}).then((results) => {
-		    console.log('Send transaction promise and event listener promise have completed');
-		    // check the results in the order the promises were added to the promise all list
-		    if (results && results[0] && results[0].status === 'SUCCESS') {
-		        console.log('Successfully sent transaction to the orderer.');
-		        res.json(tx_id.getTransactionID())
-		    } else {
-		        console.error('Failed to order the transaction. Error code: ' + response.status);
-		        res.send("Error: no enterance catch found");
-		    }
-
-		    if(results && results[1] && results[1].event_status === 'VALID') {
-		        console.log('Successfully committed the change to the ledger by the peer');
-		        res.json(tx_id.getTransactionID())
-		    } else {
-		        console.log('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
-		    }
-		}).catch((err) => {
-		    console.error('Failed to invoke successfully :: ' + err);
-		    res.send("Error: no enterance catch found");
-		});
+			// 'UpdateEnterance', '1', '2020.2.2', 'South', 'IN'
+		}
 
 	}
-
-}
 })();

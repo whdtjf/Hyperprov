@@ -4,6 +4,30 @@
 
 var app = angular.module('application', []);
 
+//=================================================================
+//  ADD REAL app.js
+//=================================================================
+let allHistoryData = [];
+let allStatusData = [];
+let queryHistory;
+let queryAllEntrance;
+let queryEnterance;
+let queryAllHistory = () => {
+  let history = [];
+  let allEntrance = queryAllEntrance();
+  for( let i = 0 ; i < allEntrance.length ; i++ ){
+    let temp = queryHistory(allEntrance[i].Key);
+    for (let j = 0 ; j < temp.length ; j ++ ){
+      history.push(temp[j]);
+    }
+  }
+  //history.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+  return history;
+}
+let monthlyLogGateA = [];
+let monthlyLogGateB = [];
+
+
 // Angular Controller
 app.controller('appController', function($scope, appFactory){
 
@@ -14,7 +38,6 @@ app.controller('appController', function($scope, appFactory){
 
 	//queryAllenterance 라는 ng-click에 function() 이하를 넣는다
 	$scope.queryAllEnterance = function(){
-
 		appFactory.queryAllEnterance(function(data){ //appFactory.queryAllEnterance하면 get방식으로 enterance모든 데이터가 callback으로 넘겨짐
 			var array = [];
 			for (var i = 0; i < data.length; i++){
@@ -25,31 +48,36 @@ app.controller('appController', function($scope, appFactory){
 			array.sort(function(a, b) {
 			    return parseFloat(a.Key) - parseFloat(b.Key);
 			});
-			$scope.all_enterance = array;
+			allStatusData = array;
+			return allStatusData;
 		});
 	}
+	queryAllEntrance = $scope.queryAllEnterance;
 
-	$scope.queryEnterance = function(){
-
-		// 1. (index.html -> app.js 동기화)
-		// index.html에서 enter a Barcode Number로 id를 입력받는다 -> $scope.enterance_id에 대입
-		var id = $scope.enterance_id; //html 파일에 enterance_id이라는 ng-model이 존재한다
-
-		// 입력받은 id에 해당하는 enterance data를 밑에 있는 appFactory.queryEnterance에서 http get으로 불러들여 $scope.query_enterance에 저장 -> index.html에 동시에 동기화된다
-		// -> index.html에서 {{query_enterance.name}} 이러한 요소들을 쓸 수 있다!
-		appFactory.queryEnterance(id, function(data){
-			$scope.query_enterance = data; // 2. (app.js -> index.html 동기화) -> 위의 1번과는 반대의 경우도 동기화 성립! -> AngularJS의 특징
-
-			if ($scope.query_enterance == "Could not locate enterance"){
-				console.log()
+	$scope.queryEnterance = function(Barcode){
+		appFactory.queryEnterance(Barcode, function(data){
+			if (data == "Could not locate enterance"){
 				$("#error_query").show();
 			} else{
 				$("#error_query").hide();
 			}
+
+			return data;
 		});
 	}
+	queryEnterance = $scope.queryEnterance
 
-
+	$scope.queryHistory = function(Barcode){
+		appFactory.queryEnterance(Barcode, function(data){
+			if (data == "Could not locate enterance"){
+				$("#error_query").show();
+			} else{
+				$("#error_query").hide();
+			}
+			return data;
+		});
+	}
+	queryHistory = $scope.queryHistory
 
 	$scope.recordBarcode = function(){
 
@@ -61,7 +89,7 @@ app.controller('appController', function($scope, appFactory){
 
 	$scope.UpdateEnterance = function(){
 
-		appFactory.UpdateEnterance($scope.timestamp, function(data){
+		appFactory.UpdateEnterance($scope.newEnterance, function(data){
 			$scope.update_timestamp = data;
 			if ($scope.update_timestamp == "Error: no enterance catch found"){
 				$("#error_holder").show();
@@ -73,6 +101,162 @@ app.controller('appController', function($scope, appFactory){
 		});
 	}
 
+
+
+	//=================================================================
+  //  ADD REAL app.js
+  //=================================================================
+  $scope.queryHistoryTop10 = () => {
+    let arr =[];
+    let getArr = $scope.queryHistory(userData.Key)
+    getArr.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
+    for (let i = 0 ;  i < getArr.length; i ++){
+      arr.push(getArr[i]);
+      if (arr.length == 8) break;
+    }
+    return arr;
+  }
+
+  let dailyHistory_GateA = [];
+  let dailyHistory_GateB = [];
+  $scope.dailyLogGroupA = []
+  $scope.dailyLogGroupB = []
+  $scope.dailyHistory_GateAisEmpty = true;
+  $scope.dailyHistory_GateAisEmpty = true;
+
+  $scope.queryDailyHistory = (rawdate) => {
+    try{
+      let date = $filter('date')(rawdate, 'yyyy-MM-dd');
+      dailyHistory_GateA = []
+      dailyHistory_GateB = []
+      let arr =[];
+      let getArr = $scope.queryAllEntrance()
+      for (let i = 0 ;  i < getArr.length; i ++){
+        let getArr2 = $scope.queryHistory(getArr[i].Key);
+        for (let j = 0 ; j < getArr2.length ; j ++ ){
+          if ( getArr2[j].timestamp.startsWith(date) ){
+            if (getArr2[j].location == 'gate_A')
+              dailyHistory_GateA.push(getArr2[j])
+            else dailyHistory_GateB.push(getArr2[j])
+          }
+        }
+      }
+      dailyHistory_GateA.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+      dailyHistory_GateB.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+
+      $scope.dailyLogGroupA = []
+      $scope.dailyLogGroupB = []
+
+      for (let j = 0; j <= ((dailyHistory_GateA.length+1) / 6); j++) {
+        let page = 0;
+        let smallGroup = [];
+        for(let i = j*6; i < j*6+6; i ++){
+          if (dailyHistory_GateA.length <= i) break;
+          smallGroup.push(dailyHistory_GateA[(page)*6 + i])
+        }
+        if (smallGroup.length == 0) break;
+        $scope.dailyLogGroupA.push(smallGroup)
+        page = page +1
+      }
+
+      for (let j = 0; j <= ((dailyHistory_GateB.length+1) / 6); j++) {
+        let page = 0;
+        let smallGroup = [];
+        for(let i = j*6; i < j*6+6; i ++){
+          if (dailyHistory_GateB.length <= i) break;
+          smallGroup.push(dailyHistory_GateB[(page)*6 + i])
+        }
+        if (smallGroup.length == 0) break;
+        $scope.dailyLogGroupB.push(smallGroup)
+        page = page +1
+      }
+
+      $scope.pagingDailyLog(0,true)
+      $scope.pagingDailyLog(0,false)
+    } catch(e) { console.log(e)}
+  }
+
+  $scope.DailyLogA = []
+  $scope.DailyLogB = []
+  $scope.pageA = 1;
+  $scope.pageB = 1;
+
+  $scope.pagingDailyLog = (page,isA) => {
+    try{
+      let totalGroup = (isA)? $scope.dailyLogGroupA:$scope.dailyLogGroupB
+      let DailyLog = []
+      for(let i = 0; i < 6; i ++){
+        if (totalGroup[page].length <= i) break;
+        DailyLog.push(totalGroup[page][i])
+      }
+
+      if (isA) { $scope.dailyHistory_GateAisEmpty = (DailyLog.length == 0)? true: false; $scope.DailyLogA = DailyLog; $scope.pageA = page+1 }
+      else { $scope.dailyHistory_GateBisEmpty = (DailyLog.length == 0)? true: false; $scope.DailyLogB = DailyLog; $scope.pageB = page+1 }
+    } catch (e) {
+      if (isA) { $scope.dailyHistory_GateAisEmpty = true; $scope.DailyLogA = []; $scope.pageA = page+1 }
+      else { $scope.dailyHistory_GateBisEmpty = true; $scope.DailyLogB = []; $scope.pageB = page+1 }
+    }
+
+  }
+
+  let mothlyHistory_GateA = []
+  let mothlyHistory_GateB = []
+
+  $scope.queryMonthlyHistory = (rawdate) => {
+    let selectMonth;
+    try{
+      let date = $filter('date')(rawdate, 'yyyy-MM');
+      selectMonth = date.split('-')[1]
+      monthlyHistory_GateA = []
+      monthlyHistory_GateB = []
+      let arr =[];
+      let getArr = $scope.queryAllEntrance()
+      for (let i = 0 ;  i < getArr.length; i ++){
+        let getArr2 = $scope.queryHistory(getArr[i].Key);
+        for (let j = 0 ; j < getArr2.length ; j ++ ){
+          if ( getArr2[j].timestamp.startsWith(date) ){
+            if (getArr2[j].location == 'gate_A')
+              monthlyHistory_GateA.push(getArr2[j])
+            else monthlyHistory_GateB.push(getArr2[j])
+          }
+        }
+      }
+      monthlyHistory_GateA.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+      monthlyHistory_GateB.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+
+      $scope.monthlyLogGateA = []
+      $scope.monthlyLogGateB = []
+
+      let maxDays = [0,31,28,31,30,31,30,31,31,30,31,30,31]
+
+      for(let i = 1; i <= maxDays[selectMonth];i++) {
+        $scope.monthlyLogGateA.push( [ selectMonth+'/'+i , 0])
+        $scope.monthlyLogGateB.push( [ selectMonth+'/'+i , 0])
+      }
+
+      for (let j = 0; j <= monthlyHistory_GateA.length; j++) {
+        let date = monthlyHistory_GateA[j].timestamp
+        date = date.split(' ')[0].split('-')[2]-1 //DAYS
+        let dateName = monthlyHistory_GateA[j].timestamp.split(' ')[0].split('-')[1] + '/'+date
+        let count = Number($scope.monthlyLogGateA[date][1]) +1
+        $scope.monthlyLogGateA.splice(Number(date),1,[dateName,count])
+      }
+      for (let j = 0; j <= monthlyHistory_GateB.length; j++) {
+        let date = monthlyHistory_GateB[j].timestamp
+        date = date.split(' ')[0].split('-')[2]-1 //DAYS
+        let dateName = monthlyHistory_GateB[j].timestamp.split(' ')[0].split('-')[1] + '/'+date
+        let count = Number($scope.monthlyLogGateB[date][1]) +1
+        $scope.monthlyLogGateB.splice(Number(date),1,[dateName,count])
+      }
+    } catch(e) { console.log(e)}
+  }
+
+  $scope.selectDate = {
+       value: new Date()
+  };
+
+  $scope.queryDailyHistory($filter('date')($scope.selectDate.value, 'yyyy-MM-dd'));
+  $scope.queryMonthlyHistory($filter('date')($scope.selectDate.value, 'yyyy-MM-dd'))
 });
 
 // Angular Factory
@@ -98,9 +282,16 @@ app.factory('appFactory', function($http){
 		});
 	}
 
+	factory.queryHistory = (id, callback) => {
+		$http.get('/get_history/'+id)
+		.then(function success(output){
+			callback(output)
+		})
+	}
+
 	factory.recordBarcode = function(data, callback){
 
-		var enterance = data.id + "-" + data.name + "-" + data.timestamp;
+		var enterance = data.id + "-" + data.name + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
 
     	$http.get('/add_barcode/'+enterance).success(function(output){
 			callback(output)
@@ -109,9 +300,9 @@ app.factory('appFactory', function($http){
 
 	factory.UpdateEnterance = function(data, callback){
 
-		var updated_timestamp = data.id + "-" + data.timestamp;
+		var updated_enterance = data.id + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
 
-    	$http.get('/update_enterance/'+updated_timestamp).success(function(output){
+    	$http.get('/update_enterance/'+updated_enterance).success(function(output){
 			callback(output)
 		});
 	}
