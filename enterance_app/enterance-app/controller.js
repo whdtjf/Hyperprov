@@ -142,17 +142,13 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					if(key==id){
-						const invoke_response=await contract.submitTransaction('recordBarcode', `${id}`, `${name}`, `${timestamp}`, `${location}`, `${state}`);
+				
+						const invoke_response=await contract.submitTransaction('recordBarcode', `${key}`, `${name}`, `${timestamp}`, `${location}`, `${state}`);
 						console.log('Transaction has been submitted');
 						console.log(`Transaction has been evaluated, result is: ${invoke_response.toString()}`);
 						res.send(invoke_response.toString());
 						await gateway.disconnect();
-					}
-					else{
-						console.log("key와 id값이 다릅니다");
-					}
-
+					
 					// Disconnect from the gateway.
 					
 			
@@ -212,7 +208,7 @@ module.exports = (function () {
 
 		},
 		get_history: async function (req, res) {
-			
+			var key = req.params.id;
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -238,7 +234,7 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					const query_responses = await contract.evaluateTransaction('queryHistory',`${id}`);
+					const query_responses = await contract.evaluateTransaction('queryHistory',`${key}`);
 					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
 					console.log(query_responses);
 					console.log("3rd");
@@ -253,8 +249,12 @@ module.exports = (function () {
 
 		},
 		update_enterance: async function (req, res) {
-			console.log("changing timestamp of enterance catch: ");
-			
+			var array=req.params.updated_enterance.split("-");
+			console.log(req.params.updated_enterance);
+			var key = array[0]
+			var timestamp = array[1]
+			var location = array[3]
+			var state = array[2]
 			try {
 				const walletPath = path.join(process.cwd(), 'wallet');
 				const wallet = new FileSystemWallet(walletPath);
@@ -280,12 +280,12 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					await contract.submitTransaction('UpdateEnterance', `${id}`, '2019.09.23', 'South', 'IN');
+					const invoke_response=await contract.submitTransaction('UpdateEnterance', `${key}`, `${timestamp}`, `${location}`, `${state}`);
 					console.log('Transaction has been submitted');
-			
+					res.send(invoke_response.toString());
 					// Disconnect from the gateway.
 					await gateway.disconnect();
-			
+
 			} catch (error) {
 				console.error(`Failed to submit transaction: ${error}`);
 				process.exit(1);
