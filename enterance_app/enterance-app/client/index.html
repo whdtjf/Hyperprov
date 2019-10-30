@@ -74,10 +74,6 @@
       </div>
  
       <table id="all_enterance" class="table" align="center">
-          <script>
-              var test1=document.getElementById(all_enterance);
-            console.log(test1);
-            </script>
         <tr>
           <th>ID</th>
           <th>Name</th>
@@ -100,15 +96,12 @@
         <label>Query a Specific Enterance</label><br>
         <h5 style="color:red;margin-bottom:2%" id="error_query">Error: Please enter a valid Barcode Id</h5>
         
-        Enter a Barcode number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="enterance_Barcode">
+        Enter a Barcode number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="enterance_id">
         <input id="querySubmit" type="submit" value="Query" class="btn btn-primary" ng-click="queryEnterance()">
       </div>
 
       <table id="query_enterance" class="table" align="center">
-        <script>
-          var test2=document.getElementById(query_enterance);
-        console.log(test2);
-        </script>
+
         <tr>
           <th>Name</th>
           <th>Timestamp</th>

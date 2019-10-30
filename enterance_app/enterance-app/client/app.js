@@ -29,21 +29,15 @@ app.controller('appController', function($scope, appFactory){
 			$scope.all_enterance = array;
 		});
 	}
-
 	$scope.queryEnterance = function(){
 
-		// 1. (index.html -> app.js 동기화)
-		// index.html에서 enter a Barcode Number로 id를 입력받는다 -> $scope.enterance_id에 대입
-		var Barcode = $scope.enterance_Barcode; //html 파일에 enterance_id이라는 ng-model이 존재한다
-		console.log("1st");
-		console.log(Barcode);
-		// 입력받은 id에 해당하는 enterance data를 밑에 있는 appFactory.queryEnterance에서 http get으로 불러들여 $scope.query_enterance에 저장 -> index.html에 동시에 동기화된다
-		// -> index.html에서 {{query_enterance.name}} 이러한 요소들을 쓸 수 있다!
-		appFactory.queryEnterance(Barcode, function(data){ 
-			$scope.query_enterance = data; // 2. (app.js -> index.html 동기화) -> 위의 1번과는 반대의 경우도 동기화 성립! -> AngularJS의 특징
-			console.log("2nd");
-			console.log(data);
+		var id = $scope.enterance_id;
+
+		appFactory.queryEnterance(id, function(data){
+			$scope.query_enterance = data;
+
 			if ($scope.query_enterance == "Could not locate enterance"){
+				console.log()
 				$("#error_query").show();
 			} else{
 				$("#error_query").hide();
@@ -89,13 +83,8 @@ app.factory('appFactory', function($http){
 	}
 
 	factory.queryEnterance = function(id, callback){
-		$http.get('/get_enterance/'+id)
-		.then(function success(output){
-			// console.log(output);
+    	$http.get('/get_enterance/'+id).success(function(output){
 			callback(output)
-		}, function error(err){
-			console.error(err);
-			callback(err);
 		});
 	}
 
