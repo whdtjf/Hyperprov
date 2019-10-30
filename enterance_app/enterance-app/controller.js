@@ -22,7 +22,8 @@ const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network')
 const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
 var manager = fs.readFileSync('Barcode.txt').toString().split("\n");
 console.log(manager.length);
-
+console.log(manager[0]);
+console.log(manager[1]);
 
 
 
@@ -57,21 +58,14 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
+					
 					const query_responses = await contract.evaluateTransaction('queryAllEnterance');
 					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
 					res.send(query_responses.toString());
 
-					// if (query_responses && query_responses.length == 1) {
-					// 	if (query_responses[0] instanceof Error) {
-					// 		console.error("error from query = ", query_responses[0]);
-					// 	} else {
-					// 		console.log("Response is ", query_responses[0].toString());
-					// 		res.send(query_responses[0].toString())
-					// 	}
-					// } else {
-					// 	console.log("No payloads were returned from query");
+					// for(var i=0; i<manager.length; i++){
+
 					// }
-			
 			} catch (error) {
 				console.error(`Failed to submit transaction: ${error}`);
 				process.exit(1);
