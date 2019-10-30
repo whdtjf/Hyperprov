@@ -147,14 +147,90 @@
               </div>
             </td>
           </tr>
-          <tr height="38%" bgcolor="red">
+          <tr height="38%">
             <td>
+
+              <!-- =================================================================================
+
+                  Gate A : Monthly Log Div
+
+              ================================================================================== -->
+              <div id="monthlyLogA"
+              style="width:100%;height:100%;overflow:hidden">
+              </div>
+
+              <script>
+                google.charts.load('current', { packages: ['corechart', 'bar'] });
+                google.charts.setOnLoadCallback(init);
+
+                function init() {
+            			var options = {
+            				title: '',			// chart의 제목
+            				chartArea: { width: '100%' },		// chart가 표시되는 크기
+            				bar: { groupWidth: '70%' },		// chart 내부의 bar 너비
+            				animation: {					// animation 효과
+                         duration: 1000,
+               					easing: 'out',
+            				},
+                    legend : 'none',
+            				vAxis: { title: '', minValue: 0, maxValue: 30 },	// y축 옵션
+            				//hAxis: { title: '요일', minValue: 0 },					// x축 옵션
+
+            				// 이 옵션을 제거하면 hover할 경우에 tooltip 생성됨
+            				// 클릭되었을 때만 tooltip이 생성되도록 하는 옵션
+            				tooltip: { trigger: 'selection' },
+                    series: {
+                      0: { color: '#3aaf1b' }
+                    }
+            			};
+
+                  var data = new google.visualization.DataTable();
+            			data.addColumn('string', 'N');			// column을 추가(data type이 string, 이름이 N)
+            			data.addColumn('number', '입장');	// column을 추가(data type이 number, 이름이 Value)
+                  data.addColumn({ type: 'number', role: 'annotation' });
+
+
+                  var chart = new google.visualization.ColumnChart(document.getElementById('monthlyLogA'));
+                  function drawChart() {
+            				// Disabling the button while the chart is drawing.
+            				google.visualization.events.addListener(chart, 'ready',
+            					function () {
+            					});
+            				chart.draw(data, options);
+            			}
+
+
+                  let cur = new Date().getMonth() + 1
+                  let maxs = [0,31,28,31,30,31,30,31,31,30,31,30,31]
+
+                  for(let i = 1; i <= maxs[cur];i++) {
+                    data.addRow( [ cur+'/'+i , 0,0])
+                  }
+                  drawChart();
+
+                  setTimeout(function() {
+
+                    var visit = monthlyLogA
+                    for (var i = 0; i < data.getNumberOfRows(); i++) {
+                      data.setValue(i,1,visit[i][1]);
+                      data.setValue(i,2,visit[i][1]);
+                    }
+                    drawChart();
+                  },2);
+
+                }
+              </script>
+
+
 
             </td>
           </tr>
-          <tr height="38%" bgcolor="blue">
+          <tr height="38%">
             <td>
-
+              <div id="monthlyLogB"
+              style="background-color:red;
+                     width:100%;height:100%;overflow:hidden">
+              </div>
             </td>
           </tr>
           </table>

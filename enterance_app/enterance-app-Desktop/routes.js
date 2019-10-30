@@ -17,6 +17,10 @@ module.exports = function (app) {
     res.render(__dirname+'/client/dailyLog.ejs');
   });
 
+  app.get('/monthlyLog', (req,res) => {
+    res.render(__dirname+'/client/monthlyLog.ejs');
+  });
+
   app.get('/get_enterance/:id', function (req, res) {
     //GET 메소드 / 주소의 요청일때만 실행된다.
     enterance.get_enterance(req, res);

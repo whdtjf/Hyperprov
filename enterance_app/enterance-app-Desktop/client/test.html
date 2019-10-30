@@ -7,7 +7,7 @@
     <script src="fakeApp.js" charset="UTF-8"></script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
     <script> //if(!sessionStorage.getItem('uID')) location.href="/"; </script>
-		<script> let userData = {key:2013122041, name:"김영찬", timestamp:Date.now()} </script>
+		<script> let userData = {Key:2013122041, name:"김영찬", timestamp:Date.now()} </script>
   </head>
 
   <body style="margin:0px 0px 0px 0px; height:100%" ng-app="fakeApplication" ng-controller="fakeAppController">
@@ -30,7 +30,7 @@
                         userName.innerHTML = "<font color='yellow' size='5'>"+userData.name
                           +"</font><font color='white'>님, 반갑습니다!</font>";
                         let userImage = document.getElementById('uImage');
-                        userImage.src = "./img/icon/" + userData.key + ".png";
+                        userImage.src = "./img/icon/" + userData.Key + ".png";
                         let logoutBtn = document.getElementById('logout');
                         logoutBtn.onclick = () => {
                           sessionStorage.removeItem('uID');
