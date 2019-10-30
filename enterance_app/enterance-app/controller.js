@@ -20,8 +20,8 @@ var os = require('os');
 
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
-var manager = fs.readFileSync('Barcode.txt').toString();
-console.log(manager);
+var manager = fs.readFileSync('Barcode.txt').toString().split("\n");
+console.log(manager.length);
 
 
 
