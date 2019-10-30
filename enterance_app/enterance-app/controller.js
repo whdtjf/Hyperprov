@@ -20,10 +20,9 @@ var os = require('os');
 
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
-var manager = fs.readFileSync('Barcode.txt').toString().split("\n");
-console.log(manager.length);
-console.log(manager[0]);
-console.log(manager[1]);
+var users = fs.readFileSync('Barcode.txt').toString().split("\n");
+
+
 
 
 
@@ -36,7 +35,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${manager}`);
+					const userExists = await wallet.exists('admin');
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -45,7 +44,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -63,9 +62,7 @@ module.exports = (function () {
 					console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
 					res.send(query_responses.toString());
 
-					// for(var i=0; i<manager.length; i++){
 
-					// }
 			} catch (error) {
 				console.error(`Failed to submit transaction: ${error}`);
 				process.exit(1);
@@ -86,7 +83,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${manager}`);
+					const userExists = await wallet.exists('admin');
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -95,7 +92,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -129,7 +126,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${manager}`);
+					const userExists = await wallet.exists('admin');
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -138,7 +135,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -178,7 +175,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${manager}`);
+					const userExists = await wallet.exists('admin');
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -187,7 +184,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -224,7 +221,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${manager}`);
+					const userExists = await wallet.exists('admin');
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -233,7 +230,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -244,11 +241,21 @@ module.exports = (function () {
 					// Evaluate the specified transaction.
 					// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 					// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
-					const invoke_response=await contract.submitTransaction('UpdateEnterance', `${key}`, `${timestamp}`, `${location}`, `${state}`);
-					console.log('Transaction has been submitted');
-					res.send(invoke_response.toString());
-					// Disconnect from the gateway.
-					await gateway.disconnect();
+					for(var i=0; i<users.length; i++){
+						if(users[i]==key){
+							const invoke_response=await contract.submitTransaction('UpdateEnterance', `${key}`, `${timestamp}`, `${location}`, `${state}`);
+							console.log('Transaction has been submitted');
+							res.send(invoke_response.toString());
+							// Disconnect from the gateway.
+							await gateway.disconnect();
+							break;
+						}
+						else{
+							continue;
+						}
+
+					}
+
 
 			} catch (error) {
 				console.error(`Failed to submit transaction: ${error}`);
@@ -257,6 +264,5 @@ module.exports = (function () {
 
 			// 'UpdateEnterance', '1', '2020.2.2', 'South', 'IN'
 		}
-
 	}
 })();
