@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: Apache-2.0
+//SPDX-License-managerentifier: Apache-2.0
 
 /*
   This code is based on code written by the Hyperledger Fabric community.
@@ -20,40 +20,10 @@ var os = require('os');
 
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
-const id = fs.readFileSync('Barcode.txt', 'utf8');
-console.log(id);
+var manager = fs.readFileSync('Barcode.txt', 'utf8');
+console.log(manager);
 
-// const fixtures = path.resolve(__dirname, '../../crypto-config');
 
-// A wallet stores a collection of identities
-
-// async function addWallet() {
-
-// 	// Main try/catch block
-// 	try {
-// 		var id = fs.readFileSync('id.txt', 'utf8');
-
-// 		/* 
-// 		바코드 문자열 단위로 출력되게 하기 -> txt or JSON 포맷형식
-// 		*/
-
-// 		// Identity to credentials to be stored in the wallet
-// 		const credPath = path.join(fixtures, 'peerOrganizations/org1.ptunstad.no/users/User1@org1.ptunstad.no');
-// 		const cert = fs.readFileSync(path.join(credPath, '/msp/signcerts/User1@org1.ptunstad.no-cert.pem')).toString();
-// 		const key = fs.readFileSync(path.join(credPath, '/msp/keystore/424cc061e990df87fc49c9ecab0d244be0250fc0f85a5826c01f9a3352278c5a_sk')).toString();
-
-// 		// Load credentials into wallet
-// 		const identityLabel = `${id}`; //User1@org1.ptunstad.no 대신 id 대입
-// 		const identity = X509WalletMixin.createIdentity('Org1MSP', cert, key);
-
-// 		await wallet.import(identityLabel, identity); //wallet.import 구문이 끝나기 전에는 밑의 return id가 실행되지 않는다
-
-// 		return id
-// 	} catch (error) {
-// 		console.log(`Error adding to wallet. ${error}`);
-// 		console.log(error.stack);
-// 	}
-// }
 
 
 
@@ -65,7 +35,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${id}`);
+					const userExists = await wallet.exists(`${manager}`);
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -74,7 +44,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -122,7 +92,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${id}`);
+					const userExists = await wallet.exists(`${manager}`);
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -131,7 +101,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -165,7 +135,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${id}`);
+					const userExists = await wallet.exists(`${manager}`);
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -174,7 +144,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -214,7 +184,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${id}`);
+					const userExists = await wallet.exists(`${manager}`);
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -223,7 +193,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
@@ -260,7 +230,7 @@ module.exports = (function () {
 				const wallet = new FileSystemWallet(walletPath);
 				console.log(`Wallet path: ${walletPath}`);
 					// Check to see if we've already enrolled the user.
-					const userExists = await wallet.exists(`${id}`);
+					const userExists = await wallet.exists(`${manager}`);
 					if (!userExists) {
 						console.log('An identity for the user who has "id" does not exist in the wallet');
 						console.log('Run the registerUser.js application before retrying');
@@ -269,7 +239,7 @@ module.exports = (function () {
 
 					// Create a new gateway for connecting to our peer node.
 					const gateway = new Gateway();
-					await gateway.connect(ccpPath, { wallet, identity: `${id}`, discovery: { enabled: true, asLocalhost: true } });
+					await gateway.connect(ccpPath, { wallet, identity: `${manager}`, discovery: { enabled: true, asLocalhost: true } });
 
 					// Get the network (channel) our contract is deployed to.
 					const network = await gateway.getNetwork('mychannel');
