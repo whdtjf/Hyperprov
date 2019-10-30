@@ -90,7 +90,7 @@ app.factory('appFactory', function($http){
 	factory.queryEnterance = function(id, callback){
 		$http.get('/get_enterance/'+id)
 		.then(function success(output){
-			console.log(output);
+			// console.log(output);
 			callback(output)
 		}, function error(err){
 			console.error(err);
