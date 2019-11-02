@@ -18,7 +18,8 @@
    	 </center>
     </div>
     <script>
-      let getID ='<%= id%>';
+      // let getID =`<%= id%>`;
+      let getID=document.getElementById(id);
       console.log(getID);
       setTimeout( () => {alert('이상발생!');},3000);
       setTimeout( () => {
