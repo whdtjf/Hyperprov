@@ -31,7 +31,7 @@ let monthlyLogGateB = [];
 
 
 // Angular Controller
-app.controller('appController', function($scope, appFactory){
+app.controller('appController', function($scope, appFactory,$filter){
 
    //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
    $scope.queryAllEnterance = function(){
