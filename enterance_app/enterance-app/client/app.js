@@ -12,6 +12,7 @@ let allStatusData = [];
 let queryHistory;
 let queryAllEntrance;
 let queryEnterance;
+let id_temp;
 let queryAllHistory = () => {
   let history = [];
   let allEntrance = queryAllEntrance();
@@ -73,7 +74,8 @@ app.controller('appController', function($scope, appFactory){
       });
    }
    queryEnterance = $scope.queryEnterance
-
+   id_temp=$scope.enterance_id
+   
   $scope.queryHistory = function(){
 
       var id = $scope.enterance_id;
