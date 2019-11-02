@@ -33,11 +33,6 @@ let monthlyLogGateB = [];
 // Angular Controller
 app.controller('appController', function($scope, appFactory){
 
-   $("#success_holder").hide();
-   $("#success_create").hide();
-   $("#error_holder").hide();
-   $("#error_query").hide();
-
    //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
    $scope.queryAllEnterance = function(){
       appFactory.queryAllEnterance(function(data){ //appFactory.queryAllEnterance하면 get방식으로 enterance모든 데이터가 callback으로 넘겨짐
