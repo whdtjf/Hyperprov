@@ -18,7 +18,11 @@
    	 </center>
     </div>
     <script>
+      var Enterance=require('./app.js');
       let getID ='<%= id%>'; //ok
+      let test_id=Enterance.queryId;
+      console.log(test_id);
+
       setTimeout( () => {alert('이상발생!');},3000);
       setTimeout( () => {
         try{
