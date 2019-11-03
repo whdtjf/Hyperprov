@@ -23,7 +23,6 @@
       setTimeout( () => {
         try{
             let result = queryEnterance(getID);
-            console.log(result);
             if (result != undefined) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(result.key));
