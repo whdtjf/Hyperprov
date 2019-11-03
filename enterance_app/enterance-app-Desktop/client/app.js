@@ -53,10 +53,12 @@ app.controller('appController', function($scope, appFactory,$filter){
 
 
 
-  $scope.queryEnterance = function(){
+  $scope.queryEnterance = function(data){
 
       var id = $scope.enterance_id;
-
+      if(data!=id){
+        console.log("삐이이이");
+      }
       appFactory.queryEnterance(id, function(data){
          $scope.query_enterance = data;
 
