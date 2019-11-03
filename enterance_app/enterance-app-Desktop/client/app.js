@@ -49,8 +49,8 @@ app.controller('appController', function($scope, appFactory,$filter){
          return allStatusData;
       });
    }
-   
-   queryAllEntrance = function(){
+
+   queryAllEnterance = function(){
      return $scope.queryAllEnterance;
 
    }
