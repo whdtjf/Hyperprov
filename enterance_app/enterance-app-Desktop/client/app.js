@@ -10,7 +10,7 @@ var app = angular.module('application', []);
 let allHistoryData = [];
 let allStatusData = [];
 let queryHistory;
-// let queryAllEntrance;
+let queryAllEntrance;
 let queryEnterance;
 let id_temp;
 
@@ -50,11 +50,6 @@ app.controller('appController', function($scope, appFactory,$filter){
       });
    }
 
-   queryAllEnterance = function(){
-     return $scope.queryAllEnterance;
-
-   }
-  
 
 
   $scope.queryEnterance = function(){
