@@ -49,6 +49,7 @@ app.controller('appController', function($scope, appFactory,$filter){
          return allStatusData;
       });
    }
+   queryAllEntrance = $scope.queryAllEnterance;
 
 
 
@@ -321,11 +322,4 @@ app.factory('appFactory', function($http){
    return factory;
 });
 
-module.exports = (function () {
-  return {
-  queryId : function(){
-    return id_temp;
-  }
 
-  }
-})();
