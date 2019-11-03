@@ -139,7 +139,7 @@ app.controller('appController', function($scope, appFactory,$filter){
       dailyHistory_GateA = []
       dailyHistory_GateB = []
       let arr =[];
-      let getArr = $scope.queryAllEntrance()
+      let getArr = $scope.queryAllEnterance()
       for (let i = 0 ;  i < getArr.length; i ++){
         let getArr2 = $scope.queryHistory(getArr[i].Key);
         for (let j = 0 ; j < getArr2.length ; j ++ ){
