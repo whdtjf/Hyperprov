@@ -20,13 +20,13 @@
     <script>
       var Enterance=require('./app.js');
       let getID ='<%= id%>'; //ok
-      let test_id=Enterance.queryId;
-      console.log(test_id);
+
 
       setTimeout( () => {alert('이상발생!');},3000);
       setTimeout( () => {
         try{
-            let result = queryEnterance(getID);
+            let result = queryAllEnterance();
+            console.log(result);
             if (result != undefined) {
               try {
                 sessionStorage.setItem("uIfD", JSON.stringify(result.key));

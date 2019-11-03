@@ -12,7 +12,6 @@ let allStatusData = [];
 let queryHistory;
 let queryAllEntrance;
 let queryEnterance;
-let id_temp;
 
 let queryAllHistory = () => {
   let history = [];
@@ -75,7 +74,6 @@ app.controller('appController', function($scope, appFactory){
       });
    }
    queryEnterance = $scope.queryEnterance
-   id_temp= $scope.enterance_id; //id확인
 
   $scope.queryHistory = function(){
 
@@ -326,12 +324,3 @@ app.factory('appFactory', function($http){
 
    return factory;
 });
-
-module.exports = (function () {
-  return {
-  queryId : function(){
-    return id_temp;
-  }
-
-  }
-})();
