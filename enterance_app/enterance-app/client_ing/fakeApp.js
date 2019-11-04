@@ -1,8 +1,5 @@
-// SPDX-License-Identifier: Apache-2.0
 
-'use strict';
-
-var app = angular.module('application', []);
+var app = angular.module('fakeApplication', []);
 
 //=================================================================
 //  ADD REAL app.js
@@ -12,8 +9,6 @@ let allStatusData = [];
 let queryHistory;
 let queryAllEntrance;
 let queryEnterance;
-let id_temp;
-
 let queryAllHistory = () => {
   let history = [];
   let allEntrance = queryAllEntrance();
@@ -30,85 +25,71 @@ let monthlyLogGateA = [];
 let monthlyLogGateB = [];
 
 
-// Angular Controller
-app.controller('appController', function($scope, appFactory,$filter){
+app.controller ('fakeAppController', ['$scope','$filter',($scope,$filter) => {
 
-   //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
-   $scope.queryAllEnterance = function(){
-      appFactory.queryAllEnterance(function(data){ //appFactory.queryAllEnterance하면 get방식으로 enterance모든 데이터가 callback으로 넘겨짐
-         var array = [];
-         for (var i = 0; i < data.length; i++){
-            parseInt(data[i].Key);
-            data[i].Record.Key = parseInt(data[i].Key);
-            array.push(data[i].Record);
-         }
-         array.sort(function(a, b) {
-             return parseFloat(a.Key) - parseFloat(b.Key);
-         });
-         allStatusData = array;
-         return allStatusData;
-      });
-   }
-   queryAllEntrance = $scope.queryAllEnterance;
+  allHistoryData = [ {Key:2013122041, name:"김영찬", timestamp:"2019-10-08 12:10:27",location:"gate_A",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-08 18:25:45",location:"gate_A",state:"out"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-09 08:10:27",location:"gate_B",state:"in"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-09 13:24:11",location:"gate_B",state:"out"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-09 22:54:35",location:"gate_A",state:"in"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-10 00:12:22",location:"gate_A",state:"out"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-10 09:22:35",location:"gate_B",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-10 10:59:20",location:"gate_A",state:"out"},
+                   {Key:2013122260, name:"정지원", timestamp:"2019-10-10 11:10:36",location:"gate_A",state:"in"},
+                   {Key:2013122260, name:"정지원", timestamp:"2019-10-10 11:35:35",location:"gate_B",state:"out"},
+                   {Key:2013122260, name:"정지원", timestamp:"2019-10-10 12:01:20",location:"gate_B",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 00:10:32",location:"gate_A",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 00:15:00",location:"gate_A",state:"out"},
+                   {Key:2013122260, name:"정지원", timestamp:"2019-10-16 07:37:34",location:"gate_A",state:"in"},
+                   {Key:2013122260, name:"정지원", timestamp:"2019-10-16 07:44:01",location:"gate_B",state:"out"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-16 08:12:18",location:"gate_A",state:"in"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-16 08:30:22",location:"gate_B",state:"out"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-16 08:31:27",location:"gate_A",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 09:52:55",location:"gate_B",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 10:25:07",location:"gate_B",state:"out"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-16 10:27:10",location:"gate_B",state:"out"},
+                   {Key:2013122201, name:"이승준", timestamp:"2019-10-16 10:32:44",location:"gate_A",state:"in"},
+                   {Key:2013122260, name:"정지원", timestamp:"2019-10-16 10:59:38",location:"gate_A",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 11:10:10",location:"gate_A",state:"in"},
+                   {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 11:12:13",location:"gate_A",state:"out"},
+                   {Key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"}
+                ];
 
+  allStatusData = [ {Key:2013122201, name:"이승준", timestamp:"2019-10-16 10:32:44",location:"gate_A",state:"in"},
+                    {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 11:12:13",location:"gate_A",state:"out"},
+                    {Key:2013122260, name:"정지원", timestamp:"2019-10-16 12:27:51",location:"gate_B",state:"in"}
+                ];
 
+  $scope.all_enterance = allHistoryData;
 
-  $scope.queryEnterance = function(id){
-      appFactory.queryEnterance(id, function(data){
-        alert(data);
-         if (data == "Could not locate enterance"){
-            console.log()
-            $("#error_query").show();
-         } else{
-            $("#error_query").hide();
+  $scope.queryHistory = (id) => {
+    let resultArr = [];
+    for (let i = 0; i < allHistoryData.length; i++) {
+      if (id == allHistoryData[i].Key ){
+        resultArr.push(allHistoryData[i]);
       }
-      return data;
-      });
-   }
-   queryEnterance = $scope.queryEnterance
-   id_temp= $scope.enterance_id; //id확인
+    }
+    return resultArr;
+  }
+  queryHistory = $scope.queryHistory;
 
-  $scope.queryHistory = function(){
+  $scope.queryAllEntrance = () => {
+    return  allStatusData;
+  };
+  queryAllEntrance = $scope.queryAllEntrance;
 
-      var id = $scope.enterance_id;
-
-      appFactory.queryHistory(id, function(data){
-         $scope.query_history = data;
-
-         if ($scope.query_history == "Could not locate enterance"){
-            console.log()
-            $("#error_query").show();
-         } else{
-            $("#error_query").hide();
+  $scope.queryEnterance = (id) => {
+    let resultArr = {};
+    for (let i = 0; i < allStatusData.length; i++) {
+      if (id == allStatusData[i].Key ){
+        return allStatusData[i];
       }
-      return data;
-      });
-   }
-   queryHistory = $scope.queryHistory
+    }
+    return null;
+  };
+  queryEnterance = $scope.queryEnterance;
 
-   $scope.recordBarcode = function(){
-
-      appFactory.recordBarcode($scope.enterance, function(data){
-         $scope.create_barcode = data;
-         $("#success_create").show();
-      });
-   }
-
-   $scope.UpdateEnterance = function(){
-
-      appFactory.UpdateEnterance($scope.newEnterance, function(data){
-         $scope.update_timestamp = data;
-         if ($scope.update_timestamp == "Error: no enterance catch found"){
-            $("#error_holder").show();
-            $("#success_holder").hide();
-         } else{
-            $("#success_holder").show();
-            $("#error_holder").hide();
-         }
-      });
-   }
-
-   //=================================================================
+  //=================================================================
   //  ADD REAL app.js
   //=================================================================
   $scope.queryHistoryTop10 = () => {
@@ -135,7 +116,7 @@ app.controller('appController', function($scope, appFactory,$filter){
       dailyHistory_GateA = []
       dailyHistory_GateB = []
       let arr =[];
-      let getArr = $scope.queryAllEnterance()
+      let getArr = $scope.queryAllEntrance()
       for (let i = 0 ;  i < getArr.length; i ++){
         let getArr2 = $scope.queryHistory(getArr[i].Key);
         for (let j = 0 ; j < getArr2.length ; j ++ ){
@@ -262,58 +243,4 @@ app.controller('appController', function($scope, appFactory,$filter){
 
   $scope.queryDailyHistory($filter('date')($scope.selectDate.value, 'yyyy-MM-dd'));
   $scope.queryMonthlyHistory($filter('date')($scope.selectDate.value, 'yyyy-MM-dd'))
-});
-
-// Angular Factory
-app.factory('appFactory', function($http){
-
-   var factory = {};
-
-    factory.queryAllEnterance = function(callback){
-
-       $http.get('/get_all_enterance/').success(function(output){
-         callback(output)
-      });
-   }
-
-   factory.queryEnterance = function(id, callback){
-      $http.get('/get_enterance/'+id)
-      .then(function success(output){
-         console.log(output);
-         callback(output)
-      }, function error(err){
-         console.error(err);
-         callback(err);
-      });
-   }
-
-   factory.queryHistory = (id, callback) => {
-      $http.get('/get_history/'+id)
-      .then(function success(output){
-         callback(output)
-      }, function error(err){
-         console.error(err);
-         callback(err);
-      });
-   }
-
-   factory.recordBarcode = function(data, callback){
-
-      var enterance = data.id + "-" + data.name + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
-
-       $http.get('/add_barcode/'+enterance).success(function(output){
-         callback(output)
-      });
-   }
-
-   factory.UpdateEnterance = function(data, callback){
-
-      var updated_enterance = data.id + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
-
-       $http.get('/update_enterance/'+updated_enterance).success(function(output){
-         callback(output)
-      });
-   }
-
-   return factory;
-});
+}])
