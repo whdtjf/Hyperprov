@@ -20,15 +20,16 @@
     <script>
       let getID ='<%= id%>';
       let result;
-    
+
       setTimeout( () => {result = queryEnterance(getID)} , 2)
       setTimeout( () => {
         try{
             console.log(queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
-                sessionStorage.setItem("uID", JSON.stringify(queryEnterance_result.Key));
-                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.name));
+                alert(queryEnterance_result)
+                sessionStorage.setItem("uID", JSON.stringify(getID));
+                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
                 location.href="/mainPage";
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
