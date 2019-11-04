@@ -15,7 +15,7 @@
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
   </head>
 
-  <body style="margin:0px 0px 0px 0px; height:100%">
+  <body ng-app="application" ng-controller="appController" style="margin:0px 0px 0px 0px; height:100%">
     <table width="100%" style="height:100%; margin:0px 0px 0px 0px; border-collapse:collapse;">
       <tr>
         <td bgcolor="#2E1257" style="width:30%;min-width:180px" align="center">
@@ -30,7 +30,7 @@
                 <div class="input-group-addon" style="width:40%;">
                   <span class="input-group-text">ID</span>
                 </div>
-                <input type="text" class="form-control" name="id" style="border: 0px; " placeholder="ID를 입력하세요.">
+                <input type="text" class="form-control" name="id" style="border: 0px; " placeholder="ID를 입력하세요." ng-model="enterance_id">
               </div>
               <br>
               <button type="submit" style="width:100%" class="btn btn-primary">로그인</button>
