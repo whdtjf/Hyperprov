@@ -80,8 +80,12 @@ app.controller('appController', function($scope, appFactory,$filter){
   //=================================================================
   $scope.queryHistoryTop10 = (callback) => {
     console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
-    let data = $scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')))
-    setTimeout(() => {console.log(data);callback(data)},1000);
+    $scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')))
+    .then(function success(output){
+       console.log(data);callback(data)
+    }, function error(err){
+       console.error(err);
+    });
   }
 
   let queryHistoryTop10_2nd = (data) => {
