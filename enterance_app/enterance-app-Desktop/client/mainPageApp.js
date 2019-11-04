@@ -79,6 +79,7 @@ app.controller('appController', function($scope, appFactory,$filter){
   //  ADD REAL app.js
   //=================================================================
   $scope.queryHistoryTop10 = () => {
+    console.log(userData.Key);
     queryHistoryTop10_2nd($scope.queryHistory(userData.Key))
   }
   $scope.queryHistoryTop10();
