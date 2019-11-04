@@ -28,8 +28,8 @@
             if (queryEnterance_result != undefined) {
               try {
                 alert(queryEnterance_result)
-                sessionStorage.setItem("uID", JSON.stringify(queryEnterance_result.Key));
-                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.name));
+                sessionStorage.setItem("uID", JSON.stringify(queryEnterance_result.data.Key));
+                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
                 //location.href="/mainPage";
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
