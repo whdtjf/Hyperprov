@@ -78,12 +78,10 @@ app.controller('appController', function($scope, appFactory,$filter){
    //=================================================================
   //  ADD REAL app.js
   //=================================================================
-
-
   $scope.queryHistoryTop10 = (callback) => {
     console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
     let data = $scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')))
-    setTimeout(() => {console.log(data);callback(data)},10);
+    setTimeout(() => {console.log(data);callback(data)},1000);
   }
 
   let queryHistoryTop10_2nd = (data) => {
@@ -95,7 +93,7 @@ app.controller('appController', function($scope, appFactory,$filter){
     }
     $scope.queryHistoryTop10_result = array;
   }
-    $scope.queryHistoryTop10(queryHistoryTop10_2nd);
+  $scope.queryHistoryTop10(queryHistoryTop10_2nd);
 
   $scope.selectDate = {
        value: new Date()
