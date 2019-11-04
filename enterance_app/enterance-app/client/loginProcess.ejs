@@ -25,7 +25,7 @@
       setTimeout( () => {
         try{
             console.log("test!!!!",angular.element(document.getElementById('angularController')).scope().queryEnterance(getID));
-            console.log(queryEnterance_result);
+            console.log("hello",queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(queryEnterance_result.Key));
