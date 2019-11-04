@@ -78,7 +78,15 @@ app.controller('appController', function($scope, appFactory,$filter){
    //=================================================================
   //  ADD REAL app.js
   //=================================================================
-  let queryHistoryTop10_2nd = (data) => {
+
+
+  $scope.queryHistoryTop10 = () => {
+    console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
+    $scope.queryHistoryTop10_2nd($scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))))
+  }
+  $scope.queryHistoryTop10();
+
+  $scope.queryHistoryTop10_2nd = (data) => {
     let arr =[];
     data.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
     for (let i = 0 ;  i < data.length; i ++){
@@ -87,14 +95,6 @@ app.controller('appController', function($scope, appFactory,$filter){
     }
     $scope.queryHistoryTop10_result = array;
   }
-
-  $scope.queryHistoryTop10 = () => {
-    console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
-    queryHistoryTop10_2nd(queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))))
-  }
-  $scope.queryHistoryTop10();
-
-
 
   $scope.selectDate = {
        value: new Date()
