@@ -25,7 +25,7 @@
       setTimeout( () => {result = queryEnterance(getID)} , 2)
       setTimeout( () => {
         try{
-            console.log("test",angular.element(document.getElementById('mainController')).scope().queryEnterance(5));
+            console.log("test",angular.element(document.getElementById('mainController')).scope().queryEnterance('5'));
             console.log("확인",queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
