@@ -78,7 +78,6 @@ app.controller('appController', function($scope, appFactory,$filter){
    queryHistory = $scope.queryHistory
 
    $scope.recordBarcode = function(){
-
       appFactory.recordBarcode($scope.enterance, function(data){
          $scope.create_barcode = data;
          $("#success_create").show();
@@ -86,7 +85,6 @@ app.controller('appController', function($scope, appFactory,$filter){
    }
 
    $scope.UpdateEnterance = function(){
-
       appFactory.UpdateEnterance($scope.newEnterance, function(data){
          $scope.update_timestamp = data;
          if ($scope.update_timestamp == "Error: no enterance catch found"){
