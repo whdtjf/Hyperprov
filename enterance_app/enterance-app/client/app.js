@@ -10,14 +10,14 @@ var app = angular.module('application', []);
 let allHistoryData = [];
 let allStatusData = [];
 let queryHistory;
-let queryAllEntrance;
+let queryAllEnterance;
 let queryEnterance;
 
 let queryAllHistory = () => {
   let history = [];
-  let allEntrance = queryAllEntrance();
-  for( let i = 0 ; i < allEntrance.length ; i++ ){
-    let temp = queryHistory(allEntrance[i].Key);
+  let allEnterance = queryAllEnterance();
+  for( let i = 0 ; i < allEnterance.length ; i++ ){
+    let temp = queryHistory(allEnterance[i].Key);
     for (let j = 0 ; j < temp.length ; j ++ ){
       history.push(temp[j]);
     }
@@ -146,7 +146,7 @@ app.controller('appController', function($scope, appFactory){
       dailyHistory_GateA = []
       dailyHistory_GateB = []
       let arr =[];
-      let getArr = $scope.queryAllEntrance()
+      let getArr = $scope.queryAllEnterance()
       for (let i = 0 ;  i < getArr.length; i ++){
         let getArr2 = $scope.queryHistory(getArr[i].Key);
         for (let j = 0 ; j < getArr2.length ; j ++ ){
@@ -226,7 +226,7 @@ app.controller('appController', function($scope, appFactory){
       monthlyHistory_GateA = []
       monthlyHistory_GateB = []
       let arr =[];
-      let getArr = $scope.queryAllEntrance()
+      let getArr = $scope.queryAllEnterance()
       for (let i = 0 ;  i < getArr.length; i ++){
         let getArr2 = $scope.queryHistory(getArr[i].Key);
         for (let j = 0 ; j < getArr2.length ; j ++ ){
