@@ -22,13 +22,13 @@ let queryAllHistory = () => {
   queryaAllHistory_2nd(queryAllEntrance())
 }
 
-let queryaAllHistory_2nd(allEnterance) {
+let queryaAllHistory_2nd = (allEnterance) =>{
   for( let i = 0 ; i < allEnterance.length ; i++ ){
     queryaAllHistory_3nd(queryHistory(allEnterance[i].Key));
   }
 }
 
-let queryaAllHistory_3nd(temp) {
+let queryaAllHistory_3nd = (temp) => {
   for (let j = 0 ; j < temp.length ; j ++ ){
     queryAllHistory_result.push(temp[j]);
   }
