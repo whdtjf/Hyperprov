@@ -19,8 +19,7 @@
     </div>
     <script>
       let getID ='<%= id%>'; //ok
-      var id = $scope.enterance_id;
-      console.log(id);
+      console.log("loginProcess에서 받아온 id는 : ",getID);
       setTimeout( () => {alert('이상발생!');},3000);
       setTimeout( () => {
         try{

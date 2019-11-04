@@ -64,7 +64,7 @@ app.controller('appController', function($scope, appFactory){
   $scope.queryEnterance = function(){
 
       var id = $scope.enterance_id;
-
+      console.log("app.js에서 받아온 id는 : ",id);
       appFactory.queryEnterance(id, function(data){
          $scope.query_enterance = data;
 
