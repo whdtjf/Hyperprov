@@ -78,6 +78,14 @@
 	 enterance := []Enterance{
 		 Enterance{Name: "JiWon", Timestamp: "1504054225", Location: "east", State: "IN"},
 		 Enterance{Name: "YoungChan", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test1", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test2", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test3", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test4", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test5", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test6", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test7", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "test8", Timestamp: "1504057825", Location: "west", State: "OUT"},
 	 }
  
 	 i := 0

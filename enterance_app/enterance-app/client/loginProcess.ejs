@@ -6,7 +6,7 @@
     <script src="app.js" charset="UTF-8"></script>
   </head>
 
-  <body ng-app="application" ng-controller="appController"
+  <body ng-app="application" ng-controller="appController" id="angularController"
     style="margin:0px 0px 0px 0px;width:100%;height:100%;
   	background-image:url('./img/bg2.png');
   	background-position:center center">
@@ -20,7 +20,8 @@
     <script>
       let getID ='<%= id%>';
       let result;
-      setTimeout( () => {result = queryEnterance(getID)} , 2)
+      setTimeout( () => {result = angular.element(document.getElementById('angularController')).scope().queryEnterance(getID);} , 2)
+      
       setTimeout( () => {alert('이상발생!');},15000);
       setTimeout( () => {
         try{
