@@ -23,7 +23,7 @@
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
   </head>
 
-  <body ng-app="application" ng-controller="appController" style="margin:0px 0px 0px 0px; height:100%">
+  <body style="margin:0px 0px 0px 0px; height:100%">
     <table width="100%" style="height:100%; margin:0px 0px 0px 0px; border-collapse:collapse;">
       <tr>
         <td bgcolor="#2E1257" style="width:30%;min-width:180px" align="center">
@@ -32,7 +32,8 @@
           <hr color="white" width="80%">
           <font size="7" color="white">관리자 로그인</font>
           <br><br><br>
-          <div id="body" style="width:80%">
+          <div ng-app="application" style="width:80%">
+            <div ng-controller="appController">
             <!-- <form method="post" action="/loginProcess"> -->
               
               <div class="input-group" style="border: 0px;">
@@ -61,6 +62,7 @@
             <!-- </form> -->
             <br><br><br>
             <font size="4" color="white">Entracne Management System<br>Based on Hyperledger Fabric</font><br>
+          </div>
           </div>
         </td>
 
