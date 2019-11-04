@@ -27,8 +27,8 @@
             console.log(queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
-                sessionStorage.setItem("uID", JSON.stringify(result.key));
-                sessionStorage.setItem("uNAME", JSON.stringify(result.name));
+                sessionStorage.setItem("uID", JSON.stringify(queryEnterance_result.Key));
+                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.name));
                 location.href="/mainPage";
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
