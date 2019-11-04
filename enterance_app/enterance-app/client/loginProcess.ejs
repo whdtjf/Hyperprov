@@ -24,7 +24,7 @@
       setTimeout( () => {alert('이상발생!');},15000);
       setTimeout( () => {
         try{
-            console.log("test!!!!",result);
+            console.log("test!!!!",angular.element(document.getElementById('angularController')).scope().queryEnterance(getID));
             console.log(queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
