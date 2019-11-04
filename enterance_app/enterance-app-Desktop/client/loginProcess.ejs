@@ -19,7 +19,8 @@
     </div>
     <script>
       let getID ='<%= id%>';
-      setTimeout( () => {let result = queryEnterance(getID)} , 2)
+      let result;
+      setTimeout( () => {result = queryEnterance(getID)} , 2)
       setTimeout( () => {alert('이상발생!');},3000);
       setTimeout( () => {
         try{
