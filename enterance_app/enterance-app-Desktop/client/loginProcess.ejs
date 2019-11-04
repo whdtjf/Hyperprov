@@ -21,7 +21,7 @@
       let getID ='<%= id%>';
       let result;
       setTimeout( () => {result = queryEnterance(getID)} , 2)
-      setTimeout( () => {alert('이상발생!');},3000);
+      setTimeout( () => {alert('이상발생!');},15000);
       setTimeout( () => {
         try{
             console.log(result);
@@ -38,7 +38,7 @@
         } catch (e) {
           console.log('error' +e);
         }
-      } ,1500);
+      } ,3000);
     </script>
   </body>
 </html>
