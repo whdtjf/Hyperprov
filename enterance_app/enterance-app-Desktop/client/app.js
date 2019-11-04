@@ -53,7 +53,7 @@ app.controller('appController', function($scope, appFactory,$filter){
 
 
 
-  $scope.queryEnterance = function(){
+  $scope.queryEnterance = function(id){
 
       var id = $scope.enterance_id;
 
@@ -321,5 +321,3 @@ app.factory('appFactory', function($http){
 
    return factory;
 });
-
-
