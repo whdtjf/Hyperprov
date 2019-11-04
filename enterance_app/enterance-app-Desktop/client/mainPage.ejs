@@ -6,7 +6,7 @@
     <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="styleMainPage.css">
-    <script src="app.js" charset="UTF-8"></script>
+    <script src="mainPageApp.js" charset="UTF-8"></script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
 		<script>
       let userData = {};
@@ -64,7 +64,7 @@
                       <td><font size="4" color="white" width="20%" height="35px"><b>디바이스</b></font></td>
                       <td><font size="4" color="white" width="20%" height="35px"><b>입장/퇴장</b></font></td>
                     </tr>
-                    <tr align="center">
+                    <tr ng-repeat="temp in queryHistoryTop10_result" align="center">
                       <td height="35px">{{temp.timestamp}}</td>
                       <td height="35px">{{temp.location}}</td>
                       <td height="35px"><span ng-show="temp.state == 'in'">&nbsp;<font color="#A4FFA3">입장</font></span><span ng-show="temp.state == 'out'">&nbsp;<font color="#FF7D6F">퇴장</font></span></td>
