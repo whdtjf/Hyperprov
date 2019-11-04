@@ -12,8 +12,6 @@
       let userData = {};
       try{
         userData = {Key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
-        alert(userData.Key);
-        alert(userData.name);
       } catch(e) {
         location.href="/";
       }

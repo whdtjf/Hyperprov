@@ -27,7 +27,6 @@
             console.log(queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
-                alert(queryEnterance_result)
                 sessionStorage.setItem("uID", JSON.stringify(getID));
                 sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
                 location.href="/mainPage";
