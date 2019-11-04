@@ -55,14 +55,8 @@ app.controller('appController', function($scope, appFactory,$filter){
 
   $scope.queryEnterance = function(id){
       appFactory.queryEnterance(id, function(data){
-        alert(data);
-         if (data == "Could not locate enterance"){
-            console.log()
-            $("#error_query").show();
-         } else{
-            $("#error_query").hide();
-      }
       return data;
+      alert(data.Key);
       });
    }
    queryEnterance = $scope.queryEnterance

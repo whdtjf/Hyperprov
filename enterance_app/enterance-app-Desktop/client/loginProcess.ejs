@@ -19,8 +19,9 @@
     </div>
     <script>
       let getID ='<%= id%>';
-      setTimeout( () => {let result = queryEnterance(getID)} , 2)
-      setTimeout( () => {alert('이상발생!');},3000);
+      let result;
+      setTimeout( () => {result = queryEnterance(getID)} , 2)
+      setTimeout( () => {alert('이상발생!');},15000);
       setTimeout( () => {
         try{
             console.log(result);
@@ -33,11 +34,12 @@
                 alert("세션 저장중 에러..!\n"+e);
               }
             }
-            else {alert("로그인 실패... ID를 확인하세요"); location.href="/";}
+            else {alert("로그인 실패... ID를 확인하세요"); //location.href="/";
+          }
         } catch (e) {
           console.log('error' +e);
         }
-      } ,1500);
+      } ,3000);
     </script>
   </body>
 </html>
