@@ -25,7 +25,8 @@
           <font size="7" color="white">관리자 로그인</font>
           <br><br><br>
           <div style="width:80%">
-            <form method="post" action="/loginProcess">
+            <!-- <form method="post" action="/loginProcess"> -->
+              
               <div class="input-group" style="border: 0px;">
                 <div class="input-group-addon" style="width:40%;">
                   <span class="input-group-text">ID</span>
@@ -34,7 +35,22 @@
               </div>
               <br>
               <input id="querySubmit" type="submit" value="로그인" class="btn btn-primary" style="width:100%" ng-click="queryEnterance()">
-            </form>
+              
+              <table id="query_enterance" class="table" align="center">
+
+                <tr>
+                  <th>Name</th>
+                  <th>Timestamp</th>
+                </tr>
+        
+                <tr>
+                  <td>{{query_enterance.name}}</td>
+                  <td>{{query_enterance.timestamp}}</td>
+                </tr>
+              </table>
+
+
+            <!-- </form> -->
             <br><br><br>
             <font size="4" color="white">Entracne Management System<br>Based on Hyperledger Fabric</font><br>
           </div>
