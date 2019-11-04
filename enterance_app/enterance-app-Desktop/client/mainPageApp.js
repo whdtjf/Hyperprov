@@ -84,7 +84,6 @@ app.controller('appController', function($scope, appFactory,$filter){
     console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
     $scope.queryHistoryTop10_2nd($scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))))
   }
-  $scope.queryHistoryTop10();
 
   $scope.queryHistoryTop10_2nd = (data) => {
     let arr =[];
@@ -95,6 +94,7 @@ app.controller('appController', function($scope, appFactory,$filter){
     }
     $scope.queryHistoryTop10_result = array;
   }
+    $scope.queryHistoryTop10();
 
   $scope.selectDate = {
        value: new Date()
