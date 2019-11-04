@@ -19,22 +19,20 @@ let queryEnterance_result;
 let id_temp;
 let queryAllHistory_result;
 let queryAllHistory = () => {
-  let history = [];
-  let allEntrance = queryAllEntrance();
-  for( let i = 0 ; i < allEntrance.length ; i++ ){
-    let temp = queryHistory(allEntrance[i].Key);
-    for (let j = 0 ; j < temp.length ; j ++ ){
-      history.push(temp[j]);
-    }
-  }
-  //history.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
-  queryAllHistory_result = history;
-  return history;
+  queryaAllHistory_2nd(queryAllEntrance())
 }
 
-let monthlyLogGateA = [];
-let monthlyLogGateB = [];
+let queryaAllHistory_2nd = (allEnterance) =>{
+  for( let i = 0 ; i < allEnterance.length ; i++ ){
+    queryaAllHistory_3nd(queryHistory(allEnterance[i].Key));
+  }
+}
 
+let queryaAllHistory_3nd = (temp) => {
+  for (let j = 0 ; j < temp.length ; j ++ ){
+    queryAllHistory_result.push(temp[j]);
+  }
+}
 
 // Angular Controller
 app.controller('appController', function($scope, appFactory,$filter){
@@ -81,8 +79,10 @@ app.controller('appController', function($scope, appFactory,$filter){
   //  ADD REAL app.js
   //=================================================================
   $scope.queryHistoryTop10 = () => {
-    queryHistoryTop10_2nd($scope.queryHistory(userData.Key))
+    console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
+    queryHistoryTop10_2nd($scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))))
   }
+  $scope.queryHistoryTop10();
 
   let queryHistoryTop10_2nd = (data) => {
     let arr =[];
