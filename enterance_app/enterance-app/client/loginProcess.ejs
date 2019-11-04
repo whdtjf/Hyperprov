@@ -6,41 +6,43 @@
     <script src="app.js" charset="UTF-8"></script>
   </head>
 
-  <body ng-app="application" ng-controller="appController" id="angularController"
+  <body 
     style="margin:0px 0px 0px 0px;width:100%;height:100%;
   	background-image:url('./img/bg2.png');
   	background-position:center center">
-
+  <div ng-app="application" ng-controller="appController" id="mainController">
     <div style="position:absolute;width:400px;height:250px;left:50%;top:50%;margin-left:-200px;margin-top:-125px;">
       <center>
 	<image src="./img/logining.gif" width="60%"><br>
          <h2><font color="white">사용자 로그인 중...</font></h2>
    	 </center>
     </div>
+  
     <script>
       let getID ='<%= id%>';
       let result;
-      setTimeout( () => {result = angular.element(document.getElementById('angularController')).scope().queryEnterance(getID);} , 2)
-      setTimeout( () => {alert('이상발생!');},15000);
+
+      setTimeout( () => {result = queryEnterance(getID)} , 2)
       setTimeout( () => {
         try{
-            console.log("test!!!!",angular.element(document.getElementById('angularController')).scope().queryEnterance(getID));
-            console.log(queryEnterance_result);
+            console.log("test",angular.element(document.getElementById('mainController')).scope().queryEnterance(getID));
+            console.log("확인",queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
-                sessionStorage.setItem("uID", JSON.stringify(queryEnterance_result.Key));
-                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.name));
-                // location.href="/mainPage";
+                alert(queryEnterance_result)
+                sessionStorage.setItem("uID", JSON.stringify(getID));
+                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
+                location.href="/mainPage";
                 } catch (e) {
                 alert("세션 저장중 에러..!\n"+e);
               }
             }
-            else {alert("로그인 실패... ID를 확인하세요"); //location.href="/";
-          }
+            else {alert("로그인 실패... ID를 확인하세요"); location.href="/"};
         } catch (e) {
           console.log('error' +e);
         }
       } ,3000);
     </script>
-  </body>
+</div>  
+</body>
 </html>
