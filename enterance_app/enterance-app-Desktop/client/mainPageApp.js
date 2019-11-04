@@ -79,8 +79,8 @@ app.controller('appController', function($scope, appFactory,$filter){
   //  ADD REAL app.js
   //=================================================================
   $scope.queryHistoryTop10 = () => {
-    console.log(userData.Key);
-    queryHistoryTop10_2nd($scope.queryHistory(userData.Key))
+    console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
+    queryHistoryTop10_2nd($scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))))
   }
   $scope.queryHistoryTop10();
 
