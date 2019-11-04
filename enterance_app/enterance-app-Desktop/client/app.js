@@ -55,7 +55,7 @@ app.controller('appController', function($scope, appFactory,$filter){
 
   $scope.queryEnterance = function(id){
       appFactory.queryEnterance(id, function(data){
-        alert(data);
+        console.log(data);
         return data;
       });
    }
