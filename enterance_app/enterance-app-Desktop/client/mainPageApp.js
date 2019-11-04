@@ -84,7 +84,7 @@ app.controller('appController', function($scope, appFactory,$filter){
     queryHistoryTop10_2nd($scope.queryHistory(userData.Key))
   }
 
-  let queryHistoryTop10_2nd = (data) {
+  let queryHistoryTop10_2nd = (data) => {
     let arr =[];
     data.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
     for (let i = 0 ;  i < data.length; i ++){
