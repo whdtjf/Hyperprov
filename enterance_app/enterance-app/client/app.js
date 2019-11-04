@@ -64,6 +64,7 @@ app.controller('appController', function($scope, appFactory,$filter){
    queryEnterance = $scope.queryEnterance
    id_temp= $scope.enterance_id; //id확인
 
+   
   $scope.queryHistory = function(){
 
       var id = $scope.enterance_id;
