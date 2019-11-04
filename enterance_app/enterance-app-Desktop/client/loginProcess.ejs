@@ -24,8 +24,8 @@
       setTimeout( () => {alert('이상발생!');},15000);
       setTimeout( () => {
         try{
-            console.log(result);
-            if (result != undefined) {
+            console.log(queryEnterance_result);
+            if (queryEnterance_result != undefined) {
               try {
                 sessionStorage.setItem("uID", JSON.stringify(result.key));
                 sessionStorage.setItem("uNAME", JSON.stringify(result.name));
