@@ -20,13 +20,14 @@
     <script>
       let getID ='<%= id%>';
       let result;
-    
+
       setTimeout( () => {result = queryEnterance(getID)} , 2)
       setTimeout( () => {
         try{
             console.log(queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
+                alert(queryEnterance_result)
                 sessionStorage.setItem("uID", JSON.stringify(queryEnterance_result.Key));
                 sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.name));
                 location.href="/mainPage";
