@@ -10,15 +10,14 @@ var app = angular.module('application', []);
 let allHistoryData = [];
 let allStatusData = [];
 let queryHistory;
-let queryAllEntrance;
+let queryAllEnterance;
 let queryEnterance;
-let id_temp;
 
 let queryAllHistory = () => {
   let history = [];
-  let allEntrance = queryAllEntrance();
-  for( let i = 0 ; i < allEntrance.length ; i++ ){
-    let temp = queryHistory(allEntrance[i].Key);
+  let allEnterance = queryAllEnterance();
+  for( let i = 0 ; i < allEnterance.length ; i++ ){
+    let temp = queryHistory(allEnterance[i].Key);
     for (let j = 0 ; j < temp.length ; j ++ ){
       history.push(temp[j]);
     }
@@ -31,7 +30,12 @@ let monthlyLogGateB = [];
 
 
 // Angular Controller
-app.controller('appController', function($scope, appFactory,$filter){
+app.controller('appController', function($scope, appFactory){
+
+   $("#success_holder").hide();
+   $("#success_create").hide();
+   $("#error_holder").hide();
+   $("#error_query").hide();
 
    //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
    $scope.queryAllEnterance = function(){
@@ -49,14 +53,22 @@ app.controller('appController', function($scope, appFactory,$filter){
          return allStatusData;
       });
    }
-   queryAllEntrance = $scope.queryAllEnterance;
+   queryAllEnterance=$scope.queryAllEnterance;
+   
+  //  queryAllEnterance = function(){
+  //   return $scope.queryAllEnterance;
 
+  // }
+ 
+   
+  $scope.queryEnterance = function(){
 
-
-  $scope.queryEnterance = function(id){
+      var id = $scope.enterance_id;
+      console.log("app.js에서 받아온 id는 : ",id);
       appFactory.queryEnterance(id, function(data){
-        alert(data);
-         if (data == "Could not locate enterance"){
+         $scope.query_enterance = data;
+
+         if ($scope.query_enterance == "Could not locate enterance"){
             console.log()
             $("#error_query").show();
          } else{
@@ -66,7 +78,6 @@ app.controller('appController', function($scope, appFactory,$filter){
       });
    }
    queryEnterance = $scope.queryEnterance
-   id_temp= $scope.enterance_id; //id확인
 
   $scope.queryHistory = function(){
 
@@ -215,7 +226,7 @@ app.controller('appController', function($scope, appFactory,$filter){
       monthlyHistory_GateA = []
       monthlyHistory_GateB = []
       let arr =[];
-      let getArr = $scope.queryAllEntrance()
+      let getArr = $scope.queryAllEnterance()
       for (let i = 0 ;  i < getArr.length; i ++){
         let getArr2 = $scope.queryHistory(getArr[i].Key);
         for (let j = 0 ; j < getArr2.length ; j ++ ){

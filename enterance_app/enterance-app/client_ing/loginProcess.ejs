@@ -18,15 +18,16 @@
    	 </center>
     </div>
     <script>
-      let getID ='<%= id%>';
-      setTimeout( () => {let result = queryEnterance(getID)} , 2)
+      let getID ='<%= id%>'; //ok
+      console.log("loginProcess에서 받아온 id는 : ",getID);
       setTimeout( () => {alert('이상발생!');},3000);
       setTimeout( () => {
         try{
+            let result = queryAllEnterance();
             console.log(result);
             if (result != undefined) {
               try {
-                sessionStorage.setItem("uID", JSON.stringify(result.key));
+                sessionStorage.setItem("uIfD", JSON.stringify(result.key));
                 sessionStorage.setItem("uNAME", JSON.stringify(result.name));
                 location.href="/mainPage";
                 } catch (e) {
