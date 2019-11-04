@@ -75,12 +75,25 @@ app.controller('appController', function($scope, appFactory,$filter){
    }
    queryHistory = $scope.queryHistory
 
+   $scope.queryHistory_Pro = function(id){
+      return new Promise(function (resolve,reject) {
+        appFactory.queryHistory(id, function(data){
+          queryHistory_result = data;
+          if (data != null){
+            resolve(data)
+          } else {
+            reject (data)
+          }
+        });
+      })
+   }
+
    //=================================================================
   //  ADD REAL app.js
   //=================================================================
   $scope.queryHistoryTop10 = (callback) => {
     console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
-    $scope.queryHistory(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')))
+    $scope.queryHistory_Pro(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')))
     .then(function success(output){
        console.log(data);callback(data)
     }, function error(err){
