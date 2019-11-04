@@ -12,6 +12,7 @@ let allStatusData = [];
 let queryHistory;
 let queryAllEntrance;
 let queryEnterance;
+let queryEnterance_result;
 let id_temp;
 
 let queryAllHistory = () => {
@@ -55,14 +56,9 @@ app.controller('appController', function($scope, appFactory,$filter){
 
   $scope.queryEnterance = function(id){
       appFactory.queryEnterance(id, function(data){
-        alert(data);
-         if (data == "Could not locate enterance"){
-            console.log()
-            $("#error_query").show();
-         } else{
-            $("#error_query").hide();
-      }
-      return data;
+        console.log(data);
+        queryEnterance_result = data;
+        return data;
       });
    }
    queryEnterance = $scope.queryEnterance
