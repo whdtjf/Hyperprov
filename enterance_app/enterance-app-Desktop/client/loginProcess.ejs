@@ -19,10 +19,10 @@
     </div>
     <script>
       let getID ='<%= id%>';
+      let result = queryEnterance(getID);
       setTimeout( () => {alert('이상발생!');},3000);
       setTimeout( () => {
         try{
-            let result = queryEnterance(getID);
             console.log(result);
             if (result != undefined) {
               try {
