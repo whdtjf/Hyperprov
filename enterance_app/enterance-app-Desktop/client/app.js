@@ -10,11 +10,14 @@ var app = angular.module('application', []);
 let allHistoryData = [];
 let allStatusData = [];
 let queryHistory;
+let queryHistory_result;
 let queryAllEntrance;
+let queryAllEntrance_result;
 let queryEnterance;
 let queryEnterance_result;
-let id_temp;
 
+let id_temp;
+let queryAllHistory_result;
 let queryAllHistory = () => {
   let history = [];
   let allEntrance = queryAllEntrance();
@@ -25,8 +28,10 @@ let queryAllHistory = () => {
     }
   }
   //history.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+  queryAllHistory_result = history;
   return history;
 }
+
 let monthlyLogGateA = [];
 let monthlyLogGateB = [];
 
@@ -44,7 +49,7 @@ app.controller('appController', function($scope, appFactory,$filter){
             array.push(data[i].Record);
          }
          array.sort(function(a, b) {
-             return parseFloat(a.Key) - parseFloat(b.Key);
+             return parseInt(a.Key) - parseInt(b.Key);
          });
          allStatusData = array;
          return allStatusData;
@@ -64,20 +69,10 @@ app.controller('appController', function($scope, appFactory,$filter){
    queryEnterance = $scope.queryEnterance
    id_temp= $scope.enterance_id; //id확인
 
-  $scope.queryHistory = function(){
-
-      var id = $scope.enterance_id;
-
+   $scope.queryHistory = function(id){
       appFactory.queryHistory(id, function(data){
-         $scope.query_history = data;
-
-         if ($scope.query_history == "Could not locate enterance"){
-            console.log()
-            $("#error_query").show();
-         } else{
-            $("#error_query").hide();
-      }
-      return data;
+        queryHistory_result = data;
+        return data;
       });
    }
    queryHistory = $scope.queryHistory
