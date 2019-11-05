@@ -78,7 +78,7 @@ app.controller('appController', function($scope, appFactory,$filter, $http){
    //=================================================================
   //  ADD REAL app.js
   //=================================================================
-  $scope.queryHistoryTop10 = (=) => {
+  $scope.queryHistoryTop10 = () => {
     let key = parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))
     let arr =[]
     $http.get('/get_history/'+id).then(function success(data){
