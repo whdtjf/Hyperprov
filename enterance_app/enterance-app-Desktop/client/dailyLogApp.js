@@ -65,7 +65,9 @@ app.controller('appController', function($scope,$filter,$http) {
       dailyHistory_GateA = []
       dailyHistory_GateB = []
       $http.get('/get_all_enterance/').success(function(rawData){
+        console.log('raw : '+rawData);
         let data = rawData.data                    // 전체 유저를 가져옴
+        console.log('data : '+data);
         dataCount = data.length
         currentCount = 0
         for (let i = 0 ; i < dataCount; i ++ ) {
