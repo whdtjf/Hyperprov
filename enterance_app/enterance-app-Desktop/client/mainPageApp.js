@@ -38,13 +38,11 @@ app.controller('appController', function($scope,$filter,$http) {
           // 밀리세컨드 단위면 변환해주고 저장함.
           if (timestamp.split(' ').length !=2){
             let temp = new Date(Number(timestamp))
-            console.log(temp)
-            console.log(timestamp)
             timestamp = temp.getFullYear() + "-"
             timestamp += (temp.getMonth()+1) + "-"
             timestamp += temp.getDate() + " "
-            timestamp += temp.getHours() + " "
-            timestamp += temp.getMinutes() + " "
+            timestamp += temp.getHours() + ":"
+            timestamp += temp.getMinutes() + ":"
             timestamp += temp.getSeconds()
           }
         }catch(e) {console.log(e)}

@@ -7,10 +7,10 @@ var app = angular.module('application', []);
 //  ---------------------------------------------------------------------------
 //  ◆ 구현된 함수
 //  ┣ queryHistoryTop8 : line 24
-//  ┣ queryDailyHistory : line 63
-//  ┣ queryDailyHistory_2Step : line 113
-//  ┣ pagingDailyLog : line 164
-//  ┗ selectDate : line 191
+//  ┣ queryDailyHistory : line 79
+//  ┣ queryDailyHistory_2Step : line 129
+//  ┣ pagingDailyLog : line 180
+//  ┗ selectDate : line 207
 //=============================================================================
 let queryAllHistory_result;
 
@@ -41,11 +41,14 @@ app.controller('appController', function($scope,$filter,$http) {
           // 밀리세컨드 단위면 변환해주고 저장함.
           if (timestamp.split(' ').length !=2){
             let temp = new Date(Number(timestamp))
-            timestamp = temp.getFullYear() + "."
-            timestamp += (temp.getMonth()+1) + "."
-            timestamp += temp.getDate() + ""
+            timestamp = temp.getFullYear() + "-"
+            timestamp += (temp.getMonth()+1) + "-"
+            timestamp += temp.getDate() + " "
+            timestamp += temp.getHours() + ":"
+            timestamp += temp.getMinutes() + ":"
+            timestamp += temp.getSeconds()
           }
-        }catch(e) {}
+        }catch(e) {console.log(e)}
         data[i].Value.timestamp = timestamp
 
         $scope.queryHistoryTop8_result.push(data[i].Value);
