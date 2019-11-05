@@ -82,6 +82,7 @@ app.controller('appController', function($scope, appFactory,$filter, $http){
     let arr =[]
     $http.get('/get_history/'+key).then(function success(data){
       let arr =[];
+      console.log(data);
       data.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
       for (let i = 0 ;  i < data.length; i ++){
         arr.push(getArr[i]);
