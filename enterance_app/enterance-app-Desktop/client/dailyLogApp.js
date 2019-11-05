@@ -74,9 +74,9 @@ app.controller('appController', function($scope,$filter,$http) {
           let key = data[i].Key                     // i번째 유저의 Key를 가져옴
           $http.get('/get_history/'+key).then(function success2(rawData2){
             currentCount += 1
-            console.log('raw : ' + rawData2)
+            console.log(rawData2)
             let data2 = rawData2.data
-            console.log('data : ' + data2)
+            console.log(data2)
 
             // 해당 유저의 모든 히스토리 기록을 저장함
             for (let j = 0; j < data2.length; j ++){
