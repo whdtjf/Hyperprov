@@ -24,6 +24,7 @@ app.controller('appController', function($scope, $http,$filter){
       // get_entrance 해서 결과 나오면 리턴
       queryEnterance_result = data
     })
-   queryEnterance = $scope.queryEnterance
-   //===========================================================================
+  }
+  queryEnterance = $scope.queryEnterance
+  //===========================================================================
 });
