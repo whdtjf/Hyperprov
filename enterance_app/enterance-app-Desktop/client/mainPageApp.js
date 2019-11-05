@@ -35,7 +35,7 @@ let queryaAllHistory_3nd = (temp) => {
 }
 
 // Angular Controller
-app.controller('appController', function($scope, appFactory,$filter){
+app.controller('appController', function($scope, appFactory,$filter, $http){
 
    //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
    $scope.queryAllEnterance = function(){
@@ -75,42 +75,25 @@ app.controller('appController', function($scope, appFactory,$filter){
    }
    queryHistory = $scope.queryHistory
 
-   $scope.queryHistory_Pro = function(id){
-      return new Promise(function (resolve,reject) {
-        appFactory.queryHistory(id, function(data){
-          queryHistory_result = data;
-          if (data != null){
-            resolve(data)
-          } else {
-            reject (data)
-          }
-        });
-      })
-   }
-
    //=================================================================
   //  ADD REAL app.js
   //=================================================================
-  $scope.queryHistoryTop10 = (callback) => {
-    console.log(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')));
-    $scope.queryHistory_Pro(parseInt(sessionStorage.getItem('uID').replace(/["]/g,'')))
-    .then(function success(output){
-       console.log(data);callback(data)
+  $scope.queryHistoryTop10 = (=) => {
+    let key = parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))
+    let arr =[]
+    $http.get('/get_history/'+id).then(function success(data){
+      let arr =[];
+      data.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
+      for (let i = 0 ;  i < data.length; i ++){
+        arr.push(getArr[i]);
+        if (arr.length == 8) break;
+      }
+      $scope.queryHistoryTop10_result = arr;
     }, function error(err){
        console.error(err);
-    });
+    })
   }
-
-  let queryHistoryTop10_2nd = (data) => {
-    let arr =[];
-    data.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
-    for (let i = 0 ;  i < data.length; i ++){
-      arr.push(getArr[i]);
-      if (arr.length == 8) break;
-    }
-    $scope.queryHistoryTop10_result = array;
-  }
-  $scope.queryHistoryTop10(queryHistoryTop10_2nd);
+  $scope.queryHistoryTop10();
 
   $scope.selectDate = {
        value: new Date()
