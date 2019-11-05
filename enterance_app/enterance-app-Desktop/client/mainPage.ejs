@@ -326,14 +326,15 @@
             let timeStrDotVersion = timeStr.replace(/[-]/g,'.')
             console.log(timeStrDotVersion);
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
-
-                if (allEntranceLog[i].timestamp.split(' ').length != 2){
-                    let tempData = new Data(allEntranceLog[i].timestamp)
+                try {
+                  if (allEntranceLog[i].timestamp.split(' ').length != 2){
+                    let tempData = new Date(allEntranceLog[i].timestamp)
                     allEntranceLog[i].timestamp = tempData.getFullYear() + "."
                     allEntranceLog[i].timestamp += (tempData.getMonth()+1) + "."
                     allEntranceLog[i].timestamp += tempData.getDate() + ""
                     console.log(allEntranceLog[i].timestamp);
-                }
+                  }
+                } catch (Error) {}
 
                 if (allEntranceLog[i].timestamp.split(' ')[0] == timeStrDotVersion) {
                   //------------------------------------------------------------------------
