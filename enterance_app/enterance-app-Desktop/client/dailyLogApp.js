@@ -60,14 +60,14 @@ app.controller('appController', function($scope,$filter,$http) {
 
   $scope.queryDailyHistory = (rawdate) => {
     try{
-      let date = $filter('date')(rawdate, 'yyyy.M.d');
+      let temp = $filter('date')(rawdate, 'yyyy.M.d').split('.');
+      let date = Number(temp[0]) + '.'
+                +  Number(temp[1]) + '.'
+                +  Number(temp[2]);
       console.log('target'+date);
       dailyHistory_GateA = []
       dailyHistory_GateB = []
-      $http.get('/get_all_enterance/').success(function(rawData){
-        console.log('raw : '+rawData);
-        let data = rawData.data                    // 전체 유저를 가져옴
-        console.log('data : '+data);
+      $http.get('/get_all_enterance/').success(function(data){
         dataCount = data.length
         currentCount = 0
         for (let i = 0 ; i < dataCount; i ++ ) {
