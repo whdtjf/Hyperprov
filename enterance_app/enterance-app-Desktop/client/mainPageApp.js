@@ -74,7 +74,7 @@ app.controller('appController', function($scope, appFactory,$filter, $http){
       });
    }
    queryHistory = $scope.queryHistory
-
+   //
    //=================================================================
   //  ADD REAL app.js
   //=================================================================
