@@ -155,7 +155,8 @@
 
                       let searchBtnClick = () => {
                         if(Date.parse(userSelectDate.value)){
-                          timeStr = userSelectDate.value
+                          let temp = userSelectDate.value.split('-')
+                          timeStr = Number(temp[0]) + '-'+ Number(temp[1]) + '-' +Number(temp[2]) 
                           reDraw();
                         }
                       }
@@ -331,10 +332,8 @@
                   if (targetTimeStamp.split(' ').length != 2){
                     let tempData = new Date(Number(allEntranceLog[i].timestamp))
                     targetTimeStamp = tempData.getFullYear() + "."
-                    let Months = tempData.getMonth()+1
-                    targetTimeStamp += parseInt(Months/10) +""+ Months%10 + "."
-                    let dates = tempData.getDate()
-                    targetTimeStamp += parseInt(dates/10) +""+ dates%10 + ""
+                    targetTimeStamp += tempData.getMonth()+1 + "."
+                    targetTimeStamp += tempData.getDate() + ""
                   }
                 } catch (Error) {}
                 console.log(targetTimeStamp)
