@@ -331,10 +331,8 @@
                   if (targetTimeStamp.split(' ').length != 2){
                     let tempData = new Date(Number(allEntranceLog[i].timestamp))
                     targetTimeStamp = tempData.getFullYear() + "."
-                    targetTimeStamp += ((tempData.getMonth()+1)/10)
-                                    + ((tempData.getMonth()+1)%10) + "."
-                    targetTimeStamp += (tempData.getDate()/10)
-                                    + (tempData.getDate()%10) + ""
+                    targetTimeStamp += ((tempData.getMonth()+1)/10) +""+ ((tempData.getMonth()+1)%10) + "."
+                    targetTimeStamp += (tempData.getDate()/10) +""+ (tempData.getDate()%10) + ""
                   }
                 } catch (Error) {}
                 console.log(targetTimeStamp)
