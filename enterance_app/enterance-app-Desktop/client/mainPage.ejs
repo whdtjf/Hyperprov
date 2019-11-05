@@ -328,6 +328,7 @@
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
                 try {
                   if (allEntranceLog[i].timestamp.split(' ').length != 2){
+                    console.log(allEntranceLog[i].timestamp);
                     let tempData = new Date(allEntranceLog[i].timestamp)
                     console.log(tempData);
                     allEntranceLog[i].timestamp = tempData.getFullYear() + "."
