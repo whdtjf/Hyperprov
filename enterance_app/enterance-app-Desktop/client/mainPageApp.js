@@ -60,6 +60,7 @@ app.controller('appController', function($scope,$filter,$http) {
           // 해당 유저의 모든 히스토리 기록을 저장함
           for (let j = 0; j < rawData2.length; j ++)
             queryAllHistory_result.push(rawData2[j].Value)
+            console.log(rawData2[j].Value)
         })
       }
     })
