@@ -60,7 +60,7 @@ app.controller('appController', function($scope,$filter,$http) {
 
   $scope.queryDailyHistory = (rawdate) => {
     try{
-      let date = $filter('date')(rawdate, 'yyyy.MM.dd');
+      let date = $filter('date')(rawdate, 'yyyy.M.d');
       console.log('target'+date);
       dailyHistory_GateA = []
       dailyHistory_GateB = []
