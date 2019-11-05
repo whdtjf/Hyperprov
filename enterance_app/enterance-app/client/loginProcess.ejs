@@ -6,18 +6,17 @@
     <script src="app.js" charset="UTF-8"></script>
   </head>
 
-  <body 
+  <body ng-app="application" ng-controller="appController"
     style="margin:0px 0px 0px 0px;width:100%;height:100%;
   	background-image:url('./img/bg2.png');
   	background-position:center center">
-  <div ng-app="application" ng-controller="appController" id="mainController">
+
     <div style="position:absolute;width:400px;height:250px;left:50%;top:50%;margin-left:-200px;margin-top:-125px;">
       <center>
 	<image src="./img/logining.gif" width="60%"><br>
          <h2><font color="white">사용자 로그인 중...</font></h2>
    	 </center>
     </div>
-  
     <script>
       let getID ='<%= id%>';
       let result;
@@ -25,11 +24,9 @@
       setTimeout( () => {result = queryEnterance(getID)} , 2)
       setTimeout( () => {
         try{
-            console.log("test",angular.element(document.getElementById('mainController')).scope().queryEnterance('5'));
-            console.log("확인",queryEnterance_result);
+            console.log(queryEnterance_result);
             if (queryEnterance_result != undefined) {
               try {
-                alert(queryEnterance_result)
                 sessionStorage.setItem("uID", JSON.stringify(getID));
                 sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
                 location.href="/mainPage";
@@ -43,6 +40,5 @@
         }
       } ,3000);
     </script>
-</div>  
-</body>
+  </body>
 </html>
