@@ -4,7 +4,7 @@
     <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" >
     <script data-require="bootstrap@4.0.5" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
     <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="app.js" charset="UTF-8"></script>
+    <script src="dailyLogAapp.js" charset="UTF-8"></script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
 		<script>
       let userData = {};
@@ -61,10 +61,10 @@
                       <td><font size="4" color="white" width="20%" height="35px"><b>디바이스</b></font></td>
                       <td><font size="4" color="white" width="20%" height="35px"><b>입장/퇴장</b></font></td>
                     </tr>
-                    <tr ng-repeat="temp in queryHistoryTop10()" align="center">
+                    <tr ng-repeat="temp in queryHistoryTop8_result" align="center">
                       <td height="35px">{{temp.timestamp}}</td>
                       <td height="35px">{{temp.location}}</td>
-                      <td height="35px"><span ng-show="temp.state == 'in'">&nbsp;<font color="#A4FFA3">입장</font></span><span ng-show="temp.state == 'out'">&nbsp;<font color="#FF7D6F">퇴장</font></span></td>
+                      <td height="35px"><span ng-show="temp.state == 'IN'">&nbsp;<font color="#A4FFA3">입장</font></span><span ng-show="temp.state == 'OUT'">&nbsp;<font color="#FF7D6F">퇴장</font></span></td>
                     </tr>
                   </table>
                 </font>
@@ -168,7 +168,7 @@
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp.name}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp.timestamp}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> <img src="./img/{{temp.state}}.png" width="35px">
-                    <span ng-show="temp.state == 'in'">&nbsp;입장</span><span ng-show="temp.state == 'out'">&nbsp;퇴장</span></td>
+                    <span ng-show="temp.state == 'IN'">&nbsp;입장</span><span ng-show="temp.state == 'OUT'">&nbsp;퇴장</span></td>
                 </tr>
                 <tr ng-show="dailyHistory_GateAisEmpty" height="60px">
                   <td  colspan="3"align ="center" style="border:1px solid #B5BA9E">
@@ -200,7 +200,7 @@
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp.name}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp.timestamp}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> <img src="./img/{{temp.state}}.png" width="35px">
-                    <span ng-show="temp.state == 'in'">&nbsp;입장</span><span ng-show="temp.state == 'out'">&nbsp;퇴장</span></td>
+                    <span ng-show="temp.state == 'IN'">&nbsp;입장</span><span ng-show="temp.state == 'OUT'">&nbsp;퇴장</span></td>
                 </tr>
                 <tr ng-show="dailyHistory_GateBisEmpty" height="60px">
                   <td  colspan="3"align ="center" style="border:1px solid #B5BA9E">
