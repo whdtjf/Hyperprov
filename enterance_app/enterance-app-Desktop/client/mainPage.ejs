@@ -324,6 +324,7 @@
             let countB_in = 0;
             let countB_out = 0;
             let timeStrDotVersion = timeStr.replace(/[-]/g,'.')
+            console.log(timeStrDotVersion);
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
                 try {
                   if (allEntranceLog[i].timestamp.split(' ').length != 2){
@@ -331,6 +332,7 @@
                     allEntranceLog[i].timestamp = tempData.getFullYear() + "."
                     allEntranceLog[i].timestamp += (tempData.getMonth()+1) + "."
                     allEntranceLog[i].timestamp += tempData.getDate() + ""
+                    console.log(allEntranceLog[i].timestamp);
                   }
                 } catch (Error) {}
 
