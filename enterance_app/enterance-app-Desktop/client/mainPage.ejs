@@ -329,6 +329,7 @@
                 try {
                   if (allEntranceLog[i].timestamp.split(' ').length != 2){
                     let tempData = new Date(allEntranceLog[i].timestamp)
+                    console.log(tempData);
                     allEntranceLog[i].timestamp = tempData.getFullYear() + "."
                     allEntranceLog[i].timestamp += (tempData.getMonth()+1) + "."
                     allEntranceLog[i].timestamp += tempData.getDate() + ""
