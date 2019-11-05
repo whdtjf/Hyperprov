@@ -87,7 +87,7 @@ app.controller('appController', function($scope,$filter,$http) {
                   timestamp += temp.getDate() + ""
                 }
               }catch(e) {}
-
+              data2[j].Value.timestamp = timestamp
               if (timestamp.startsWith(date)) {
                 if (data2[j].Value.location == 'west')
                   dailyHistory_GateA.push(data2[j].Value)
