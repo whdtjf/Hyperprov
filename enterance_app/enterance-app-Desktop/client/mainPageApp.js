@@ -74,14 +74,13 @@ app.controller('appController', function($scope, appFactory,$filter, $http){
       });
    }
    queryHistory = $scope.queryHistory
-   //
    //=================================================================
   //  ADD REAL app.js
   //=================================================================
   $scope.queryHistoryTop10 = () => {
     let key = parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))
     let arr =[]
-    $http.get('/get_history/'+id).then(function success(data){
+    $http.get('/get_history/'+key).then(function success(data){
       let arr =[];
       data.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
       for (let i = 0 ;  i < data.length; i ++){
