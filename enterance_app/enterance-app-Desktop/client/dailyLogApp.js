@@ -36,7 +36,7 @@ app.controller('appController', function($scope,$filter,$http) {
       // 소팅 후 최근 순서부터 하나씩 출력
       for (let i = 0 ;  i < data.length; i ++){
         // 만약, TimeStamp가 밀리세컨드 단위라면 바꿔주는 작업 진행
-        let timestamp = data2[j].Value.timestamp
+        let timestamp = data[j].Value.timestamp
         try{
           // 밀리세컨드 단위면 변환해주고 저장함.
           if (timestamp.split(' ').length !=2){
@@ -46,7 +46,7 @@ app.controller('appController', function($scope,$filter,$http) {
             timestamp += temp.getDate() + ""
           }
         }catch(e) {}
-        data2[j].Value.timestamp = timestamp
+        data[j].Value.timestamp = timestamp
 
         $scope.queryHistoryTop8_result.push(data[i].Value);
         if ($scope.queryHistoryTop8_result.length == 8) break;
