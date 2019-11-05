@@ -64,10 +64,10 @@
                       <td><font size="4" color="white" width="20%" height="35px"><b>디바이스</b></font></td>
                       <td><font size="4" color="white" width="20%" height="35px"><b>입장/퇴장</b></font></td>
                     </tr>
-                    <tr ng-repeat="temp in queryHistoryTop10_result" align="center">
+                    <tr ng-repeat="temp in queryHistoryTop8_result" align="center">
                       <td height="35px">{{temp.timestamp}}</td>
                       <td height="35px">{{temp.location}}</td>
-                      <td height="35px"><span ng-show="temp.state == 'in'">&nbsp;<font color="#A4FFA3">입장</font></span><span ng-show="temp.state == 'out'">&nbsp;<font color="#FF7D6F">퇴장</font></span></td>
+                      <td height="35px"><span ng-show="temp.state == 'IN'">&nbsp;<font color="#A4FFA3">입장</font></span><span ng-show="temp.state == 'OUT'">&nbsp;<font color="#FF7D6F">퇴장</font></span></td>
                     </tr>
                   </table>
 								</font>
@@ -323,13 +323,23 @@
             let countA_out = 0;
             let countB_in = 0;
             let countB_out = 0;
+            let timeStrDotVersion = timeStr.replace(/[-]/g,'.')
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
-                if (allEntranceLog[i].timestamp.split(' ')[0] == timeStr) {
+                try {
+                  if (allEntranceLog[i].timestamp.split(' ').length != 2){
+                    let tempData = new Data(allEntranceLog[i].timestamp)
+                    allEntranceLog[i].timestamp = tempData.getFullYear() + "."
+                    allEntranceLog[i].timestamp += (tempData.getMonth()+1) + "."
+                    allEntranceLog[i].timestamp += tempData.getDate() + ""
+                  }
+                } catch (Error) {}
+
+                if (allEntranceLog[i].timestamp.split(' ')[0] == timeStrDotVersion) {
                   //------------------------------------------------------------------------
                   // gate_A의 로그
                   //------------------------------------------------------------------------
-                  if (allEntranceLog[i].location == 'gate_A'){
-                    let isEnter = (allEntranceLog[i].state == 'in');
+                  if (allEntranceLog[i].location == 'west'){
+                    let isEnter = (allEntranceLog[i].state == 'IN');
                     noneGateARecord = false;
 
                     if(isEnter) {
@@ -345,7 +355,7 @@
                   // gate_B의 로그
                   //------------------------------------------------------------------------
                   } else {
-                    let isEnter = (allEntranceLog[i].state == 'in');
+                    let isEnter = (allEntranceLog[i].state == 'IN');
                     noneGateBRecord = false;
 
                     if(isEnter) {

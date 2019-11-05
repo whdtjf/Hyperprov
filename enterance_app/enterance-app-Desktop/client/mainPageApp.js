@@ -1,155 +1,69 @@
 // SPDX-License-Identifier: Apache-2.0
-
 'use strict';
-
 var app = angular.module('application', []);
 
-//=================================================================
-//  ADD REAL app.js
-//=================================================================
-let allHistoryData = [];
-let allStatusData = [];
-let queryHistory;
-let queryHistory_result;
-let queryAllEntrance;
-let queryAllEntrance_result;
-let queryEnterance;
-let queryEnterance_result;
-
-let id_temp;
+//=============================================================================
+//  Main page Angular.JS
+//  ---------------------------------------------------------------------------
+//  ◆ 구현된 함수
+//  ┣ queryHistoryTop8 : line 21
+//  ┗ queryAllHistory : line 51
+//=============================================================================
 let queryAllHistory_result;
-let queryAllHistory = () => {
-  queryaAllHistory_2nd(queryAllEntrance())
-}
 
-let queryaAllHistory_2nd = (allEnterance) =>{
-  for( let i = 0 ; i < allEnterance.length ; i++ ){
-    queryaAllHistory_3nd(queryHistory(allEnterance[i].Key));
-  }
-}
-
-let queryaAllHistory_3nd = (temp) => {
-  for (let j = 0 ; j < temp.length ; j ++ ){
-    queryAllHistory_result.push(temp[j]);
-  }
-}
-
-// Angular Controller
-app.controller('appController', function($scope, appFactory,$filter, $http){
-
-   //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
-   $scope.queryAllEnterance = function(){
-      appFactory.queryAllEnterance(function(data){ //appFactory.queryAllEnterance하면 get방식으로 enterance모든 데이터가 callback으로 넘겨짐
-         var array = [];
-         for (var i = 0; i < data.length; i++){
-            parseInt(data[i].Key);
-            data[i].Record.Key = parseInt(data[i].Key);
-            array.push(data[i].Record);
-         }
-         array.sort(function(a, b) {
-             return parseInt(a.Key) - parseInt(b.Key);
-         });
-         allStatusData = array;
-         return allStatusData;
-      });
-   }
-   queryAllEntrance = $scope.queryAllEnterance;
-
-
-
-  $scope.queryEnterance = function(id){
-      appFactory.queryEnterance(id, function(data){
-        console.log(data);
-        queryEnterance_result = data;
-        return data;
-      });
-   }
-   queryEnterance = $scope.queryEnterance
-   id_temp= $scope.enterance_id; //id확인
-
-   $scope.queryHistory = function(id){
-      appFactory.queryHistory(id, function(data){
-        queryHistory_result = data;
-        return data;
-      });
-   }
-   queryHistory = $scope.queryHistory
-   //=================================================================
-  //  ADD REAL app.js
-  //=================================================================
-  $scope.queryHistoryTop10 = () => {
+//=============================================================================
+app.controller('appController', function($scope,$filter,$http) {
+  //===========================================================================
+  //  QUERY HISTORY TOP 8    |    KimYC1223
+  //  -------------------------------------------------------------------------
+  //  자신의 최근 8개 히스토리 출력
+  //===========================================================================
+  $scope.queryHistoryTop8 = () => {
+    // session에서 로그인된 Key 받아옴
     let key = parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))
+    // Key를 통해 get_history
     $http.get('/get_history/'+key).then(function success(rawData){
-      $scope.queryHistoryTop10_result =[];
-      let data = rawData.data;
-      data.sort( (a,b) => {
+      $scope.queryHistoryTop8_result =[];   // 배열 초기화
+      let data = rawData.data;              // 받아온 데이터에서 data만 꺼냄
+      data.sort( (a,b) => {                 // timestamp에 의한 소팅
         return ( ( a.Value.timestamp == b.Value.timestamp ) ?
         0 : ( ( a.Value.timestamp > b.Value.timestamp ) ?
          -1 : 1 ) ); });
+
+      // 소팅 후 최근 순서부터 하나씩 출력
       for (let i = 0 ;  i < data.length; i ++){
-        $scope.queryHistoryTop10_result.push(data[i].Value);
-        if ($scope.queryHistoryTop10_result.length == 8) break;
+        $scope.queryHistoryTop8_result.push(data[i].Value);
+        if ($scope.queryHistoryTop8_result.length == 8) break;
+        // 최대 8개 까지 출력
       }
-      return $scope.queryHistoryTop10_result;
+      return $scope.queryHistoryTop8_result;
     })
   }
-  $scope.queryHistoryTop10();
+  $scope.queryHistoryTop8();
+  //===========================================================================
 
-  $scope.selectDate = {
-       value: new Date()
-  };
-});
 
-// Angular Factory
-app.factory('appFactory', function($http){
-
-   var factory = {};
-
-    factory.queryAllEnterance = function(callback){
-
-       $http.get('/get_all_enterance/').success(function(output){
-         callback(output)
-      });
-   }
-
-   factory.queryEnterance = function(id, callback){
-      $http.get('/get_enterance/'+id)
-      .then(function success(output){
-         console.log(output);
-         callback(output)
-      }, function error(err){
-         console.error(err);
-         callback(err);
-      });
-   }
-
-   factory.queryHistory = (id, callback) => {
-      $http.get('/get_history/'+id)
-      .then(function success(output){
-         callback(output)
-      }, function error(err){
-         console.error(err);
-         callback(err);
-      });
-   }
-
-   factory.recordBarcode = function(data, callback){
-
-      var enterance = data.id + "-" + data.name + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
-
-       $http.get('/add_barcode/'+enterance).success(function(output){
-         callback(output)
-      });
-   }
-
-   factory.UpdateEnterance = function(data, callback){
-
-      var updated_enterance = data.id + "-" + data.timestamp+ "-" + data.location+ "-" + data.state;
-
-       $http.get('/update_enterance/'+updated_enterance).success(function(output){
-         callback(output)
-      });
-   }
-
-   return factory;
+  //===========================================================================
+  //  QUERY ALL HISTORY    |    KimYC1223
+  //  -------------------------------------------------------------------------
+  //  모든 사람의 모든 히스토리 출력
+  //===========================================================================
+  $scope.queryAllHistory = () => {
+    queryAllHistory_result = [] ;                 // 배열 초기화
+    // 모든 유저를 가져옴
+    $http.get('/get_all_enterance/').then(function success(rawData){
+      let data = rawData.data;                    // 전체 유저를 가져옴
+      for (let i = 0 ; i < data.length; i ++ ) {
+        let key = data[i].Key                     // i번째 유저의 Key를 가져옴
+        $http.get('/get_history/'+key).then(function success2(rawData2){
+          let data2 = rawData2.data
+          // 해당 유저의 모든 히스토리 기록을 저장함
+          for (let j = 0; j < rawData2.length; j ++)
+            queryAllHistory_result.push(rawData2[j].Value)
+        })
+      }
+    })
+  }
+  $scope.queryAllHistory();
+  //===========================================================================
 });
