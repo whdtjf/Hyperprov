@@ -6,9 +6,11 @@ var app = angular.module('application', []);
 //  Main page Angular.JS
 //  ---------------------------------------------------------------------------
 //  ◆ 구현된 함수
-//  ┣ queryHistoryTop8 : line 21
-//  ┣ queryDailyHistory : line 51
-//  ┗ selectDate : line 51
+//  ┣ queryHistoryTop8 : line 24
+//  ┣ queryDailyHistory : line 63
+//  ┣ queryDailyHistory_2Step : line 113
+//  ┣ pagingDailyLog : line 164
+//  ┗ selectDate : line 191
 //=============================================================================
 let queryAllHistory_result;
 
@@ -33,6 +35,19 @@ app.controller('appController', function($scope,$filter,$http) {
 
       // 소팅 후 최근 순서부터 하나씩 출력
       for (let i = 0 ;  i < data.length; i ++){
+        // 만약, TimeStamp가 밀리세컨드 단위라면 바꿔주는 작업 진행
+        let timestamp = data2[j].Value.timestamp
+        try{
+          // 밀리세컨드 단위면 변환해주고 저장함.
+          if (timestamp.split(' ').length !=2){
+            let temp = new Date(Number(timestamp))
+            timestamp = temp.getFullYear() + "."
+            timestamp += (temp.getMonth()+1) + "."
+            timestamp += temp.getDate() + ""
+          }
+        }catch(e) {}
+        data2[j].Value.timestamp = timestamp
+
         $scope.queryHistoryTop8_result.push(data[i].Value);
         if ($scope.queryHistoryTop8_result.length == 8) break;
         // 최대 8개 까지 출력
@@ -45,9 +60,9 @@ app.controller('appController', function($scope,$filter,$http) {
 
 
   //===========================================================================
-  //  QUERY ALL HISTORY    |    KimYC1223
+  //  QUERY DAILY HISTORY    |    KimYC1223
   //  -------------------------------------------------------------------------
-  //  모든 사람의 모든 히스토리 출력
+  //  모든 사람의 해당 날짜의 히스토리 출력 _ Fetch 담당 부분
   //===========================================================================
   let dailyHistory_GateA = [];
   let dailyHistory_GateB = [];
@@ -100,12 +115,23 @@ app.controller('appController', function($scope,$filter,$http) {
       });
     } catch(e) { console.log(e)}
   }
+  //===========================================================================
 
+
+  //===========================================================================
+  //  QUERY DAILY HISTORY .  STEP 2    |    KimYC1223
+  //  -------------------------------------------------------------------------
+  //  모든 사람의 해당 날짜의 히스토리 출력 _ Sorting&Filter 담당 부분
+  //===========================================================================
   $scope.queryDailyHistory_2Step = () => {
       if (dataCount != currentCount) return;
 
-      dailyHistory_GateA.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
-      dailyHistory_GateB.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+      dailyHistory_GateA.sort( (a,b) => {
+        return ( ( a.timestamp == b.timestamp ) ?
+        0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
+      dailyHistory_GateB.sort( (a,b) => {
+        return ( ( a.timestamp == b.timestamp ) ?
+        0 : ( ( a.timestamp > b.timestamp ) ? 1 : -1 ) ); });
 
       $scope.dailyLogGroupA = []
       $scope.dailyLogGroupB = []
@@ -133,16 +159,21 @@ app.controller('appController', function($scope,$filter,$http) {
         $scope.dailyLogGroupB.push(smallGroup)
         page = page +1
       }
-
       $scope.pagingDailyLog(0,true)
       $scope.pagingDailyLog(0,false)
   }
+  //===========================================================================
 
+
+  //===========================================================================
+  //  PAGING DAILY LOG    |    KimYC1223
+  //  -------------------------------------------------------------------------
+  //  데일리 로그를 6개씩 잘라 페이지별로 표시하는 함수
+  //===========================================================================
   $scope.DailyLogA = []
   $scope.DailyLogB = []
   $scope.pageA = 1;
   $scope.pageB = 1;
-
   $scope.pagingDailyLog = (page,isA) => {
     try{
       let totalGroup = (isA)? $scope.dailyLogGroupA:$scope.dailyLogGroupB
@@ -152,19 +183,29 @@ app.controller('appController', function($scope,$filter,$http) {
         DailyLog.push(totalGroup[page][i])
       }
 
-      if (isA) { $scope.dailyHistory_GateAisEmpty = (DailyLog.length == 0)? true: false; $scope.DailyLogA = DailyLog; $scope.pageA = page+1 }
-      else { $scope.dailyHistory_GateBisEmpty = (DailyLog.length == 0)? true: false; $scope.DailyLogB = DailyLog; $scope.pageB = page+1 }
+      if (isA) { $scope.dailyHistory_GateAisEmpty = (DailyLog.length == 0)?
+        true: false; $scope.DailyLogA = DailyLog; $scope.pageA = page+1 }
+      else { $scope.dailyHistory_GateBisEmpty = (DailyLog.length == 0)?
+        true: false; $scope.DailyLogB = DailyLog; $scope.pageB = page+1 }
     } catch (e) {
-      if (isA) { $scope.dailyHistory_GateAisEmpty = true; $scope.DailyLogA = []; $scope.pageA = page+1 }
-      else { $scope.dailyHistory_GateBisEmpty = true; $scope.DailyLogB = []; $scope.pageB = page+1 }
+      if (isA) { $scope.dailyHistory_GateAisEmpty = true;
+        $scope.DailyLogA = []; $scope.pageA = page+1 }
+      else { $scope.dailyHistory_GateBisEmpty = true;
+        $scope.DailyLogB = []; $scope.pageB = page+1 }
     }
-
   }
   //===========================================================================
 
+  //===========================================================================
+  //  SELECT DATE    |    KimYC1223
+  //  -------------------------------------------------------------------------
+  //  해당 날짜 출력
+  //===========================================================================
   $scope.selectDate = {
        value: new Date()
   };
 
-  $scope.queryDailyHistory($filter('date')($scope.selectDate.value, 'yyyy.MM.dd'))
+  $scope.queryDailyHistory(
+    $filter('date')($scope.selectDate.value, 'yyyy.MM.dd'))
+  //===========================================================================
 });
