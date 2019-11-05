@@ -80,7 +80,7 @@ app.controller('appController', function($scope,$filter,$http) {
 
             // 해당 유저의 모든 히스토리 기록을 저장함
             for (let j = 0; j < data2.length; j ++){
-              let timestamp = data[j].Value.timestamp
+              let timestamp = data2[j].Value.timestamp
               try{
                 if (timestamp.split(' ').length !=2){
                   let temp = new Date(Number(timestamp))
@@ -91,9 +91,9 @@ app.controller('appController', function($scope,$filter,$http) {
               }catch(e) {}
 
               if (timstamp.startsWith(date)) {
-                if (getArr2[j].location == 'gate_A')
-                  dailyHistory_GateA.push(data[j].Value)
-                else dailyHistory_GateB.push(data[j].Value)
+                if (getArr2[j].location == 'west')
+                  dailyHistory_GateA.push(data2[j].Value)
+                else dailyHistory_GateB.push(data2[j].Value)
               }
             }
             $scope.queryDailyHistory_2Step();
