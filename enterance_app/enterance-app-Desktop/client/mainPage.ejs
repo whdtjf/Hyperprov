@@ -326,18 +326,20 @@
             let timeStrDotVersion = timeStr.replace(/[-]/g,'.')
             console.log(timeStrDotVersion);
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
+                let targetTimeStamp = allEntranceLog[i].timestamp;
                 try {
-                  if (allEntranceLog[i].timestamp.split(' ').length != 2){
+                  if (targetTimeStamp.split(' ').length != 2){
                     let tempData = new Date(Number(allEntranceLog[i].timestamp))
-                    console.log(tempData);
-                    allEntranceLog[i].timestamp = tempData.getFullYear() + "."
-                    allEntranceLog[i].timestamp += (tempData.getMonth()+1) + "."
-                    allEntranceLog[i].timestamp += tempData.getDate() + ""
-                    console.log(allEntranceLog[i].timestamp);
+                    targetTimeStamp = tempData.getFullYear() + "."
+                    targetTimeStamp += ((tempData.getMonth()+1)/10)
+                                    + ((tempData.getMonth()+1)%10) + "."
+                    targetTimeStamp += (tempData.getDate()/10)
+                                    + (tempData.getDate()%10) + ""
                   }
                 } catch (Error) {}
+                console.log(targetTimeStamp)
 
-                if (allEntranceLog[i].timestamp.split(' ')[0] == timeStrDotVersion) {
+                if (targetTimeStamp.split(' ')[0] == timeStrDotVersion) {
                   //------------------------------------------------------------------------
                   // gate_A의 로그
                   //------------------------------------------------------------------------
