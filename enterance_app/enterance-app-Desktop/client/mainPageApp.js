@@ -79,21 +79,17 @@ app.controller('appController', function($scope, appFactory,$filter, $http){
   //=================================================================
   $scope.queryHistoryTop10 = () => {
     let key = parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))
-    let arr =[]
-    $http.get('/get_history/'+key).then(function success(rawData){
-      let arr =[];
-      let rawData
-      rawData.sort( (a,b) => {
+    $http.get('/get_history/'+key).then(function success(data){
+      $scope.queryHistoryTop10_result =[];
+      data.sort( (a,b) => {
         return ( ( a.data.value.timestamp == b.data.value.timestamp ) ?
         0 : ( ( a.data.value.timestamp > b.data.value.timestamp ) ?
          -1 : 1 ) ); });
       for (let i = 0 ;  i < data.length; i ++){
-        arr.push(rawData[i].data.value);
-        if (arr.length == 8) break;
+        $scope.queryHistoryTop10_result.push(data[i].data.value);
+        if ($scope.queryHistoryTop10_result.length == 8) break;
       }
-      $scope.queryHistoryTop10_result = arr;
-    }, function error(err){
-       console.error(err);
+      return $scope.queryHistoryTop10_result;
     })
   }
   $scope.queryHistoryTop10();
