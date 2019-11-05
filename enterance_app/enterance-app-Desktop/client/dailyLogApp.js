@@ -163,6 +163,5 @@ app.controller('appController', function($scope,$filter,$http) {
        value: new Date()
   };
 
-  $scope.queryDailyHistory($filter('date')($scope.selectDate.value, 'yyyy.MM.dd'));
-  $scope.queryMonthlyHistory($filter('date')($scope.selectDate.value, 'yyyy.MM.dd'))
+  $scope.queryDailyHistory($filter('date')($scope.selectDate.value, 'yyyy.MM.dd'))
 });
