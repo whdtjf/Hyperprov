@@ -133,7 +133,6 @@ app.controller('appController', function($scope,$filter,$http) {
 
       $scope.pagingDailyLog(0,true)
       $scope.pagingDailyLog(0,false)
-    } catch(e) { console.log(e)}
   }
 
   $scope.DailyLogA = []
