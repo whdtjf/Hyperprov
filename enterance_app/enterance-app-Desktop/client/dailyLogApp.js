@@ -88,7 +88,7 @@ app.controller('appController', function($scope,$filter,$http) {
                 }
               }catch(e) {}
 
-              if (timstamp.startsWith(date)) {
+              if (timestamp.startsWith(date)) {
                 if (getArr2[j].location == 'west')
                   dailyHistory_GateA.push(data2[j].Value)
                 else dailyHistory_GateB.push(data2[j].Value)
