@@ -156,7 +156,7 @@
                       let searchBtnClick = () => {
                         if(Date.parse(userSelectDate.value)){
                           let temp = userSelectDate.value.split('-')
-                          timeStr = Number(temp[0]) + '-'+ Number(temp[1]) + '-' +Number(temp[2]) 
+                          timeStr = Number(temp[0]) + '-'+ Number(temp[1]) + '-' +Number(temp[2])
                           reDraw();
                         }
                       }
@@ -317,7 +317,6 @@
             rawDataGateA = [['gate','count'],['입장',0],['퇴장',0]];
             rawDataGateB = [['gate','count'],['입장',0],['퇴장',0]];
             let allEntranceLog = queryAllHistory_result;
-            console.log(allEntranceLog)
             let noneGateARecord = true;
             let noneGateBRecord = true;
             let countA_in = 0;
@@ -325,7 +324,6 @@
             let countB_in = 0;
             let countB_out = 0;
             let timeStrDotVersion = timeStr.replace(/[-]/g,'.')
-            console.log(timeStrDotVersion);
             for (let i = 0 ; i < allEntranceLog.length ; i ++) {
                 let targetTimeStamp = allEntranceLog[i].timestamp;
                 try {
@@ -336,7 +334,6 @@
                     targetTimeStamp += tempData.getDate() + ""
                   }
                 } catch (Error) {}
-                console.log(targetTimeStamp)
 
                 if (targetTimeStamp.split(' ')[0] == timeStrDotVersion) {
                   //------------------------------------------------------------------------
