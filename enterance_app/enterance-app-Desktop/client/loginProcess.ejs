@@ -24,7 +24,7 @@
 
       setTimeout( () => {
         getLocalIPs( (ip) => {
-          result = queryEnterance(getID,ip);
+          result = queryEnterance(getID,ip.toString());
         })
       }, 1)
       setTimeout( () => {
