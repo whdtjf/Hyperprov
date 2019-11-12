@@ -276,6 +276,7 @@ services:
       placement:
         constraints:
           - node.hostname == agc-rpi4
+          - node.hostname == agc-rpi6
     networks:
       hyperledger-fabric:
         aliases:
