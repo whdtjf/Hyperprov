@@ -13,7 +13,7 @@ var path          = require('path');
 var util          = require('util');
 var os            = require('os');
 var session       = require('express-session');
-
+var cors          = require('cors');
 
 // instantiate the app
 var app = express();
@@ -24,6 +24,7 @@ app.use(session({
  resave: true,
  saveUninitialized: true
 }));
+app.use(cors())
 
 // Load all of our middleware
 // configure app to use bodyParser()
