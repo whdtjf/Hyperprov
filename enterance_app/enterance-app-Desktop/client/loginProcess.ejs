@@ -22,27 +22,30 @@
     <script>
       let getID ='<%= id%>';
       let result;
+      getLocalIPs(function(ips) { // <!-- ips is an array of local IP addresses.
+        localIP = ips.toString()
 
-      setTimeout( () => {
-        result = queryEnterance(getID,localIP);
-      }, 10)
-      setTimeout( () => {
-        try{
-            console.log(queryEnterance_result);
-            if (queryEnterance_result != undefined) {
-              try {
-                sessionStorage.setItem("uID", JSON.stringify(getID));
-                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
-                location.href="/mainPage";
-                } catch (e) {
-                alert("세션 저장중 에러..!\n"+e);
+        setTimeout( () => {
+          result = queryEnterance(getID,localIP);
+        }, 1)
+        setTimeout( () => {
+          try{
+              console.log(queryEnterance_result);
+              if (queryEnterance_result != undefined) {
+                try {
+                  sessionStorage.setItem("uID", JSON.stringify(getID));
+                  sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
+                  location.href="/mainPage";
+                  } catch (e) {
+                  alert("세션 저장중 에러..!\n"+e);
+                }
               }
-            }
-            else {alert("로그인 실패... ID를 확인하세요"); location.href="/"};
-        } catch (e) {
-          console.log('error' +e);
-        }
-      } ,1500);
+              else {alert("로그인 실패... ID를 확인하세요"); location.href="/"};
+          } catch (e) {
+            console.log('error' +e);
+          }
+        } ,2000);
+      });
     </script>
   </body>
 </html>

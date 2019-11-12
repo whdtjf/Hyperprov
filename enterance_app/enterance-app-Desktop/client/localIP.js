@@ -1,9 +1,3 @@
-let localIP
-
-getLocalIPs(function(ips) { // <!-- ips is an array of local IP addresses.
-  localIP = ips.toString()
-});
-
 function getLocalIPs(callback) {
 try {
 var ips = [];
