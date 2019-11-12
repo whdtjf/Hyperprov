@@ -1,31 +1,29 @@
-function checkLocal() {
 
-                window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;   //compatibility for firefox and chrome
+function getLocalIPs(callback) {
+try {
+var ips = [];
 
-                var pc = new RTCPeerConnection({iceServers: []}), noop = function () {
+var RTCPeerConnection = window.RTCPeerConnection ||
+window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
 
-                };
+var pc = new RTCPeerConnection({
+// Don't specify any stun/turn servers, otherwise you will
+// also find your public IP addresses.
+iceServers: []
+});
+// Add a media line, this is needed to activate candidate gathering.
+pc.createDataChannel('');
 
-                pc.createDataChannel("");    //create a bogus data channel
-
-                pc.createOffer(pc.setLocalDescription.bind(pc), noop);    // create offer and set local description
-
-                pc.onicecandidate = function (ice) {  //listen for candidate events
-
-                    if (!ice || !ice.candidate || !ice.candidate.candidate) return;
-
-                    var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
-
-                    jQuery(document).ready(function () {
-
-                        console.log(myIP);
-
-                    });
-
-                    pc.onicecandidate = noop;
-
-                };
-
-            }
-
-getLocal();
+// onicecandidate is triggered whenever a candidate has been found.
+pc.onicecandidate = function(e) {
+if (!e.candidate) { // Candidate gathering completed.
+pc.close();
+callback(ips);
+return ;
+}
+};
+pc.createOffer(function(sdp) {
+pc.setLocalDescription(sdp);
+}, function onerror() {});
+}catch(e){}
+}
