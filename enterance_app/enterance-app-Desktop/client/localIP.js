@@ -18,7 +18,7 @@ pc.createDataChannel('');
 pc.onicecandidate = function(e) {
 if (!e.candidate) { // Candidate gathering completed.
 pc.close();
-callback(ips);
+callback(ips.toString());
 return ;
 }
 };
