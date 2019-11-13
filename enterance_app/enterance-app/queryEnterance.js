@@ -34,7 +34,7 @@ async function main() {
         // queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
         // queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 
-        const query_responses = await contract.evaluateTransaction('queryEnterance', '10');
+        const query_responses = await contract.evaluateTransaction('queryEnterance', '13');
         fs.writeFileSync('check.txt', '0', 'utf8');
         console.log(`${query_responses.toString()}`);
     } catch (error) {
