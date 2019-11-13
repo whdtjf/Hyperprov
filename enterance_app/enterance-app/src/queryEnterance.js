@@ -13,7 +13,6 @@ async function main() {
     try {
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
-        console.log(`Wallet path: ${walletPath}`);
         // Check to see if we've already enrolled the user.
         const userExists = await wallet.exists('admin');
         if (!userExists) {
@@ -28,17 +27,14 @@ async function main() {
 
         // Get the network (channel) our contract is deployed to.
         const network = await gateway.getNetwork('mychannel');
-        console.log(network);
-        console.log("1st");
         // Get the contract from the network.
         const contract = network.getContract('enterance_code_final_please');
-        console.log(contract);
-        console.log("2nd");
+
         // Evaluate the specified transaction.
         // queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
         // queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 
-        const query_responses = await contract.evaluateTransaction('queryEnterance', '11');
+        const query_responses = await contract.evaluateTransaction('queryEnterance', '10');
         console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
 
 
