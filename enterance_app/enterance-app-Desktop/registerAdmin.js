@@ -23,7 +23,7 @@ async function main() {
         const caTLSCACerts = caInfo.tlsCACerts.pem;
         console.log(caTLSCACerts);
         console.log("2nd ok");
-        const ca = new FabricCAServices('http://192.168.9.127:7054', { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
+        const ca = new FabricCAServices('http://192.168.9.127:7054', { trustedRoots: [], verify: false }, caInfo.caName);
         console.log(ca);
         console.log("3rd ok");
         // Create a new file system based wallet for managing identities.
