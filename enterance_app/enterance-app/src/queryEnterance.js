@@ -35,7 +35,7 @@ async function main() {
         // queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
 
         const query_responses = await contract.evaluateTransaction('queryEnterance', '10');
-        console.log(`Transaction has been evaluated, result is: ${query_responses.toString()}`);
+        console.log(`${query_responses.toString()}`);
 
 
     } catch (error) {
