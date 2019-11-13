@@ -3,6 +3,7 @@
  */
 
 'use strict';
+var fs = require('fs');
 
 const { FileSystemWallet, Gateway } = require('fabric-network');
 const path = require('path');
