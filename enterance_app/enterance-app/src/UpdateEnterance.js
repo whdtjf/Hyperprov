@@ -8,14 +8,15 @@ const { FileSystemWallet, Gateway } = require('fabric-network');
 const path = require('path');
 
 const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
+var users = fs.readFileSync('Barcode.txt').toString().split("\n");
 
 async function main() {
-    var array = req.params.updated_enterance.split("-");
-    console.log(req.params.updated_enterance);
-    var key = array[0]
-    var timestamp = array[1]
-    var location = array[2]
-    var state = array[3]
+    // var array = req.params.updated_enterance.split("-");
+    // console.log(req.params.updated_enterance);
+    // var key = array[0]
+    // var timestamp = array[1]
+    // var location = array[2]
+    // var state = array[3]
     try {
         const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
@@ -25,7 +26,7 @@ async function main() {
         for (var i = 0; i < users.length; i++) {
             const userExists = await wallet.exists(users[i]);
 
-            if(userExists && users[i]=='1'){
+            if(userExists && users[i]=='5'){
             // if(userExists && users[i]==key){
                 const gateway = new Gateway();
                 await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
