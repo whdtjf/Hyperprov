@@ -272,10 +272,10 @@ services:
       - peer1_org1
       - peer2_org1
       - peer3_org1
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == agc-rpi4
+    # deploy:
+    #   placement:
+    #     constraints:
+    #       - node.hostname == agc-rpi4
     networks:
       hyperledger-fabric:
         aliases:
