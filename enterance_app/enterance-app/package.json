@@ -10,6 +10,7 @@
         "express": "^4.17.1",
         "fabric-ca-client": "^1.4.4",
         "fabric-client": "^1.4.4",
+        "fabric-network": "^1.4.4",
         "grpc": "^1.6.0",
         "onoff": "^5.0.0"
     },
