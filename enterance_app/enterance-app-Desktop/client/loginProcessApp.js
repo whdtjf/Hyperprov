@@ -19,7 +19,7 @@ app.controller('appController', function($scope, $http,$filter){
   //  ID로 현재 STATUS 검색
   //===========================================================================
   $scope.queryEnterance = (id,ip) => {
-    $http.get(`http://${ip}:4000/get_enterance/${id}`)
+    $http.get(`http://${ip}:8000/get_enterance/${id}`)
     .then(function success(data){
       // get_entrance 해서 결과 나오면 리턴
       queryEnterance_result = data
