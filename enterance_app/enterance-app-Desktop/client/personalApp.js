@@ -68,6 +68,7 @@ app.controller('appController', function($scope,$filter,$http) {
   //  해당 인물의 Personal History를 모두 가져오는 기능
   //===========================================================================
   $scope.personalLogs = []
+  $scope.pageNumArr = []
   $scope.personalLogs_isEmpty = true;
   $scope.personalNFC = ''
   $scope.totalPage = 0
@@ -82,6 +83,9 @@ app.controller('appController', function($scope,$filter,$http) {
         let count = 0;
         if (data.length == 0) return;
         $scope.totalPage = (data.length-1)/10;
+        $scope.pageNumArr = []
+        for (let i = 0 ; i < $scope.totalPage ; i++)
+          $scope.pageNumArr.push(i)
         $scope.currentPage = 0;
         $scope.userName = data[0].Value.name
         for (let i = 0; i < data.length ; i ++) {
