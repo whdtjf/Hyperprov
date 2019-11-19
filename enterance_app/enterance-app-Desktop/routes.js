@@ -37,7 +37,7 @@ module.exports = function (app) {
     res.render(__dirname+'/client/dailyLog.ejs');
   });
 
-  app.get('/monthlyLog', (req,res) => {
-    res.render(__dirname+'/client/monthlyLog.ejs');
+  app.get('/personalPage', (req,res) => {
+    res.render(__dirname+'/client/personal.ejs');
   });
 }
