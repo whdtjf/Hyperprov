@@ -4,7 +4,7 @@
     <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" >
     <script data-require="bootstrap@4.0.5" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
     <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="personalApp.js" charset="UTF-8"></script>
+    <script src="adminApp.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="styleMainPage.css">
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
 		<script>
@@ -94,7 +94,7 @@
               background-position:center center;
               background-size: 100%" align="left" valign="bottom">
                 <b><font color="white" size="7"><div id ="titleName">
-                  개인 페이지
+                  사용자 관리
                 </div></font></b>
         </td>
       </tr>
@@ -127,27 +127,8 @@
         <td align="center" height="calc(76% - 100px)">
           <!-- ############################# 본문 내용 시작 #############################-->
           <div style="margin:10px 10px 10px 10px;background-color:#DADEFF;width:70vw;min-width:180px;height:calc(76vh - 20px);">
-          <table>
-            <tr>
-              <td>
-                <tr height="20%" width="20%">
-                  <span id="profileImg">
-                    <image src="./img/icon/default.png" width="100%" height="100%">
-                  </span>
-                </tr>
-                <tr width="80%">
-                  <input type="text" ng-model="personalNFC"/>
-                  <button ng-click="queryPersonalHistory">쿼리하기</button>
-                </tr>
-              </td>
-            </tr>
-          </table>
+          test
           </div>
-          <script>
-            setTimeout(()=>{
-              setInitUser(userData.key)
-            },100)
-          </script>
           <!-- ############################# 본문 내용 종료 #############################-->
         </td>
       </tr>

@@ -7,12 +7,10 @@ var app = angular.module('application', []);
 //  ---------------------------------------------------------------------------
 //  ◆ 구현된 함수
 //  ┣ queryHistoryTop8 : line 22
-//  ┣ queryPersonalHistory : line 75
-//  ┣ pagingPersonalLog : line 107
-//  ┗ SET INIT USER : line 129
+//  ┣ queryPersonalHistory : line 74
+//  ┗ pagingPersonalLog : line 104
 //=============================================================================
 let queryAllHistory_result;
-let setInitUser
 
 //=============================================================================
 app.controller('appController', function($scope,$filter,$http) {
@@ -84,14 +82,12 @@ app.controller('appController', function($scope,$filter,$http) {
         $scope.currentPage = 0;
 
         for (let i = 0; i < data.length ; i ++) {
-          let arrayData = {
+          $scope.personalLogs.push({
             TxID : data[i].TxId ,
             TimeStamp : data[i].Value.timestamp,
             location : data[i].Value.location,
             state : data[i].Value.state
-          }
-          $scope.personalLogs.push(arrayData)
-          console.log(arrayData)
+          })
         }
       })
     } catch(e) { console.log(e)}
@@ -119,19 +115,5 @@ app.controller('appController', function($scope,$filter,$http) {
       }
     }
   }
-  //===========================================================================
-
-  //===========================================================================
-  //  SET INIT USER    |    KimYC1223
-  //  -------------------------------------------------------------------------
-  //  personal NFC를 초기화 하는 함수
-  //===========================================================================
-  $scope.setInitUser = (name) => {
-    $scope.personalNFC = name
-    let span = document.getElementById('profileImg')
-    span.innerHTML
-          = '<image src="./img/icon/'+name+'.png" width="100%" height="100%">'
-  }
-  setInitUser = $scope.setInitUser
   //===========================================================================
 });
