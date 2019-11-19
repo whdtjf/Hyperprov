@@ -98,6 +98,10 @@ app.controller('appController', function($scope,$filter,$http) {
           $scope.personalLogs.push(arrayData)
           $scope.personalLogs_isEmpty = false
         }
+        $scope.personalLogs.sort( (a,b) => {
+          return ( ( a.TimeStamp == b.TimeStamp ) ?
+          0 : ( ( a.TimeStamp > b.TimeStamp ) ?
+           -1 : 1 ) ); });
         $scope.pagingPersonalLog(0)
       })
     } catch(e) { console.log(e)}
