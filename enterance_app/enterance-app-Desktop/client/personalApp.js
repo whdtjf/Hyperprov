@@ -131,8 +131,7 @@ app.controller('appController', function($scope,$filter,$http) {
     $scope.personalNFC = key
     $scope.userName = name
     let span = document.getElementById('profileImg')
-    span.innerHTML
-          = '<image src="./img/icon/'+key+'.png" width="100%">'
+    span.innerHTML = '<image src="./img/icon/'+key+'.png" width="100%">'
   }
   setInitUser = $scope.setInitUser
   //===========================================================================
