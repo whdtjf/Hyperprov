@@ -74,10 +74,15 @@ app.controller('appController', function($scope,$filter,$http) {
   $scope.currentPage = 0
 
   $scope.queryPersonalHistory = () => {
-    if ($scope.personalNFC == '') return;
+    console.log('param : '+$scope.personalNFC)
+    if ($scope.personalNFC == '') {
+      console.log('param : '+$scope.personalNFC)
+      return;
+    }
     try{
       $http.get('/get_history/'+$scope.personalNFC).success(function(rawData){
         let data = rawData.data
+        console.log(data)
         let count = 0;
         if (data.length == 0) return;
         $scope.totalPage = (data.length-1)/6;
@@ -110,7 +115,6 @@ app.controller('appController', function($scope,$filter,$http) {
       $scope.showingPersonalLog = []
       $scope.totalPage = 0
       $scope.currentPage = 0
-      alert ('해당 사용자를 찾을 수 없습니다.')
     } else {
       $scope.currentPage = page
       for (let i = 0 ; i < 6 ; i ++ ) {
