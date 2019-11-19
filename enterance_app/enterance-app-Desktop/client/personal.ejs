@@ -9,9 +9,8 @@
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
 		<script>
       let userData = {};
-      alert(sessionStorage.getItem('uID'))
       try{
-        userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
+        userData = {key:sessionStorage.getItem('uID').replace(/["]/g,''), name:sessionStorage.getItem('uNAME')};
       } catch(e) {
         location.href="/";
       }

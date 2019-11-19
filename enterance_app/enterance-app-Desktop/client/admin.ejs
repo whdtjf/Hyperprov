@@ -10,7 +10,7 @@
 		<script>
       let userData = {};
       try{
-        userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
+        userData = {key:sessionStorage.getItem('uID').replace(/["]/g,''), name:sessionStorage.getItem('uNAME')};
       } catch(e) {
         location.href="/";
       }
