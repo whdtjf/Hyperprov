@@ -203,7 +203,10 @@
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp.name}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp.timestamp}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> <img src="./img/{{temp.state}}.png" width="35px">
-                    <span ng-show="temp.state == 'IN'">&nbsp;입장</span><span ng-show="temp.state == 'OUT'">&nbsp;퇴장</span></td>
+                    <span ng-show="temp.state == 'IN'">&nbsp;입장</span>
+                    <span ng-show="temp.state == 'OUT'">&nbsp;퇴장</span>
+                    <span ng-show="temp.state == 'GENERATED'">&nbsp;가입</span>
+                    <span ng-show="temp.state == 'EXPIRED'">&nbsp;탈퇴</span>
                 </tr>
                 <tr ng-show="dailyHistory_GateBisEmpty" height="60px">
                   <td  colspan="3"align ="center" style="border:1px solid #B5BA9E">
