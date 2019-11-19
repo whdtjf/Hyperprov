@@ -100,7 +100,28 @@ app.controller('appController', function($scope,$filter,$http) {
         let span = document.getElementById('profileImg')
         span.innerHTML
           = '<image src="./img/icon/'+$scope.personalNFC+'.png" width="100%">'
-        
+        $scope.personalLogs.sort( (a,b) => {
+          let a_year = a
+          let a_hour = '00:00:00'
+          let b_year = b
+          let b_hour = '00:00:00'
+          if (a.split(' ').length == 2) {
+            a_year = a.split(' ')[0]
+            a_hour = a.split(' ')[1]
+          }
+          if (b.split(' ').length == 2) {
+            b_year = b.split(' ')[0]
+            b_hour = b.split(' ')[1]
+          }
+
+          if (a_year > b_year) { return -1 }
+          else if (a_year < b_year) { return 1 }
+          else {
+            if (a_hour > b_hour) { return -1 }
+            else if (a_hour < b_hour) { return 1 }
+            else {return 0}
+          }
+         });
         $scope.pagingPersonalLog(0)
       })
     } catch(e) { console.log(e)}
