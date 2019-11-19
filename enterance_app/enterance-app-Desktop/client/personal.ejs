@@ -169,20 +169,20 @@
                     <b>해당 사용자를 찾을 수 없습니다.</b>
                   </td>
                 </tr>
+                <tr>
+                  <td align ="center" >
+                    <div class="pageBox" ng-hide="personalLogs_isEmpty" style="margin-top:20px;">
+                      <div ng-repeat="temp in pageNumArr"
+                        style="cursor:pointer;background-color: #272822; display: inline-block;border-radius: 7px;
+                        width:35px;height:35px;color:white;margin:0px 2px;padding:5px 5px;"
+                        ng-click="pagingPersonalLog(pageNumArr.indexOf(temp))">
+                        <span ng-show="currentPage == pageNumArr.indexOf(temp)"><font color="#9EB8E8"><u>{{pageNumArr.indexOf(temp)+1}}</u></font></span>
+                        <span ng-hide="currentPage == pageNumArr.indexOf(temp)">{{pageNumArr.indexOf(temp)+1}}</span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
               </table>
-            </tr>
-            <tr>
-              <td align ="center" >
-                <div class="pageBox" ng-hide="personalLogs_isEmpty" style="margin-top:20px;">
-                  <div ng-repeat="temp in pageNumArr"
-                    style="cursor:pointer;background-color: #272822; display: inline-block;border-radius: 7px;
-                    width:35px;height:35px;color:white;margin:0px 2px;padding:5px 5px;"
-                    ng-click="pagingPersonalLog(pageNumArr.indexOf(temp))">
-                    <span ng-show="currentPage == pageNumArr.indexOf(temp)"><font color="#9EB8E8"><u>{{pageNumArr.indexOf(temp)+1}}</u></font></span>
-                    <span ng-hide="currentPage == pageNumArr.indexOf(temp)">{{pageNumArr.indexOf(temp)+1}}</span>
-                  </div>
-                </div>
-              </td>
             </tr>
           </table>
           </div>
