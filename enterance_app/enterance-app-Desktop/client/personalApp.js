@@ -94,7 +94,7 @@ app.controller('appController', function($scope,$filter,$http) {
           $scope.personalLogs.push(arrayData)
           $scope.personalLogs_isEmpty = false
         }
-        $scope.pagingPersonalLog()
+        $scope.pagingPersonalLog(0)
       })
     } catch(e) { console.log(e)}
   }
