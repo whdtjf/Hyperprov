@@ -92,9 +92,9 @@ app.controller('appController', function($scope,$filter,$http) {
             state : data[i].Value.state
           }
           $scope.personalLogs.push(arrayData)
+          $scope.personalLogs_isEmpty = false
         }
-        console.log($scope.personalLogs)
-        $scope.pagingPersonalLog(0)
+        $scope.pagingPersonalLog()
       })
     } catch(e) { console.log(e)}
   }
