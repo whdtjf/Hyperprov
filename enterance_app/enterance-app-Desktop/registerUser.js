@@ -9,7 +9,7 @@ const path = require('path');
 
 const ccpPath = path.resolve(__dirname, '..', '..', 'scripts', 'connection-org1.json');
 
-async function main() {
+async function main(stringID) {
     try {
 
         // Create a new file system based wallet for managing identities.
@@ -18,9 +18,9 @@ async function main() {
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
-        const userExists = await wallet.exists('2');
+        const userExists = await wallet.exists(stringID);
         if (userExists) {
-            console.log('An identity for the user "2" already exists in the wallet');
+            console.log('An identity for the user "'+stringID+'" already exists in the wallet');
             return;
         }
 
@@ -41,16 +41,16 @@ async function main() {
         const adminIdentity = gateway.getCurrentIdentity();
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: '2', role: 'client' }, adminIdentity);
-        const enrollment = await ca.enroll({ enrollmentID: '2', enrollmentSecret: secret });
+        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: stringID , role: 'client' }, adminIdentity);
+        const enrollment = await ca.enroll({ enrollmentID: stringID , enrollmentSecret: secret });
         const userIdentity = X509WalletMixin.createIdentity('Org1MSP', enrollment.certificate, enrollment.key.toBytes());
-        await wallet.import('2', userIdentity);
-        console.log('Successfully registered and enrolled admin user "2" and imported it into the wallet');
+        await wallet.import(stringID, userIdentity);
+        console.log('Successfully registered and enrolled admin user "'+stringID+'" and imported it into the wallet');
 
     } catch (error) {
-        console.error(`Failed to register user "2": ${error}`);
+        console.error(`Failed to register user "${stringID}": ${error}`);
         process.exit(1);
     }
 }
 
-main();
+main('6e7fa6c3');
