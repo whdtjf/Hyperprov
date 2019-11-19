@@ -113,6 +113,7 @@ app.controller('appController', function($scope,$filter,$http) {
       $scope.totalPage = 0
       $scope.currentPage = 0
     } else {
+      $scope.showingPersonalLog = []
       $scope.currentPage = page
       for (let i = 0 ; i < 6 ; i ++ ) {
         if ( $scope.currentPage * 6 + i >= $scope.personalLogs.length ) break
