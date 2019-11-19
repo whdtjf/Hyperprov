@@ -82,6 +82,7 @@ app.controller('appController', function($scope,$filter,$http) {
         let count = 0;
         $scope.totalPage = (data.length-1)/10;
         $scope.pageNumArr = []
+        $scope.personalLogs = []
         for (let i = 0 ; i < $scope.totalPage ; i++)
           $scope.pageNumArr.push(i)
         $scope.currentPage = 0;
@@ -115,7 +116,7 @@ app.controller('appController', function($scope,$filter,$http) {
   $scope.showingPersonalLog = []
   $scope.pagingPersonalLog = (page) => {
     if($scope.personalLogs_isEmpty == true) {
-      $scope.showingPersonalLog = []
+      $scope.showingPersonalLog.clear()
       $scope.totalPage = 0
       $scope.currentPage = 0
     } else {
