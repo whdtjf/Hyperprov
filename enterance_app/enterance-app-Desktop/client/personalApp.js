@@ -72,6 +72,7 @@ app.controller('appController', function($scope,$filter,$http) {
   $scope.personalNFC = ''
   $scope.totalPage = 0
   $scope.currentPage = 0
+  $scope.userName = ''
 
   $scope.queryPersonalHistory = () => {
     if ($scope.personalNFC == '') return;
@@ -82,7 +83,7 @@ app.controller('appController', function($scope,$filter,$http) {
         if (data.length == 0) return;
         $scope.totalPage = (data.length-1)/6;
         $scope.currentPage = 0;
-
+        $scope.userName = data[0].Value.name
         for (let i = 0; i < data.length ; i ++) {
           let arrayData = {
             TxID : data[i].TxId ,
@@ -126,9 +127,9 @@ app.controller('appController', function($scope,$filter,$http) {
   //  -------------------------------------------------------------------------
   //  personal NFC를 초기화 하는 함수
   //===========================================================================
-  $scope.setInitUser = (name) => {
-    console.log(name+'!!!')
-    $scope.personalNFC = name
+  $scope.setInitUser = (key,name) => {
+    $scope.personalNFC = key
+    $scope.userName = name
     let span = document.getElementById('profileImg')
     span.innerHTML
           = '<image src="./img/icon/'+name+'.png" width="100%">'
