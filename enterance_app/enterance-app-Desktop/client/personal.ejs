@@ -146,14 +146,14 @@
             <tr height="5%">
             </tr>
             <tr height="70%">
-              <table width="100%" height="100%">
-                <tr height="16%">
+              <table>
+                <tr height="6%">
                   <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">트랜젝션</font></td>
                   <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">출입 시간</font></td>
                   <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">장소</font></td>
                   <td align ="center" bgcolor="#272822" style="border:1px solid white"><font color="white">분류</font></td>
                 </tr>
-                <tr ng-repeat="temp2 in showingPersonalLog track by $index" height="14%">
+                <tr ng-repeat="temp2 in showingPersonalLog track by $index" height="6%">
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp2.TxID}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp2.TimeStamp}}</td>
                   <td align ="center" style="border:1px solid #B5BA9E"> {{temp2.location}}</td>
