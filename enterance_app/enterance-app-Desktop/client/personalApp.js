@@ -93,7 +93,7 @@ app.controller('appController', function($scope,$filter,$http) {
           }
           $scope.personalLogs.push(arrayData)
         }
-
+        console.log($scope.personalLogs)
         $scope.pagingPersonalLog(0)
       })
     } catch(e) { console.log(e)}
@@ -116,6 +116,7 @@ app.controller('appController', function($scope,$filter,$http) {
       $scope.currentPage = page
       for (let i = 0 ; i < 6 ; i ++ ) {
         if ( currentPage * 6 + i >= data.length ) break
+        console.log(data[currentPage * 6 + i])
         $scope.showingPersonalLog.push(data[currentPage * 6 + i])
       }
     }
