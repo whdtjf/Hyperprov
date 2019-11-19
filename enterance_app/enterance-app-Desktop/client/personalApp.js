@@ -76,12 +76,10 @@ app.controller('appController', function($scope,$filter,$http) {
   $scope.userName = ''
 
   $scope.queryPersonalHistory = () => {
-    if ($scope.personalNFC == '') return;
     try{
       $http.get('/get_history/'+$scope.personalNFC).success(function(rawData){
         let data = rawData
         let count = 0;
-        if (data.length == 0) return;
         $scope.totalPage = (data.length-1)/10;
         $scope.pageNumArr = []
         for (let i = 0 ; i < $scope.totalPage ; i++)
