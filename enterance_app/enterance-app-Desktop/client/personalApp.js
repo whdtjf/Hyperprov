@@ -127,6 +127,7 @@ app.controller('appController', function($scope,$filter,$http) {
   //  personal NFC를 초기화 하는 함수
   //===========================================================================
   $scope.setInitUser = (name) => {
+    console.log(name+'!!!')
     $scope.personalNFC = name
     let span = document.getElementById('profileImg')
     span.innerHTML
