@@ -97,6 +97,9 @@ app.controller('appController', function($scope,$filter,$http) {
           $scope.personalLogs.push(arrayData)
           $scope.personalLogs_isEmpty = false
         }
+        let span = document.getElementById('profileImg')
+        span.innerHTML
+        = '<image src="./img/icon/'+$scope.personalNFC+'.png" width="100%">'
         $scope.personalLogs.sort( (a,b) => {
           return ( ( a.TimeStamp == b.TimeStamp ) ?
           0 : ( ( a.TimeStamp > b.TimeStamp ) ?
