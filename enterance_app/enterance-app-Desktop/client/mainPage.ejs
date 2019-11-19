@@ -67,7 +67,12 @@
                     <tr ng-repeat="temp in queryHistoryTop8_result" align="center">
                       <td height="35px">{{temp.timestamp}}</td>
                       <td height="35px">{{temp.location}}</td>
-                      <td height="35px"><span ng-show="temp.state == 'IN'">&nbsp;<font color="#A4FFA3">입장</font></span><span ng-show="temp.state == 'OUT'">&nbsp;<font color="#FF7D6F">퇴장</font></span></td>
+                      <td height="35px">
+                        <span ng-show="temp.state == 'IN'">&nbsp;<font color="#A4FFA3">입장</font></span>
+                        <span ng-show="temp.state == 'OUT'">&nbsp;<font color="#FF7D6F">퇴장</font></span>
+                        <span ng-show="temp.state == 'GENERATED'">&nbsp;<font color="#A4FFA3">가입</font></span>
+                        <span ng-show="temp.state == 'EXPIRED'">&nbsp;<font color="#FF7D6F">탈퇴</font></span>
+                      </td>
                     </tr>
                   </table>
 								</font>
