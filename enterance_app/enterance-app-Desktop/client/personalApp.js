@@ -99,11 +99,8 @@ app.controller('appController', function($scope,$filter,$http) {
         }
         let span = document.getElementById('profileImg')
         span.innerHTML
-        = '<image src="./img/icon/'+$scope.personalNFC+'.png" width="100%">'
-        $scope.personalLogs.sort( (a,b) => {
-          return ( ( a.TimeStamp == b.TimeStamp ) ?
-          0 : ( ( a.TimeStamp > b.TimeStamp ) ?
-           -1 : 1 ) ); });
+          = '<image src="./img/icon/'+$scope.personalNFC+'.png" width="100%">'
+        
         $scope.pagingPersonalLog(0)
       })
     } catch(e) { console.log(e)}
