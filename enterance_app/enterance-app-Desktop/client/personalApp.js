@@ -81,7 +81,7 @@ app.controller('appController', function($scope,$filter,$http) {
         let data = rawData
         let count = 0;
         if (data.length == 0) return;
-        $scope.totalPage = (data.length-1)/6;
+        $scope.totalPage = (data.length-1)/10;
         $scope.currentPage = 0;
         $scope.userName = data[0].Value.name
         for (let i = 0; i < data.length ; i ++) {
@@ -115,13 +115,9 @@ app.controller('appController', function($scope,$filter,$http) {
     } else {
       $scope.showingPersonalLog = []
       $scope.currentPage = page
-      for (let i = 0 ; i < 6 ; i ++ ) {
-        if ( $scope.currentPage * 6 + i >= $scope.personalLogs.length ) break
+      for (let i = 0 ; i < 10 ; i ++ ) {
+        if ( $scope.currentPage * 10 + i >= $scope.personalLogs.length ) break
         $scope.showingPersonalLog.push($scope.personalLogs[page * 6 + i])
-      }
-
-      for (let i = 0 ; i < 6 ; i ++ ) {
-        console.log($scope.showingPersonalLog[i])
       }
     }
   }
