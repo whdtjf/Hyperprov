@@ -101,17 +101,17 @@ app.controller('appController', function($scope,$filter,$http) {
         span.innerHTML
           = '<image src="./img/icon/'+$scope.personalNFC+'.png" width="100%">'
         $scope.personalLogs.sort( (a,b) => {
-          let a_year = a
+          let a_year = a.TimeStamp
           let a_hour = '00:00:00'
-          let b_year = b
+          let b_year = b.TimeStamp
           let b_hour = '00:00:00'
           if (a.split(' ').length == 2) {
-            a_year = a.split(' ')[0]
-            a_hour = a.split(' ')[1]
+            a_year = a.TimeStamp.split(' ')[0]
+            a_hour = a.TimeStamp.split(' ')[1]
           }
           if (b.split(' ').length == 2) {
-            b_year = b.split(' ')[0]
-            b_hour = b.split(' ')[1]
+            b_year = b.TimeStamp.split(' ')[0]
+            b_hour = b.TimeStamp.split(' ')[1]
           }
 
           if (a_year > b_year) { return -1 }
