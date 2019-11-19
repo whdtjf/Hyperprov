@@ -132,7 +132,7 @@ app.controller('appController', function($scope,$filter,$http) {
     $scope.userName = name
     let span = document.getElementById('profileImg')
     span.innerHTML
-          = '<image src="./img/icon/'+name+'.png" width="100%">'
+          = '<image src="./img/icon/'+key+'.png" width="100%">'
   }
   setInitUser = $scope.setInitUser
   //===========================================================================
