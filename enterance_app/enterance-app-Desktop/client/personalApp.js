@@ -81,6 +81,7 @@ app.controller('appController', function($scope,$filter,$http) {
     }
     try{
       $http.get('/get_history/'+$scope.personalNFC).success(function(rawData){
+        console.log(rawData)
         let data = rawData.data
         console.log(data)
         let count = 0;
