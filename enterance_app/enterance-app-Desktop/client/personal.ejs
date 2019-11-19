@@ -127,7 +127,7 @@
         <td align="center" height="calc(76% - 100px)">
           <!-- ############################# 본문 내용 시작 #############################-->
           <div style="margin:10px 10px 10px 10px;background-color:#DADEFF;width:70vw;min-width:180px;height:calc(76vh - 20px);">
-          <table style="border:1px solid rgb(203, 122, 34)" width="100%" heigth="100%">
+          <table style="border:1px solid rgb(203, 122, 34)" width="90%" heigth="100%">
             <tr height="10%" >
               <td width="10%">
                   <span id="profileImg">
@@ -143,8 +143,18 @@
                   <button ng-click="queryPersonalHistory()">쿼리하기</button>
               </td>
             </tr>
-            <tr>
-
+            <tr height="5%">
+            </tr>
+            <tr ng-repeat="temp in showingPersonalLog" height="10%">
+              <td align ="center" style="border:1px solid #B5BA9E"> {{temp.TxID}}</td>
+              <td align ="center" style="border:1px solid #B5BA9E"> {{temp.TimeStamp}}</td>
+              <td align ="center" style="border:1px solid #B5BA9E"> {{temp.location}}</td>
+              <td align ="center" style="border:1px solid #B5BA9E">
+                <span ng-show="temp.state == 'IN'">&nbsp;<font color="#A4FFA3">입장</font></span>
+                <span ng-show="temp.state == 'OUT'">&nbsp;<font color="#FF7D6F">퇴장</font></span>
+                <span ng-show="temp.state == 'GENERATED'">&nbsp;<font color="#A4FFA3">가입</font></span>
+                <span ng-show="temp.state == 'EXPIRED'">&nbsp;<font color="#FF7D6F">탈퇴</font></span>
+              </td>
             </tr>
           </table>
           </div>
