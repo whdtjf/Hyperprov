@@ -134,9 +134,14 @@
                     <image src="./img/icon/default.png" width="100%">
                   </span>
               </td>
-              <td width="80%">
-                  <span style="font-size:32px;color:rgb(22, 22, 22)">{{userName}}</span>
-                  <span style="font-size:16px;color:rgb(68, 68, 68)">님의 출입 이력</span>
+              <td width="5%">
+                  <span id="profileImg">
+                    <image src="./img/icon/default.png" width="100%">
+                  </span>
+              </td>
+              <td width="75%">
+                  <span style="font-size:48px;color:rgb(22, 22, 22)">{{userName}}</span>
+                  <span style="font-size:24px;color:rgb(68, 68, 68)">님의 출입 이력</span><br />
                   <input type="text" ng-model="personalNFC"/>
                   <button ng-click="queryPersonalHistory()">쿼리하기</button>
               </td>
