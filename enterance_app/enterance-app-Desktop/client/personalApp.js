@@ -77,7 +77,7 @@ app.controller('appController', function($scope,$filter,$http) {
       $http.get('/get_history/'+$scope.personalNFC).success(function(rawData){
         let data = rawData.data
         let count = 0;
-        if (data.length == 0) break;
+        if (data.length == 0) return;
         $scope.totalPage = (data.length-1)/6;
         $scope.currentPage = 0;
 
