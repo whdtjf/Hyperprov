@@ -171,6 +171,17 @@
                 </tr>
               </table>
             </tr>
+            <tr>
+              <div class="pageBox" ng-hide="personalLogs_isEmpty" style="margin-top:20px;">
+                <div ng-repeat="temp in showingPersonalLog"
+                  style="cursor:pointer;background-color: #272822; display: inline-block;border-radius: 7px;
+                  width:35px;height:35px;color:white;margin:0px 2px;padding:5px 5px;"
+                  ng-click="pagingPersonalLog(showingPersonalLog.indexOf(temp),false)">
+                  <span ng-show="currentPage == showingPersonalLog.indexOf(temp)+1"><font color="#9EB8E8"><u>{{showingPersonalLog.indexOf(temp)+1}}</u></font></span>
+                  <span ng-hide="currentPage == showingPersonalLog.indexOf(temp)+1">{{showingPersonalLog.indexOf(temp)+1}}</span>
+                </div>
+              </div>
+            </tr>
           </table>
           </div>
           <script>
