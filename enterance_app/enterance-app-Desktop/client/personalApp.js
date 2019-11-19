@@ -74,11 +74,7 @@ app.controller('appController', function($scope,$filter,$http) {
   $scope.currentPage = 0
 
   $scope.queryPersonalHistory = () => {
-    console.log('param : '+$scope.personalNFC)
-    if ($scope.personalNFC == '') {
-      console.log('param : '+$scope.personalNFC)
-      return;
-    }
+    if ($scope.personalNFC == '') return;
     try{
       $http.get('/get_history/'+$scope.personalNFC).success(function(rawData){
         let data = rawData
@@ -95,8 +91,9 @@ app.controller('appController', function($scope,$filter,$http) {
             state : data[i].Value.state
           }
           $scope.personalLogs.push(arrayData)
-          console.log(arrayData)
         }
+
+        $scope.pagingPersonalLog(0)
       })
     } catch(e) { console.log(e)}
   }
