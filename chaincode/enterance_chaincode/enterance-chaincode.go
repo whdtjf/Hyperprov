@@ -86,22 +86,14 @@
 		 Enterance{Name: "person_F", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
 		 Enterance{Name: "person_G", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
 	 }
-	 var a[...] string
-	 a[0] = "dccaa283"
-	 a[1] = "d5a5a7c3"
-	 a[2] = "a924a283"
-	 a[3] = "464da283"
-	 a[4] = "f14da7c3"
-	 a[5] = "853da7c3"
-	 a[6] = "cb02a783"
-	 a[7] = "0ad8a283"
-	 a[8] = "6e7fa6c3"
+
+	 nfc_key := [...]string{"dccaa283","d5a5a7c3","a924a283","464da283","f14da7c3","853da7c3","cb02a783","0ad8a283","6e7fa6c3"}
 
 	 i := 0
 	 for i < len(enterance) {
 		 fmt.Println("i is ", i)
 		 enteranceAsBytes, _ := json.Marshal(enterance[i])
-		 APIstub.PutState(a[i], enteranceAsBytes)
+		 APIstub.PutState(nfc_key[i], enteranceAsBytes)
 		 fmt.Println("Added", enterance[i])
 		 i = i + 1
 	 }
