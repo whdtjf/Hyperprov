@@ -155,7 +155,7 @@ installChaincode () {
   setGlobals $PEER $ORG
   VERSION=${3:-1.2}
         set -x
-  peer chaincode install -n enterance_code_final_please -v ${VERSION} -l ${LANGUAGE} -p github.com/hyperledger/fabric/examples/chaincode/go/enterance_chaincode >&log.txt
+  peer chaincode install -n enterance_code_final_please2 -v ${VERSION} -l ${LANGUAGE} -p github.com/hyperledger/fabric/examples/chaincode/go/enterance_chaincode >&log.txt
   res=$?
         set +x
   cat log.txt
@@ -174,12 +174,12 @@ instantiateChaincode () {
   # lets supply it directly as we know it using the "-o" option
   if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
                 set -x
-    peer chaincode instantiate -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR('Org1MSP.member','Org1MSP.member')" >&log.txt ## '{"Args":["c","asdf"]}'
+    peer chaincode instantiate -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please2 -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR('Org1MSP.member','Org1MSP.member')" >&log.txt ## '{"Args":["c","asdf"]}'
     res=$?
                 set +x
   else
                 set -x
-    peer chaincode instantiate -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR  ('Org1MSP.peer','Org2MSP.peer')" >&log.txt
+    peer chaincode instantiate -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please2 -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR  ('Org1MSP.peer','Org2MSP.peer')" >&log.txt
     res=$?
                 set +x
   fi
@@ -195,9 +195,9 @@ chaincodeInvoke () {
         # while 'peer chaincode' command can get the orderer endpoint from the peer (if join was successful),
         # lets supply it directly as we know it using the "-o" option
         if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
-                peer chaincode invoke -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please -c '{"Args":["initLedger"]}' >&log.txt
+                peer chaincode invoke -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please2 -c '{"Args":["initLedger"]}' >&log.txt
         else
-                peer chaincode invoke -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please -c '{"Args":["initLedger"]}'
+                peer chaincode invoke -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please2 -c '{"Args":["initLedger"]}'
         fi
         res=$?
         cat log.txt
@@ -223,7 +223,7 @@ chaincodeQuery () {
     sleep $DELAY
     echo "Attempting to Query peer${PEER}.org${ORG} ...$(($(date +%s) - starttime)) secs"
     set -x
-    peer chaincode query -C $CHANNEL_NAME -n enterance_code_final_please -c '{"Args":["queryEnterance","0"]}' >&log.txt
+    peer chaincode query -C $CHANNEL_NAME -n enterance_code_final_please2 -c '{"Args":["queryEnterance","0"]}' >&log.txt
     res=$?
     set +x
     test $res -eq 0 && VALUE=$(cat log.txt | awk '/Query Result/ {print $NF}')
