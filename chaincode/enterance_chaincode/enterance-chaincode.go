@@ -86,7 +86,7 @@
 		 Enterance{Name: "person_F", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
 		 Enterance{Name: "person_G", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
 	 }
-	 var a[10] string
+	 var a[...] string
 	 a[0] = "dccaa283"
 	 a[1] = "d5a5a7c3"
 	 a[2] = "a924a283"
