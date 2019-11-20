@@ -41,7 +41,7 @@
  
 	 // Retrieve the requested Smart Contract function and arguments
 	 function, args := APIstub.GetFunctionAndParameters()
-	 // Route to the appropriate handler function to interact with the ledger
+	 // RGENETRATEDe to the appropriate handler function to interact with the ledger
 	 if function == "queryEnterance" {
 		 return s.queryEnterance(APIstub, args)
 	 } else if function == "initLedger" {
@@ -76,23 +76,32 @@
 
  func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Response {
 	 enterance := []Enterance{
-		 Enterance{Name: "JiWon", Timestamp: "1504054225", Location: "east", State: "IN"},
-		 Enterance{Name: "YoungChan", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test1", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test2", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test3", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test4", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test5", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test6", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test7", Timestamp: "1504057825", Location: "west", State: "OUT"},
-		 Enterance{Name: "test8", Timestamp: "1504057825", Location: "west", State: "OUT"},
+		 Enterance{Name: "JiWon", Timestamp: "2019.11.20", Location: "GATE_A", State: "GENERATED"},
+		 Enterance{Name: "YoungChan", Timestamp: "2019.11.20", Location: "GATE_A", State: "GENETRATED"},
+		 Enterance{Name: "person_A", Timestamp: "2019.11.20", Location: "GATE_A", State: "GENETRATED"},
+		 Enterance{Name: "person_B", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
+		 Enterance{Name: "person_C", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
+		 Enterance{Name: "person_D", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
+		 Enterance{Name: "person_E", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
+		 Enterance{Name: "person_F", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
+		 Enterance{Name: "person_G", Timestamp: "2019.11.20", Location: "GATE_B", State: "GENETRATED"},
 	 }
- 
+	 var a [10] string
+	 a[0] = "dccaa283"
+	 a[1] = "d5a5a7c3"
+	 a[2] = "a924a283"
+	 a[3] = "464da283"
+	 a[4] = "f14da7c3"
+	 a[5] = "853da7c3"
+	 a[6] = "cb02a783"
+	 a[7] = "0ad8a283"
+	 a[8] = "6e7fa6c3"
+
 	 i := 0
 	 for i < len(enterance) {
 		 fmt.Println("i is ", i)
 		 enteranceAsBytes, _ := json.Marshal(enterance[i])
-		 APIstub.PutState(strconv.Itoa(i+1), enteranceAsBytes)
+		 APIstub.PutState(a[i], enteranceAsBytes)
 		 fmt.Println("Added", enterance[i])
 		 i = i + 1
 	 }
@@ -120,8 +129,8 @@
 
  func (s *SmartContract) queryAllEnterance(APIstub shim.ChaincodeStubInterface) sc.Response {
 
-	startKey := "0"
-	endKey := "999"
+	startKey := ""
+	endKey := ""
 
 	resultsIterator, err := APIstub.GetStateByRange(startKey, endKey)
 	if err != nil {
