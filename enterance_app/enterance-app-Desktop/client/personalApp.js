@@ -105,11 +105,11 @@ app.controller('appController', function($scope,$filter,$http) {
           let a_hour = '00:00:00'
           let b_year = b.TimeStamp
           let b_hour = '00:00:00'
-          if (a.split(' ').length == 2) {
+          if (a.TimeStamp.split(' ').length == 2) {
             a_year = a.TimeStamp.split(' ')[0]
             a_hour = a.TimeStamp.split(' ')[1]
           }
-          if (b.split(' ').length == 2) {
+          if (b.TimeStamp.split(' ').length == 2) {
             b_year = b.TimeStamp.split(' ')[0]
             b_hour = b.TimeStamp.split(' ')[1]
           }
