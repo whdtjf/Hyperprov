@@ -77,7 +77,7 @@
  func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Response {
 	 enterance := []Enterance{
 		 Enterance{Name: "JiWon", Timestamp: "2019.11.24 17:02:21", Location: "GATE_A", State: "GENERATED"},
-		 Enterance{Name: "YoungChan", Timestamp: "2019.11.24 17:02:21", Location: "GATE_A", State: "GENERATED"}
+		 Enterance{Name: "YoungChan", Timestamp: "2019.11.24 17:02:21", Location: "GATE_A", State: "GENERATED"},
 	 }
 
 	 nfc_key := [...]string{"dccaa283","674ea7c3"}
