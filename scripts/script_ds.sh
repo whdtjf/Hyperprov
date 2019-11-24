@@ -40,9 +40,9 @@ echo "Channel name : "$CHANNEL_NAME
 #Prevents "Minimum memory limit allowed is 4MB" error on low RAM devices (like RasPi)
 CORE_VM_DOCKER_HOSTCONFIG_MEMORY=536870912
 # Sets the default images to use my build for the ARM architecture
-CORE_CHAINCODE_BUILDER=ptunstad/fabric-ccenv:arm64-1.4.1 
-CORE_CHAINCODE_GOLANG=ptunstad/fabric-baseos:arm64-0.4.15 
-CORE_CHAINCODE_CAR=ptunstad/fabric-baseos:arm64-0.4.15 
+CORE_CHAINCODE_BUILDER=ptunstad/fabric-ccenv:arm64-1.4.1
+CORE_CHAINCODE_GOLANG=ptunstad/fabric-baseos:arm64-0.4.15
+CORE_CHAINCODE_CAR=ptunstad/fabric-baseos:arm64-0.4.15
 ### CORE_CHAINCODE_JAVA=apelser/fabric-javaenv:arm64-1.4.1
 
 echo "Channel name : "$CHANNEL_NAME
@@ -73,7 +73,7 @@ setGlobals () {
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG1_CA
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.ptunstad.no/users/Admin@org1.ptunstad.no/msp
     if [ $1 -eq 0 -o $1 -eq 1 ] ; then
-      
+
       if [ $1 -eq 0 ]; then
         CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.ptunstad.no/peers/peer0.org1.ptunstad.no/tls/server.crt
         CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.ptunstad.no/peers/peer0.org1.ptunstad.no/tls/server.key
@@ -155,7 +155,7 @@ installChaincode () {
   setGlobals $PEER $ORG
   VERSION=${3:-1.2}
         set -x
-  peer chaincode install -n enterance_code_final_please4 -v ${VERSION} -l ${LANGUAGE} -p github.com/hyperledger/fabric/examples/chaincode/go/enterance_chaincode >&log.txt
+  peer chaincode install -n enterance_code_final_please6 -v ${VERSION} -l ${LANGUAGE} -p github.com/hyperledger/fabric/examples/chaincode/go/enterance_chaincode >&log.txt
   res=$?
         set +x
   cat log.txt
@@ -174,12 +174,12 @@ instantiateChaincode () {
   # lets supply it directly as we know it using the "-o" option
   if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
                 set -x
-    peer chaincode instantiate -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please4 -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR('Org1MSP.member','Org1MSP.member')" >&log.txt ## '{"Args":["c","asdf"]}'
+    peer chaincode instantiate -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please6 -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR('Org1MSP.member','Org1MSP.member')" >&log.txt ## '{"Args":["c","asdf"]}'
     res=$?
                 set +x
   else
                 set -x
-    peer chaincode instantiate -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please4 -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR  ('Org1MSP.peer','Org2MSP.peer')" >&log.txt
+    peer chaincode instantiate -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please6 -l ${LANGUAGE} -v ${VERSION} -c '{"Args":[]}' -P "OR  ('Org1MSP.peer','Org2MSP.peer')" >&log.txt
     res=$?
                 set +x
   fi
@@ -195,9 +195,9 @@ chaincodeInvoke () {
         # while 'peer chaincode' command can get the orderer endpoint from the peer (if join was successful),
         # lets supply it directly as we know it using the "-o" option
         if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
-                peer chaincode invoke -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please4 -c '{"Args":["initLedger"]}' >&log.txt
+                peer chaincode invoke -o orderer.ptunstad.no:7050 -C $CHANNEL_NAME -n enterance_code_final_please6 -c '{"Args":["initLedger"]}' >&log.txt
         else
-                peer chaincode invoke -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please4 -c '{"Args":["initLedger"]}'
+                peer chaincode invoke -o orderer.ptunstad.no:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n enterance_code_final_please6 -c '{"Args":["initLedger"]}'
         fi
         res=$?
         cat log.txt
@@ -223,7 +223,7 @@ chaincodeQuery () {
     sleep $DELAY
     echo "Attempting to Query peer${PEER}.org${ORG} ...$(($(date +%s) - starttime)) secs"
     set -x
-    peer chaincode query -C $CHANNEL_NAME -n enterance_code_final_please4 -c '{"Args":["queryEnterance","0"]}' >&log.txt
+    peer chaincode query -C $CHANNEL_NAME -n enterance_code_final_please6 -c '{"Args":["queryEnterance","0"]}' >&log.txt
     res=$?
     set +x
     test $res -eq 0 && VALUE=$(cat log.txt | awk '/Query Result/ {print $NF}')
