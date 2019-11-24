@@ -11,7 +11,7 @@
 		<script>
       let userData = {};
       try{
-        userData = {key:sessionStorage.getItem('uID').replace(/["]/g,''), name:sessionStorage.getItem('uNAME')};
+        userData = {Key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
       } catch(e) {
         location.href="/";
       }
@@ -67,12 +67,7 @@
                     <tr ng-repeat="temp in queryHistoryTop8_result" align="center">
                       <td height="35px">{{temp.timestamp}}</td>
                       <td height="35px">{{temp.location}}</td>
-                      <td height="35px">
-                        <span ng-show="temp.state == 'IN'">&nbsp;<font color="#A4FFA3">입장</font></span>
-                        <span ng-show="temp.state == 'OUT'">&nbsp;<font color="#FF7D6F">퇴장</font></span>
-                        <span ng-show="temp.state == 'GENERATED'">&nbsp;<font color="#A4FFA3">가입</font></span>
-                        <span ng-show="temp.state == 'EXPIRED'">&nbsp;<font color="#FF7D6F">탈퇴</font></span>
-                      </td>
+                      <td height="35px"><span ng-show="temp.state == 'IN'">&nbsp;<font color="#A4FFA3">입장</font></span><span ng-show="temp.state == 'OUT'">&nbsp;<font color="#FF7D6F">퇴장</font></span></td>
                     </tr>
                   </table>
 								</font>
@@ -90,7 +85,7 @@
 					</table>
         </td>
 
-        <td height="80px" style="margin:0px 0px 0px 0px;padding:0px 50px 30px 50px;
+        <td height="20%" style="margin:0px 0px 0px 0px;padding:0px 50px 30px 50px;
 							border-collapse:collapse;
 							background-image:url('./img/bg3.png');
 							background-position:center center;
@@ -100,22 +95,25 @@
 								</div></font></b>
         </td>
       </tr>
-			<tr height="8px" bgcolor="#272822">
+			<tr height="4%" bgcolor="#272822">
 				<td>
           <table width="100%" style="color:white;">
             <tr>
-              <td width="25%" align="center"><div class="menu" id="menu0">메인 페이지</div></td>
-              <td width="25%" align="center"><div class="menu" id="menu1">일별 출입량</div></td>
-              <td width="25%" align="center"><div class="menu" id="menu3">개인 페이지</div></td>
-              <td width="25%" align="center"><div class="menu" id="menu4">사용자 관리</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu0">메인 페이지</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu1">일별 출입량</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu2">월별 출입량</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu3">개인 페이지</div></td>
+              <td width="20%" align="center"><div class="menu" id="menu4">사용자 관리</div></td>
               <script>
                 let menu0 = document.getElementById('menu0');
                 let menu1 = document.getElementById('menu1');
+                let menu2 = document.getElementById('menu2');
                 let menu3 = document.getElementById('menu3');
                 let menu4 = document.getElementById('menu4');
 
                 menu0.onclick = () => {location.href="/mainPage";};
                 menu1.onclick = () => {location.href="/dailyLog";};
+                menu2.onclick = () => {location.href="/monthlyLog";};
                 menu3.onclick = () => {location.href="/personalPage";};
                 menu4.onclick = () => {location.href="/userManage";};
 

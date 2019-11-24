@@ -51,7 +51,7 @@ module.exports = (function () {
 				console.log(network);
 				console.log("1st");
 				// Get the contract from the network.
-				const contract = network.getContract('enterance_code_final_please4');
+				const contract = network.getContract('enterance_code_final_please5');
 				console.log(contract);
 				console.log("2nd");
 				// Evaluate the specified transaction.
@@ -98,7 +98,7 @@ module.exports = (function () {
 				const network = await gateway.getNetwork('mychannel');
 
 				// Get the contract from the network.
-				const contract = network.getContract('enterance_code_final_please4');
+				const contract = network.getContract('enterance_code_final_please5');
 
 				// Evaluate the specified transaction.
 				// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
@@ -140,7 +140,7 @@ module.exports = (function () {
 				// Get the network (channel) our contract is deployed to.
 				const network = await gateway.getNetwork('mychannel');
 				// Get the contract from the network.
-				const contract = network.getContract('enterance_code_final_please4');
+				const contract = network.getContract('enterance_code_final_please5');
 				// Evaluate the specified transaction.
 				// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
 				// queryAllEnterance transaction - requires no arguments, ex: ('queryAllEnterance')
@@ -190,7 +190,7 @@ module.exports = (function () {
 				const network = await gateway.getNetwork('mychannel');
 
 				// Get the contract from the network.
-				const contract = network.getContract('enterance_code_final_please4');
+				const contract = network.getContract('enterance_code_final_please5');
 
 				// Evaluate the specified transaction.
 				// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
@@ -234,7 +234,7 @@ module.exports = (function () {
 						const network = await gateway.getNetwork('mychannel');
 
 						// Get the contract from the network.
-						const contract = network.getContract('enterance_code_final_please4');
+						const contract = network.getContract('enterance_code_final_please5');
 
 						// Evaluate the specified transaction.
 						// queryEnterance transaction - requires 1 argument, ex: ('queryEnterance', '0101092')
