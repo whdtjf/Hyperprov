@@ -7,7 +7,7 @@ let allStatusData = [];
 let queryEnterance;
 
 
-app.controller('fakeAppController', ['$scope', '$filter', ($scope, $filter) => {
+app.controller('fakeAppController', function($scope, appFactory,$filter) {
 
     //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
     $scope.queryAllEnterance = function () {
@@ -40,7 +40,7 @@ app.controller('fakeAppController', ['$scope', '$filter', ($scope, $filter) => {
             alert("queryEnterance 불가!!");
         }
     }
-    queryEnterance = $scope.queryEnterance
+    
 
 
 
@@ -70,7 +70,7 @@ app.controller('fakeAppController', ['$scope', '$filter', ($scope, $filter) => {
 
 
 
-}])
+})
 
 // Angular Factory
 app.factory('appFactory', function ($http) {
