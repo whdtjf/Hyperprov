@@ -4,6 +4,7 @@ let allHistoryData = [];
 let queryHistory;
 let queryEnterance_result;
 let allStatusData = [];
+let queryEnterance;
 
 
 app.controller('fakeAppController', ['$scope', '$filter', ($scope, $filter) => {
