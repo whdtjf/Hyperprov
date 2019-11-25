@@ -38,7 +38,7 @@
           try {
             sessionStorage.setItem("uID", JSON.stringify(getID));
             sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
-            location.href = "/main_practice";
+            location.href = "/mainPage";
           } catch (e) {
             alert("세션 저장중 에러..!\n" + e);
           }
