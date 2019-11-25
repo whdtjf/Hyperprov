@@ -47,14 +47,16 @@
       let result;
       setTimeout(() => {
           result = queryEnterance(getID);
-          console.log("결과는"+result);
+        }, 1)
+      setTimeout(()=>{
+        console.log("결과는"+result);
           if (result) {
             return result;
           }
           else {
             return new Error("queryEnterance Promise 에러!");
           }
-        }, 1000)
+      },2000);
     }
 
     queryEnterance_promise().then(function(queryEnterance_result) {
