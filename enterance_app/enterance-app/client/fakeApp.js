@@ -21,6 +21,7 @@ app.controller('fakeAppController', function($scope, appFactory,$filter) {
             array.sort(function (a, b) {
                 return parseInt(a.Key) - parseInt(b.Key);
             });
+            $scope.all_enterance = array;
             allStatusData = array;
             return allStatusData;
         });
