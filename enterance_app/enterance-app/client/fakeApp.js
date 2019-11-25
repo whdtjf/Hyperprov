@@ -32,6 +32,7 @@ app.controller('fakeAppController', function($scope, appFactory,$filter) {
         try {
             appFactory.queryEnterance(id, function (data) {
                 // queryEnterance_result = data;
+                console.log("Enterance Query결과 : "+data);
                 return data;
             });
         }
