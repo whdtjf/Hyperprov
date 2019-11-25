@@ -40,7 +40,7 @@ app.controller('fakeAppController', function($scope, appFactory,$filter) {
             alert("queryEnterance 불가!!");
         }
     }
-    queryEnterance = $scope.queryEnterance
+    queryEnterance = $scope.queryEnterance;
 
 
 
