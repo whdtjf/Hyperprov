@@ -1,44 +1,66 @@
 <html>
-  <head>
-    <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" >
-    <script data-require="bootstrap@4.0.5" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
-    <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="app.js" charset="UTF-8"></script>
-  </head>
 
-  <body ng-app="application" ng-controller="appController"
-    style="margin:0px 0px 0px 0px;width:100%;height:100%;
+<head>
+  <link data-require="bootstrap@4.0.5" data-semver="4.0.5" rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+  <script data-require="bootstrap@4.0.5" data-semver="4.0.5"
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+  <script data-require="angularjs@1.5.7" data-semver="1.5.7"
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="fakeApp.js" charset="UTF-8"></script>
+</head>
+
+<body ng-app="fakeApplication" ng-controller="fakeAppController" style="margin:0px 0px 0px 0px;width:100%;height:100%;
   	background-image:url('./img/bg2.png');
   	background-position:center center">
 
-    <div style="position:absolute;width:400px;height:250px;left:50%;top:50%;margin-left:-200px;margin-top:-125px;">
-      <center>
-	<image src="./img/logining.gif" width="60%"><br>
-         <h2><font color="white">사용자 로그인 중...</font></h2>
-   	 </center>
-    </div>
-    <script>
-      let getID ='<%= id%>';
-      let result;
+  <div style="position:absolute;width:400px;height:250px;left:50%;top:50%;margin-left:-200px;margin-top:-125px;">
+    <center>
+      <image src="./img/logining.gif" width="60%"><br>
+        <h2>
+          <font color="white">사용자 로그인 중...</font>
+        </h2>
+    </center>
+  </div>
 
-      setTimeout( () => {result = queryEnterance(getID)} , 2)
-      setTimeout( () => {
-        try{
-            console.log(queryEnterance_result);
-            if (queryEnterance_result != undefined) {
-              try {
-                sessionStorage.setItem("uID", JSON.stringify(getID));
-                sessionStorage.setItem("uNAME", JSON.stringify(queryEnterance_result.data.name));
-                location.href="/mainPage";
-                } catch (e) {
-                alert("세션 저장중 에러..!\n"+e);
-              }
-            }
-            else {alert("로그인 실패... ID를 확인하세요"); location.href="/"};
-        } catch (e) {
-          console.log('error' +e);
+  <script>
+    let getID = '<%= id%>';
+
+
+    function queryEnterance_promise() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          result = queryEnterance(getID);
+          if (result) {
+            resolve(result);
+          }
+          else {
+            reject(new Error("queryEnterance Promise 에러!"));
+          }
+        }, 1)
+      })
+    }
+
+    queryEnterance_promise().then(function(queryEnterance_result) {
+      try {
+        console.log(queryEnterance_result);
+        if (queryEnterance_result != undefined) { //queryEnterance 함수는 wallet에 관리자 신원만 있으면 호출가능!
+          //따라서 DApp이 작동하는 데스크탑(즉, nodeJS 서버가 구동중인 컴퓨터)의 wallet에는 admin1, admin2... 이런식으로 존재해야함
+          //controller.js에서 queryEnterance를 호출시킬때도 각각의 데스크탑에 해당 관리자 신원인 admin(n)을 거쳐야만 한다
+          try {
+            sessionStorage.setItem('ID', JSON.stringify(getID));
+            location.href = "/main_practice";
+          } catch (e) {
+            alert("세션 저장중 에러..!\n" + e);
+          }
         }
-      } ,3000);
-    </script>
-  </body>
+        else { alert("로그인 실패... 관리자에게 문의하세요"); location.href = "/" };
+      } catch (e) {
+        console.log('error' + e);
+      }
+    })
+
+  </script>
+</body>
+
 </html>

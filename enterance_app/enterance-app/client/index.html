@@ -8,8 +8,8 @@
     <script>
       let userData = {};
       try{
-        userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
-        location.href="/mainPage";
+        userData = {key:(parseInt(sessionStorage.getItem('ID').replace(/["]/g,'')))};
+        location.href="/main_practice";
       } catch(e) {}
     </script>
     <title>Hyper Shield : 블록체인 기반의 출입 관리 시스템</title>
@@ -28,7 +28,7 @@
             <form method="post" action="/loginProcess">
               <div class="input-group" style="border: 0px;">
                 <div class="input-group-addon" style="width:40%;">
-                  <span class="input-group-text">ID</span>
+                  <span class="input-group-text">NFC</span>
                 </div>
                 <input type="text" class="form-control" name="id" style="border: 0px; " placeholder="ID를 입력하세요.">
               </div>
