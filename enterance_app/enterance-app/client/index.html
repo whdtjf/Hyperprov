@@ -8,7 +8,7 @@
     <script>
       let userData = {};
       try{
-        userData = {key:(parseInt(sessionStorage.getItem('ID').replace(/["]/g,'')))};
+        userData = {key:(parseInt(sessionStorage.getItem('uID').replace(/["]/g,''))), name:sessionStorage.getItem('uNAME')};
         location.href="/mainPage";
       } catch(e) {}
     </script>

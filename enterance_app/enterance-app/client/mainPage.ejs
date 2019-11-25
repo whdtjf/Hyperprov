@@ -10,8 +10,15 @@
     <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="fakeApp.js" charset="UTF-8"></script>
     <title>Document</title>
-    <!-- <script> let userData = { Key: 2013122260, name: "정지원", timestamp: Date.now() } 
-    </script> -->
+    <script>
+        let userData = {};
+        try{
+          userData = {key:sessionStorage.getItem('uID').replace(/["]/g,''), name:sessionStorage.getItem('uNAME')};
+        } catch(e) {
+          location.href="/";
+        }
+        let reDraw;
+      </script>
 </head>
 
 <body ng-app="fakeApplication" ng-controller="fakeAppController">
@@ -21,9 +28,7 @@
     <font size="1"><br></font>
     <div align="center"><button class="btn btn-primary" id="login">로그인</button></div>
     <div align="right"><button class="btn btn-primary" id="logout">로그아웃</button></div>
-    <script>
-        let userName = document.getElementById('username');
-        userName.innerHTML = "<font color='black' size='5'>" + userData.name + "</font><font color='black'>님, 반갑습니다!</font>";
+    <!-- <script>
         let loginBtn = document.getElementById('login');
 
 /*         function getStorage_promise() {
@@ -61,7 +66,7 @@
         logoutBtn.onclick = () => {
             sessionStorage.removeItem("ID");
         }
-    </script>
+    </script> -->
     <tr height="50%">
         <td valign="top" align="center">
             <font color="black">
