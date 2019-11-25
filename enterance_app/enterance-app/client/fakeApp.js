@@ -1,64 +1,126 @@
 var app = angular.module('fakeApplication', []);
 
-let allHistoryData=[];
+let allHistoryData = [];
 let queryHistory;
-let test=[];
-let queryEnterance;
+let queryEnterance_result;
+let allStatusData = [];
 
-app.controller ('fakeAppController', ['$scope','$filter',($scope,$filter) => {
-    allHistoryData = [ 
-    {Key:2013122041, name:"김영찬", timestamp:"2019-10-08 12:10:27",location:"gate_A",state:"in"},
-    {Key:2013122041, name:"김영찬", timestamp:"2019-10-08 18:25:45",location:"gate_A",state:"out"},
-    {Key:2013122201, name:"이승준", timestamp:"2019-10-09 08:10:27",location:"gate_B",state:"in"},
-    {Key:2013122201, name:"이승준", timestamp:"2019-10-09 13:24:11",location:"gate_B",state:"out"},
-    {Key:2013122201, name:"이승준", timestamp:"2019-10-09 22:54:35",location:"gate_A",state:"in"},
-    {Key:2013122041, name:"김영찬", timestamp:"2019-10-10 09:22:35",location:"gate_B",state:"in"},
-    {Key:2013122041, name:"김영찬", timestamp:"2019-10-10 10:59:20",location:"gate_A",state:"out"},
-    {Key:2013122260, name:"정지원", timestamp:"2019-10-10 11:10:36",location:"gate_A",state:"in"},
-    {Key:2013122260, name:"정지원", timestamp:"2019-10-10 11:35:35",location:"gate_B",state:"out"},
-    {Key:2013122260, name:"정지원", timestamp:"2019-10-10 12:01:20",location:"gate_B",state:"in"},
-    {Key:2013122041, name:"김영찬", timestamp:"2019-10-16 00:10:32",location:"gate_A",state:"in"}
-];
 
-$scope.queryAllEnterance=()=>{
-    $scope.all_enterance = allHistoryData;
-    // return allHistoryData;
-}
-$scope.queryHistory=(id)=>{
-    let resultArr=[];
-    for(let i=0; i<allHistoryData.length; i++){
-        if(id==allHistoryData[i].Key){
-            resultArr.push(allHistoryData[i]);
+app.controller('fakeAppController', ['$scope', '$filter', ($scope, $filter) => {
+
+    //queryAllenterance 라는 ng-click에 function() 이하를 넣는다
+    $scope.queryAllEnterance = function () {
+        appFactory.queryAllEnterance(function (data) { //appFactory.queryAllEnterance하면 get방식으로 enterance모든 데이터가 callback으로 넘겨짐
+            var array = [];
+            for (var i = 0; i < data.length; i++) {
+                parseInt(data[i].Key);
+                data[i].Record.Key = parseInt(data[i].Key);
+                array.push(data[i].Record);
+            }
+            array.sort(function (a, b) {
+                return parseInt(a.Key) - parseInt(b.Key);
+            });
+            allStatusData = array;
+            return allStatusData;
+        });
+    }
+    queryAllEntrance = $scope.queryAllEnterance;
+
+
+    $scope.queryEnterance = (id) => {
+        try {
+            appFactory.queryEnterance(id, function (data) {
+                queryEnterance_result = data;
+                return data;
+            });
+        }
+        catch (e) {
+            console.log(e);
+            alert("queryEnterance 불가!!");
         }
     }
-    return resultArr;
-}
-queryHistory=$scope.queryHistory();
+    queryEnterance = $scope.queryEnterance
 
-$scope.queryHistoryTop10=()=>{
-    let arr=[];
-    let getArr=$scope.queryHistory(userData.Key);
-    getArr.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
-    for (let i = 0 ;  i < getArr.length; i ++){
-      arr.push(getArr[i]);
-      test.push(getArr[i]);
-      if (arr.length == 8) break;
+
+
+/*     $scope.queryHistory = (id) => {
+        let resultArr = [];
+        for (let i = 0; i < allHistoryData.length; i++) {
+            if (id == allHistoryData[i].Key) {
+                resultArr.push(allHistoryData[i]);
+            }
+        }
+        return resultArr;
     }
-    return arr;
-}
+    queryHistory = $scope.queryHistory(); */
 
-$scope.queryEnterance=(id)=>{
-    let result;
-   try{
-        let getArr=$scope.queryHistory(id);
-        getArr.sort( (a,b) => {  return ( ( a.timestamp == b.timestamp ) ? 0 : ( ( a.timestamp > b.timestamp ) ? -1 : 1 ) ); });
-        result=getArr[0];
-        return result;
-   }catch(e){
-        console.log(e);
-        alert("queryEnterance 불가!!");
-   }
-}
-queryEnterance = $scope.queryEnterance
+/*     $scope.queryHistoryTop10 = () => {
+        let arr = [];
+        let getArr = $scope.queryHistory(userData.Key);
+        getArr.sort((a, b) => { return ((a.timestamp == b.timestamp) ? 0 : ((a.timestamp > b.timestamp) ? -1 : 1)); });
+        for (let i = 0; i < getArr.length; i++) {
+            arr.push(getArr[i]);
+            test.push(getArr[i]);
+            if (arr.length == 8) break;
+        }
+        return arr;
+    } */
+
+
+
+
 }])
 
+// Angular Factory
+app.factory('appFactory', function ($http) {
+
+    var factory = {};
+
+    factory.queryAllEnterance = function (callback) {
+
+        $http.get('/get_all_enterance/').success(function (output) {
+            callback(output)
+        });
+    }
+
+    factory.queryEnterance = function (id, callback) {
+        $http.get('/get_enterance/' + id)
+            .then(function success(output) {
+                console.log(output);
+                callback(output)
+            }, function error(err) {
+                console.error(err);
+                callback(err);
+            });
+    }
+
+    factory.queryHistory = (id, callback) => {
+        $http.get('/get_history/' + id)
+            .then(function success(output) {
+                callback(output)
+            }, function error(err) {
+                console.error(err);
+                callback(err);
+            });
+    }
+
+    factory.recordBarcode = function (data, callback) {
+
+        var enterance = data.id + "-" + data.name + "-" + data.timestamp + "-" + data.location + "-" + data.state;
+
+        $http.get('/add_barcode/' + enterance).success(function (output) {
+            callback(output)
+        });
+    }
+
+    factory.UpdateEnterance = function (data, callback) {
+
+        var updated_enterance = data.id + "-" + data.timestamp + "-" + data.location + "-" + data.state;
+
+        $http.get('/update_enterance/' + updated_enterance).success(function (output) {
+            callback(output)
+        });
+    }
+
+    return factory;
+});
