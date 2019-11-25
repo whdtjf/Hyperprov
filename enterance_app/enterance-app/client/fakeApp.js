@@ -2,7 +2,7 @@ var app = angular.module('fakeApplication', []);
 
 let allHistoryData = [];
 let queryHistory;
-let queryEnterance_result;
+// let queryEnterance_result;
 let allStatusData = [];
 let queryEnterance;
 
@@ -31,7 +31,7 @@ app.controller('fakeAppController', ['$scope', '$filter', ($scope, $filter) => {
     $scope.queryEnterance = (id) => {
         try {
             appFactory.queryEnterance(id, function (data) {
-                queryEnterance_result = data;
+                // queryEnterance_result = data;
                 return data;
             });
         }
