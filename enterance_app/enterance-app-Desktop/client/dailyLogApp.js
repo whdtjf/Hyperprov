@@ -109,7 +109,7 @@ app.controller('appController', function($scope,$filter,$http) {
               if (timestamp.startsWith(date)) {
                 if (data2[j].Value.location == 'GATE_A')
                   dailyHistory_GateA.push(data2[j].Value)
-                else dailyHistory_GateB.push(data2[j].Value)
+                else if (data2[j].Value.location == 'GATE_B') dailyHistory_GateB.push(data2[j].Value)
               }
             }
             $scope.queryDailyHistory_2Step();
