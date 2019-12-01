@@ -40,4 +40,8 @@ module.exports = function (app) {
   app.get('/personalPage', (req,res) => {
     res.render(__dirname+'/client/personal.ejs');
   });
+
+  app.get('/userManage', (req,res) => {
+    res.render(__dirname+'/client/admin.ejs');
+  });
 }
