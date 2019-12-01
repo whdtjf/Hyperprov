@@ -81,7 +81,7 @@ app.controller('appController', function($scope,$filter,$http) {
     console.log(enterance)
     $http.get('/add_barcode/'+enterance).then(function success(rawData){
       alert(rawData)
-    }
+    })
   }
   //===========================================================================
 });
