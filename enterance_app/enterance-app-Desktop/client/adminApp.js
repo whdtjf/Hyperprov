@@ -80,7 +80,7 @@ app.controller('appController', function($scope,$filter,$http) {
     let enterance = `${key}-${timestamp}-${name}-x-${state}`
     console.log(enterance)
     $http.get('/add_barcode/'+enterance).then(function success(rawData){
-      alert(rawData)
+      alert("등록 되었습니다.")
       console.log(rawData)
     })
   }
